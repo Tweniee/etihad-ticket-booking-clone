@@ -376,7 +376,7 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                   onClick={() => handleDateSelect(day)}
                   disabled={isDisabled}
                   aria-label={format(day, "EEEE, MMMM d, yyyy")}
-                  aria-selected={isSelected}
+                  aria-current={isSelected ? "date" : undefined}
                   className={cn(
                     "aspect-square p-2 text-sm rounded-lg",
                     "focus:outline-none focus:ring-2 focus:ring-blue-500",
