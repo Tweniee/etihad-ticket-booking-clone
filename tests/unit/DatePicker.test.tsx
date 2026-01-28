@@ -190,7 +190,7 @@ describe("DatePicker Component", () => {
       await waitFor(() => {
         const dayButtons = screen.getAllByRole("button");
         const selectedButton = dayButtons.find(
-          (button) => button.getAttribute("aria-selected") === "true",
+          (button) => button.getAttribute("aria-current") === "date",
         );
         expect(selectedButton).toBeInTheDocument();
       });
