@@ -43,75 +43,74 @@ enum Gender {
 // ============================================================================
 
 model Booking {
-  id              String        @id @default(cuid())
-  reference       String        @unique  // 6-char alphanumeric
-  status          BookingStatus @default(PENDING)
+  id        String        @id @default(cuid())
+  reference String        @unique // 6-char alphanumeric
+  status    BookingStatus @default(PENDING)
 
   // Flight information (stored as JSON snapshot)
-  flightId        String
-  flightData      Json         // Snapshot of flight at booking time
+  flightId   String
+  flightData Json // Snapshot of flight at booking time
 
   // Passengers
-  passengers      Passenger[]
+  passengers Passenger[]
 
   // Selections (stored as JSON)
-  seats           Json         // Map of passengerId to seat
-  extras          Json         // Selected extras
+  seats  Json // Map of passengerId to seat
+  extras Json // Selected extras
 
   // Payment
-  totalAmount     Decimal      @db.Decimal(10, 2)
-  currency        String       @default("USD")
-  paymentId       String?
-  paymentStatus   PaymentStatus @default(PENDING)
+  totalAmount   Decimal       @db.Decimal(10, 2)
+  currency      String        @default("USD")
+  paymentId     String?
+  paymentStatus PaymentStatus @default(PENDING)
 
   // Metadata
-  createdAt       DateTime     @default(now())
-  updatedAt       DateTime     @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([reference])
   @@index([createdAt])
 }
 
 model Passenger {
-  id              String        @id @default(cuid())
-  bookingId       String
-  booking         Booking       @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  id        String  @id @default(cuid())
+  bookingId String
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 
-  type            PassengerType
-  firstName       String
-  lastName        String
-  dateOfBirth     DateTime
-  gender          Gender
+  type        PassengerType
+  firstName   String
+  lastName    String
+  dateOfBirth DateTime
+  gender      Gender
 
   // Passport (optional for international flights)
-  passportNumber  String?
-  passportExpiry  DateTime?
-  nationality     String?
+  passportNumber String?
+  passportExpiry DateTime?
+  nationality    String?
 
   // Contact (for primary passenger)
-  email           String?
-  phone           String?
-  countryCode     String?
+  email       String?
+  phone       String?
+  countryCode String?
 
   @@index([bookingId])
 }
 
 model Session {
-  id              String   @id @default(cuid())
-  sessionId       String   @unique
+  id        String @id @default(cuid())
+  sessionId String @unique
 
   // Booking flow state (stored as JSON)
-  searchCriteria  Json?
-  selectedFlight  Json?
-  selectedSeats   Json?
-  passengerInfo   Json?
-  selectedExtras  Json?
+  searchCriteria Json?
+  selectedFlight Json?
+  selectedSeats  Json?
+  passengerInfo  Json?
+  selectedExtras Json?
 
-  expiresAt       DateTime
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([sessionId])
   @@index([expiresAt])
 }
-

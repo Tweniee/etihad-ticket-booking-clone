@@ -1,88 +1,88 @@
 # Etihad Flight Booking System
 
-A modern flight booking application inspired by premium airline booking systems like Etihad Airways. Built with Next.js 14, TypeScript, and Tailwind CSS.
-
-## Features
-
-- **Flight Search**: Search for flights by origin, destination, dates, and passenger count
-- **Seat Selection**: Interactive seat map for selecting preferred seats
-- **Passenger Information**: Collect passenger details with validation
-- **Add-ons & Extras**: Optional services like baggage, meals, insurance, and lounge access
-- **Secure Payment**: Stripe integration for secure payment processing
-- **Booking Management**: View and manage existing bookings
-- **Multi-language Support**: English and Arabic with RTL layout
-- **Responsive Design**: Works seamlessly on mobile, tablet, and desktop
-- **Accessibility**: WCAG 2.1 Level AA compliant
+A modern flight booking application built with Next.js 14, inspired by premium airline booking systems like Etihad Airways.
 
 ## Tech Stack
 
-### Frontend
-
-- **Framework**: Next.js 14 (React 18) with App Router
+- **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **State Management**: Zustand
 - **Form Management**: React Hook Form with Zod validation
-- **Icons**: Lucide React
-
-### Backend
-
-- **API**: Next.js API Routes
 - **Database**: PostgreSQL with Prisma ORM
 - **Session Store**: Redis
-- **Payment**: Stripe
-- **Email**: SendGrid
+- **Payment Processing**: Stripe
+- **Email Service**: SendGrid
+- **Testing**: Vitest (unit/property tests), Playwright (E2E tests)
 
-### Testing
-
-- **Unit/Property Tests**: Vitest with fast-check
-- **E2E Tests**: Playwright
-
-## Getting Started
-
-### Prerequisites
+## Prerequisites
 
 - Node.js 18+
 - pnpm
-- PostgreSQL
-- Redis
+- Docker and Docker Compose
 
-### Installation
+## Getting Started
 
-1. Clone the repository:
+### 1. Clone the repository
 
 ```bash
 git clone <repository-url>
 cd etihad-next
 ```
 
-2. Install dependencies:
+### 2. Install dependencies
 
 ```bash
 pnpm install
 ```
 
-3. Set up environment variables:
+### 3. Set up environment variables
+
+Copy the example environment file and update with your values:
 
 ```bash
 cp .env.example .env
-# Edit .env with your actual values
 ```
 
-4. Set up the database:
+Update the following variables in `.env`:
+
+- `DATABASE_URL`: PostgreSQL connection string (default works with Docker setup)
+- `REDIS_URL`: Redis connection string (default works with Docker setup)
+- `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`: Your Stripe publishable key
+- `STRIPE_SECRET_KEY`: Your Stripe secret key
+- `SENDGRID_API_KEY`: Your SendGrid API key
+- `SENDGRID_FROM_EMAIL`: Your verified sender email
+
+### 4. Start Docker containers
+
+Start PostgreSQL and Redis using Docker Compose:
 
 ```bash
-pnpm prisma generate
-pnpm prisma migrate dev
+docker-compose up -d
 ```
 
-5. Run the development server:
+Verify containers are running:
+
+```bash
+docker-compose ps
+```
+
+### 5. Run database migrations
+
+Generate Prisma client and run migrations:
+
+```bash
+npx prisma generate
+npx prisma migrate dev
+```
+
+### 6. Start the development server
 
 ```bash
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Available Scripts
 
@@ -90,7 +90,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - `pnpm build` - Build for production
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
-- `pnpm test` - Run unit and property tests
+- `pnpm test` - Run unit and integration tests
 - `pnpm test:ui` - Run tests with UI
 - `pnpm test:coverage` - Run tests with coverage report
 - `pnpm test:e2e` - Run end-to-end tests
@@ -102,68 +102,117 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 etihad-next/
 ├── app/                    # Next.js app directory
 │   ├── api/               # API routes
-│   └── ...                # Pages and layouts
+│   ├── fonts/             # Custom fonts
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
 ├── components/            # React components
-│   ├── shared/           # Shared/reusable components
-│   ├── search/           # Search-related components
-│   ├── results/          # Results display components
-│   └── booking/          # Booking flow components
+│   ├── booking/          # Booking flow components
+│   ├── results/          # Search results components
+│   ├── search/           # Search components
+│   └── shared/           # Shared/reusable components
 ├── lib/                   # Utility libraries
 │   ├── store/            # Zustand stores
-│   ├── types/            # TypeScript types
+│   ├── types/            # TypeScript type definitions
 │   ├── utils/            # Utility functions
-│   └── validation/       # Zod schemas
+│   ├── validation/       # Zod schemas
+│   ├── prisma.ts         # Prisma client
+│   └── redis.ts          # Redis client
 ├── prisma/               # Prisma schema and migrations
+│   ├── migrations/       # Database migrations
+│   └── schema.prisma     # Database schema
 ├── tests/                # Test files
-│   ├── unit/            # Unit tests
-│   ├── property/        # Property-based tests
+│   ├── e2e/             # End-to-end tests
 │   ├── integration/     # Integration tests
-│   └── e2e/             # End-to-end tests
-└── public/              # Static assets
+│   ├── property/        # Property-based tests
+│   ├── unit/            # Unit tests
+│   └── setup.ts         # Test setup
+├── docker-compose.yml    # Docker services configuration
+├── .env                  # Environment variables (not in git)
+├── .env.example         # Example environment variables
+└── package.json         # Dependencies and scripts
+```
+
+## Database Management
+
+### View database with Prisma Studio
+
+```bash
+npx prisma studio
+```
+
+### Create a new migration
+
+```bash
+npx prisma migrate dev --name <migration-name>
+```
+
+### Reset database
+
+```bash
+npx prisma migrate reset
+```
+
+## Docker Management
+
+### Stop containers
+
+```bash
+docker-compose down
+```
+
+### Stop and remove volumes
+
+```bash
+docker-compose down -v
+```
+
+### View logs
+
+```bash
+docker-compose logs -f
 ```
 
 ## Testing
 
-### Unit and Property Tests
-
-Run unit and property-based tests:
+### Run all tests
 
 ```bash
 pnpm test
 ```
 
-Run with UI:
+### Run specific test file
 
 ```bash
-pnpm test:ui
+pnpm test tests/unit/setup.test.ts
 ```
 
-Run with coverage:
+### Run tests in watch mode
 
 ```bash
-pnpm test:coverage
+pnpm test
 ```
 
-### End-to-End Tests
-
-Run E2E tests:
+### Run E2E tests
 
 ```bash
 pnpm test:e2e
 ```
 
-Run with UI:
+## Features
 
-```bash
-pnpm test:e2e:ui
-```
-
-## Documentation
-
-- [Requirements Document](.kiro/specs/flight-booking-system/requirements.md)
-- [Design Document](.kiro/specs/flight-booking-system/design.md)
-- [Implementation Tasks](.kiro/specs/flight-booking-system/tasks.md)
+- Flight search with multiple trip types (one-way, round-trip, multi-city)
+- Interactive seat selection
+- Passenger information collection
+- Add-ons and extras (baggage, meals, insurance, lounge access)
+- Secure payment processing with Stripe
+- Booking management (view, modify, cancel)
+- Email notifications
+- Session management
+- Responsive design (mobile, tablet, desktop)
+- Accessibility compliant (WCAG 2.1 Level AA)
+- Multi-language support (English, Arabic with RTL)
 
 ## License
 
-This project is for educational purposes.
+MIT
