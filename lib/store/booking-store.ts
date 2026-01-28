@@ -469,3 +469,44 @@ export const useFlightSelection = () => {
     clearSelectedFlight: state.clearSelectedFlight,
   }));
 };
+
+// Get seat selection state
+export const useSeatSelection = () => {
+  const selectedSeats = useBookingStore((state) => state.selectedSeats);
+  const setSeat = useBookingStore((state) => state.setSeat);
+  const removeSeat = useBookingStore((state) => state.removeSeat);
+  const clearSeats = useBookingStore((state) => state.clearSeats);
+
+  return { selectedSeats, setSeat, removeSeat, clearSeats };
+};
+
+// Get passenger information state
+export const usePassengerInfo = () => {
+  const passengers = useBookingStore((state) => state.passengers);
+  const setPassengers = useBookingStore((state) => state.setPassengers);
+  const updatePassenger = useBookingStore((state) => state.updatePassenger);
+  const clearPassengers = useBookingStore((state) => state.clearPassengers);
+
+  return { passengers, setPassengers, updatePassenger, clearPassengers };
+};
+
+// Get extras state
+export const useExtras = () => {
+  const selectedExtras = useBookingStore((state) => state.selectedExtras);
+  const setExtras = useBookingStore((state) => state.setExtras);
+  const updateBaggage = useBookingStore((state) => state.updateBaggage);
+  const updateMeal = useBookingStore((state) => state.updateMeal);
+  const setInsurance = useBookingStore((state) => state.setInsurance);
+  const setLoungeAccess = useBookingStore((state) => state.setLoungeAccess);
+  const clearExtras = useBookingStore((state) => state.clearExtras);
+
+  return {
+    selectedExtras,
+    setExtras,
+    updateBaggage,
+    updateMeal,
+    setInsurance,
+    setLoungeAccess,
+    clearExtras,
+  };
+};

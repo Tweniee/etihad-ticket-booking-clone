@@ -14,7 +14,12 @@
 
 import { describe, it, expect, beforeEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
-import { useBookingStore } from "../../../lib/store/booking-store";
+import {
+  useBookingStore,
+  useSeatSelection,
+  usePassengerInfo,
+  useExtras,
+} from "../../../lib/store/booking-store";
 import type {
   SearchCriteria,
   Flight,
@@ -628,6 +633,158 @@ describe("BookingStore", () => {
       expect(result.current.totalPrice).toBe(0);
       expect(result.current.currentStep).toBe("search");
       expect(result.current.sessionId).toBeNull();
+    });
+  });
+
+  describe("Selector Hooks", () => {
+    describe("useSeatSelection", () => {
+      it("should provide seat selection state and actions", () => {
+        const { result: storeResult } = renderHook(() => useBookingStore());
+        const { result: seatResult } = renderHook(() => useSeatSelection());
+
+        act(() => {
+          seatResult.current.setSeat("passenger-1", mockSeat);
+        });
+
+        expect(seatResult.current.selectedSeats.get("passenger-1")).toEqual(
+          mockSeat,
+        );
+        expect(storeResult.current.selectedSeats.get("passenger-1")).toEqual(
+          mockSeat,
+        );
+
+        act(() => {
+          seatResult.current.removeSeat("passenger-1");
+        });
+
+        expect(seatResult.current.selectedSeats.has("passenger-1")).toBe(false);
+      });
+
+      it("should clear all seats", () => {
+        const { result } = renderHook(() => useSeatSelection());
+
+        act(() => {
+          result.current.setSeat("passenger-1", mockSeat);
+          result.current.setSeat("passenger-2", mockPaidSeat);
+          result.current.clearSeats();
+        });
+
+        expect(result.current.selectedSeats.size).toBe(0);
+      });
+    });
+
+    describe("usePassengerInfo", () => {
+      it("should provide passenger state and actions", () => {
+        const { result: storeResult } = renderHook(() => useBookingStore());
+        const { result: passengerResult } = renderHook(() =>
+          usePassengerInfo(),
+        );
+
+        act(() => {
+          passengerResult.current.setPassengers([mockPassenger]);
+        });
+
+        expect(passengerResult.current.passengers).toEqual([mockPassenger]);
+        expect(storeResult.current.passengers).toEqual([mockPassenger]);
+
+        const updatedPassenger = { ...mockPassenger, firstName: "Jane" };
+        act(() => {
+          passengerResult.current.updatePassenger(
+            "passenger-1",
+            updatedPassenger,
+          );
+        });
+
+        expect(passengerResult.current.passengers[0].firstName).toBe("Jane");
+      });
+
+      it("should clear passengers", () => {
+        const { result } = renderHook(() => usePassengerInfo());
+
+        act(() => {
+          result.current.setPassengers([mockPassenger]);
+          result.current.clearPassengers();
+        });
+
+        expect(result.current.passengers).toEqual([]);
+      });
+    });
+
+    describe("useExtras", () => {
+      it("should provide extras state and actions", () => {
+        const { result: storeResult } = renderHook(() => useBookingStore());
+        const { result: extrasResult } = renderHook(() => useExtras());
+
+        // Set flight first for price calculation
+        act(() => {
+          storeResult.current.setSelectedFlight(mockFlight);
+        });
+
+        act(() => {
+          extrasResult.current.updateBaggage("passenger-1", mockBaggage);
+        });
+
+        expect(
+          extrasResult.current.selectedExtras.baggage.get("passenger-1"),
+        ).toEqual(mockBaggage);
+
+        act(() => {
+          extrasResult.current.updateMeal("passenger-1", mockMeal);
+        });
+
+        expect(
+          extrasResult.current.selectedExtras.meals.get("passenger-1"),
+        ).toEqual(mockMeal);
+      });
+
+      it("should set insurance and lounge access", () => {
+        const { result: storeResult } = renderHook(() => useBookingStore());
+        const { result: extrasResult } = renderHook(() => useExtras());
+        const insurance = {
+          type: "basic" as const,
+          coverage: 50000,
+          price: 30,
+        };
+        const lounge = { airport: "JFK", price: 75 };
+
+        // Set flight first for price calculation
+        act(() => {
+          storeResult.current.setSelectedFlight(mockFlight);
+        });
+
+        act(() => {
+          extrasResult.current.setInsurance(insurance);
+          extrasResult.current.setLoungeAccess(lounge);
+        });
+
+        expect(extrasResult.current.selectedExtras.insurance).toEqual(
+          insurance,
+        );
+        expect(extrasResult.current.selectedExtras.loungeAccess).toEqual(
+          lounge,
+        );
+      });
+
+      it("should clear all extras", () => {
+        const { result: storeResult } = renderHook(() => useBookingStore());
+        const { result: extrasResult } = renderHook(() => useExtras());
+
+        // Set flight first for price calculation
+        act(() => {
+          storeResult.current.setSelectedFlight(mockFlight);
+        });
+
+        act(() => {
+          extrasResult.current.updateBaggage("passenger-1", mockBaggage);
+          extrasResult.current.updateMeal("passenger-1", mockMeal);
+          extrasResult.current.clearExtras();
+        });
+
+        expect(extrasResult.current.selectedExtras.baggage.size).toBe(0);
+        expect(extrasResult.current.selectedExtras.meals.size).toBe(0);
+        expect(extrasResult.current.selectedExtras.insurance).toBeNull();
+        expect(extrasResult.current.selectedExtras.loungeAccess).toBeNull();
+      });
     });
   });
 });

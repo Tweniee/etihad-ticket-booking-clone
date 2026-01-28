@@ -11,4 +11,7 @@ export {
   useBookingPrice,
   useSearchState,
   useFlightSelection,
+  useSeatSelection,
+  usePassengerInfo,
+  useExtras,
 } from "./booking-store";
