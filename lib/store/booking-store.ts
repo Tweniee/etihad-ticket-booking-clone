@@ -24,6 +24,14 @@ import type {
   DetailedPriceBreakdown,
   BookingStep,
 } from "../types";
+import {
+  saveSession,
+  loadSession,
+  clearSession as clearSessionData,
+  generateSessionId,
+  extendSession,
+  type SessionData,
+} from "../utils/session";
 
 /**
  * Booking Store State Interface
@@ -96,7 +104,10 @@ interface BookingActions {
 
   // Session management
   setSessionId: (sessionId: string) => void;
+  saveSession: () => Promise<void>;
+  loadSession: (sessionId: string) => Promise<void>;
   clearSession: () => void;
+  initializeSession: () => void;
 
   // Reset entire store
   reset: () => void;
@@ -407,7 +418,143 @@ export const useBookingStore = create<BookingStore>()((set, get) => ({
     set({ sessionId });
   },
 
+  /**
+   * Initialize a new session
+   * Requirements: 16.1
+   */
+  initializeSession: () => {
+    const sessionId = generateSessionId();
+    set({ sessionId });
+  },
+
+  /**
+   * Save current booking state to session
+   * Requirements: 16.1
+   */
+  saveSession: async () => {
+    const state = get();
+    const { sessionId } = state;
+
+    if (!sessionId) {
+      // Initialize session if not exists
+      get().initializeSession();
+      return get().saveSession();
+    }
+
+    try {
+      // Convert Maps to objects for serialization
+      const selectedSeatsObj: Record<string, Seat> = {};
+      state.selectedSeats.forEach((seat, passengerId) => {
+        selectedSeatsObj[passengerId] = seat;
+      });
+
+      const baggageObj: Record<string, any> = {};
+      state.selectedExtras.baggage.forEach((baggage, passengerId) => {
+        baggageObj[passengerId] = baggage;
+      });
+
+      const mealsObj: Record<string, any> = {};
+      state.selectedExtras.meals.forEach((meal, passengerId) => {
+        mealsObj[passengerId] = meal;
+      });
+
+      const sessionData: SessionData = {
+        searchCriteria: state.searchCriteria,
+        selectedFlight: state.selectedFlight,
+        selectedSeats: selectedSeatsObj,
+        passengers: state.passengers,
+        selectedExtras: {
+          baggage: baggageObj,
+          meals: mealsObj,
+          insurance: state.selectedExtras.insurance,
+          loungeAccess: state.selectedExtras.loungeAccess,
+        },
+      };
+
+      await saveSession(sessionId, sessionData);
+
+      // Extend session timeout on save
+      await extendSession(sessionId);
+    } catch (error) {
+      console.error("Failed to save session:", error);
+      throw error;
+    }
+  },
+
+  /**
+   * Load booking state from session
+   * Requirements: 16.1
+   */
+  loadSession: async (sessionId: string) => {
+    try {
+      const sessionData = await loadSession(sessionId);
+
+      if (!sessionData) {
+        throw new Error("Session not found or expired");
+      }
+
+      // Convert objects back to Maps
+      const selectedSeats = new Map<string, Seat>();
+      Object.entries(sessionData.selectedSeats).forEach(
+        ([passengerId, seat]) => {
+          selectedSeats.set(passengerId, seat);
+        },
+      );
+
+      const baggageMap = new Map<string, any>();
+      Object.entries(sessionData.selectedExtras.baggage).forEach(
+        ([passengerId, baggage]) => {
+          baggageMap.set(passengerId, baggage);
+        },
+      );
+
+      const mealsMap = new Map<string, any>();
+      Object.entries(sessionData.selectedExtras.meals).forEach(
+        ([passengerId, meal]) => {
+          mealsMap.set(passengerId, meal);
+        },
+      );
+
+      // Update store with loaded data
+      set({
+        sessionId,
+        searchCriteria: sessionData.searchCriteria,
+        selectedFlight: sessionData.selectedFlight,
+        selectedSeats,
+        passengers: sessionData.passengers,
+        selectedExtras: {
+          baggage: baggageMap,
+          meals: mealsMap,
+          insurance: sessionData.selectedExtras.insurance,
+          loungeAccess: sessionData.selectedExtras.loungeAccess,
+        },
+      });
+
+      // Recalculate price after loading
+      get().calculatePrice();
+
+      // Extend session timeout on load
+      await extendSession(sessionId);
+    } catch (error) {
+      console.error("Failed to load session:", error);
+      throw error;
+    }
+  },
+
+  /**
+   * Clear session data
+   * Requirements: 16.5
+   */
   clearSession: () => {
+    const { sessionId } = get();
+
+    if (sessionId) {
+      // Clear from Redis asynchronously
+      clearSessionData(sessionId).catch((error) => {
+        console.error("Failed to clear session from Redis:", error);
+      });
+    }
+
     set({ sessionId: null });
   },
 
@@ -508,5 +655,22 @@ export const useExtras = () => {
     setInsurance,
     setLoungeAccess,
     clearExtras,
+  };
+};
+
+// Get session management state
+export const useSessionManagement = () => {
+  const sessionId = useBookingStore((state) => state.sessionId);
+  const initializeSession = useBookingStore((state) => state.initializeSession);
+  const saveSession = useBookingStore((state) => state.saveSession);
+  const loadSession = useBookingStore((state) => state.loadSession);
+  const clearSession = useBookingStore((state) => state.clearSession);
+
+  return {
+    sessionId,
+    initializeSession,
+    saveSession,
+    loadSession,
+    clearSession,
   };
 };

@@ -14,4 +14,5 @@ export {
   useSeatSelection,
   usePassengerInfo,
   useExtras,
+  useSessionManagement,
 } from "./booking-store";

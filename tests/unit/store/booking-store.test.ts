@@ -608,6 +608,18 @@ describe("BookingStore", () => {
 
       expect(result.current.sessionId).toBeNull();
     });
+
+    it("should initialize a new session", () => {
+      const { result } = renderHook(() => useBookingStore());
+
+      act(() => {
+        result.current.initializeSession();
+      });
+
+      expect(result.current.sessionId).toBeDefined();
+      expect(result.current.sessionId).not.toBeNull();
+      expect(result.current.sessionId).toMatch(/^session_/);
+    });
   });
 
   describe("Reset", () => {
