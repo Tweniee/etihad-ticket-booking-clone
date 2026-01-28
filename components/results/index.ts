@@ -5,3 +5,6 @@
 
 export { FlightCard } from "./FlightCard";
 export type { FlightCardProps } from "./FlightCard";
+
+export { FlightResults } from "./FlightResults";
+export type { FlightResultsProps } from "./FlightResults";
