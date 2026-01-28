@@ -26,3 +26,33 @@ export {
   type MultiCitySearchInput,
   type SearchCriteriaInput,
 } from "./search";
+
+// Passenger validation schemas
+export {
+  contactInfoSchema,
+  passportInfoSchema,
+  createPassportSchemaWithTravelDate,
+  basePassengerInfoSchema,
+  domesticPassengerSchema,
+  internationalPassengerSchema,
+  createInternationalPassengerSchema,
+  primaryDomesticPassengerSchema,
+  primaryInternationalPassengerSchema,
+  createPrimaryInternationalPassengerSchema,
+  domesticPassengerListSchema,
+  internationalPassengerListSchema,
+  createInternationalPassengerListSchema,
+  validatePassengerAge,
+  createPassengerSchemaWithAgeValidation,
+  validateContactInfo,
+  validatePassportInfo,
+  validatePassengerInfo,
+  validatePassengerList,
+  type ContactInfoInput,
+  type PassportInfoInput,
+  type BasePassengerInfoInput,
+  type DomesticPassengerInput,
+  type InternationalPassengerInput,
+  type PrimaryDomesticPassengerInput,
+  type PrimaryInternationalPassengerInput,
+} from "./passenger";

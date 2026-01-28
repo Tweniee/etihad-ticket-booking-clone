@@ -129,7 +129,7 @@ export const oneWaySearchSchema = z.object({
     .length(1, "One-way trip must have exactly 1 segment"),
   passengers: passengerCountSchema,
   cabinClass: z.enum(["economy", "business", "first"], {
-    errorMap: () => ({ message: "Please select a valid cabin class" }),
+    message: "Please select a valid cabin class",
   }),
 });
 
@@ -147,7 +147,7 @@ export const roundTripSearchSchema = z
       .length(2, "Round-trip must have exactly 2 segments"),
     passengers: passengerCountSchema,
     cabinClass: z.enum(["economy", "business", "first"], {
-      errorMap: () => ({ message: "Please select a valid cabin class" }),
+      message: "Please select a valid cabin class",
     }),
   })
   .refine(
@@ -209,7 +209,7 @@ export const multiCitySearchSchema = z.object({
     .max(5, "Multi-city trip can have at most 5 segments"),
   passengers: passengerCountSchema,
   cabinClass: z.enum(["economy", "business", "first"], {
-    errorMap: () => ({ message: "Please select a valid cabin class" }),
+    message: "Please select a valid cabin class",
   }),
 });
 
