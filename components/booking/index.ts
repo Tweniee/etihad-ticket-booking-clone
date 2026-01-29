@@ -4,3 +4,5 @@
  */
 
 export { FlightDetails } from "./FlightDetails";
+export { Seat } from "./Seat";
+export { SeatMap } from "./SeatMap";
