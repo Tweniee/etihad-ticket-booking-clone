@@ -7,11 +7,11 @@
  * - Seat selections
  * - Passenger information
  * - Extras
- * - Price calculation
+ * - Price calculation (integrated with price calculator utilities)
  * - Session management
  * - Navigation state
  *
- * Requirements: 1.1, 1.2, 16.1
+ * Requirements: 1.1, 1.2, 8.2, 9.3, 16.1, 19.1, 19.2, 19.3
  */
 
 import { create } from "zustand";
@@ -32,6 +32,7 @@ import {
   extendSession,
   type SessionData,
 } from "../utils/session";
+import { calculateTotalPrice as calculatePrice } from "../utils/price";
 
 /**
  * Booking Store State Interface
@@ -164,69 +165,20 @@ const stepOrder: BookingStep[] = [
 
 /**
  * Calculate total price from all booking components
+ * Now uses the centralized price calculator utility
  *
- * Requirements: 1.1, 1.2
+ * Requirements: 8.2, 9.3, 19.1, 19.2, 19.3
  *
  * @param state - Current booking state
  * @returns Detailed price breakdown with total
  */
 function calculateTotalPrice(state: BookingState): DetailedPriceBreakdown {
-  const breakdown: DetailedPriceBreakdown = {
-    baseFare: 0,
-    taxes: 0,
-    fees: 0,
-    seatFees: 0,
-    extraBaggage: 0,
-    meals: 0,
-    insurance: 0,
-    loungeAccess: 0,
-    total: 0,
-  };
-
-  // Base fare from selected flight
-  if (state.selectedFlight) {
-    breakdown.baseFare = state.selectedFlight.price.breakdown.baseFare;
-    breakdown.taxes = state.selectedFlight.price.breakdown.taxes;
-    breakdown.fees = state.selectedFlight.price.breakdown.fees;
-  }
-
-  // Seat fees
-  state.selectedSeats.forEach((seat) => {
-    breakdown.seatFees += seat.price;
-  });
-
-  // Extra baggage fees
-  state.selectedExtras.baggage.forEach((baggage) => {
-    breakdown.extraBaggage += baggage.price;
-  });
-
-  // Meal fees
-  state.selectedExtras.meals.forEach((meal) => {
-    breakdown.meals += meal.price;
-  });
-
-  // Insurance fee
-  if (state.selectedExtras.insurance) {
-    breakdown.insurance = state.selectedExtras.insurance.price;
-  }
-
-  // Lounge access fee
-  if (state.selectedExtras.loungeAccess) {
-    breakdown.loungeAccess = state.selectedExtras.loungeAccess.price;
-  }
-
-  // Calculate total
-  breakdown.total =
-    breakdown.baseFare +
-    breakdown.taxes +
-    breakdown.fees +
-    breakdown.seatFees +
-    breakdown.extraBaggage +
-    breakdown.meals +
-    breakdown.insurance +
-    breakdown.loungeAccess;
-
-  return breakdown;
+  return calculatePrice(
+    state.selectedFlight,
+    state.selectedSeats,
+    state.selectedExtras,
+    state.searchCriteria?.passengers,
+  );
 }
 
 /**
@@ -357,6 +309,8 @@ export const useBookingStore = create<BookingStore>()((set, get) => ({
   },
 
   // Price calculation
+  // Automatically recalculates when flight, seats, or extras change
+  // Requirements: 8.2, 9.3, 19.1, 19.2, 19.3
   calculatePrice: () => {
     const state = get();
     const priceBreakdown = calculateTotalPrice(state);
