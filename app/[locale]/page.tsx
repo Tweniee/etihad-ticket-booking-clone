@@ -14,6 +14,10 @@ import { useTranslations } from "next-intl";
 import { Search } from "@/components/search";
 import { LoadingSpinner, LanguageSwitcher } from "@/components/shared";
 import { useBookingStore } from "@/lib/store/booking-store";
+import { useAuth } from "@/lib/contexts/auth-context";
+import { LoginModal, RegisterModal } from "@/components/auth";
+import { User, LogOut, UserCircle } from "lucide-react";
+import Link from "next/link";
 import type { SearchCriteria, Airport } from "@/lib/types";
 
 export default function HomePage() {
@@ -22,13 +26,22 @@ export default function HomePage() {
   const locale = params.locale as string;
   const t = useTranslations();
   const { setSearchCriteria, goToStep } = useBookingStore();
+  const { user, logout } = useAuth();
   const [isSearching, setIsSearching] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
   // Prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const handleLogout = async () => {
+    await logout();
+    setShowUserMenu(false);
+  };
 
   if (!mounted) {
     return null;
@@ -110,6 +123,57 @@ export default function HomePage() {
                 </a>
               </nav>
               <LanguageSwitcher />
+
+              {user ? (
+                <div className="relative">
+                  <button
+                    onClick={() => setShowUserMenu(!showUserMenu)}
+                    className="flex items-center gap-2 px-4 py-2 bg-[#7F5539] text-white rounded-md font-medium hover:bg-[#6A4530] transition-colors focus:outline-none focus:ring-2 focus:ring-[#7F5539] focus:ring-offset-2"
+                    aria-label={t("auth.userMenu")}
+                  >
+                    <User size={20} />
+                    <span className="hidden sm:inline">
+                      {user.firstName || user.email.split("@")[0]}
+                    </span>
+                  </button>
+
+                  {showUserMenu && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
+                      <div className="px-4 py-2 text-sm text-gray-700 border-b">
+                        <div className="font-medium">
+                          {user.firstName} {user.lastName}
+                        </div>
+                        <div className="text-gray-500 truncate">
+                          {user.email}
+                        </div>
+                      </div>
+                      <Link
+                        href={`/${locale}/profile`}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                        onClick={() => setShowUserMenu(false)}
+                      >
+                        <UserCircle size={16} />
+                        {t("profile.title")}
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2"
+                      >
+                        <LogOut size={16} />
+                        {t("auth.logout")}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <button
+                  onClick={() => setShowLoginModal(true)}
+                  className="px-6 py-2 bg-[#7F5539] text-white rounded-md font-medium hover:bg-[#6A4530] transition-colors focus:outline-none focus:ring-2 focus:ring-[#7F5539] focus:ring-offset-2"
+                  aria-label={t("auth.login")}
+                >
+                  {t("auth.login")}
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -337,6 +401,25 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+
+      {/* Auth Modals */}
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onSwitchToRegister={() => {
+          setShowLoginModal(false);
+          setShowRegisterModal(true);
+        }}
+      />
+
+      <RegisterModal
+        isOpen={showRegisterModal}
+        onClose={() => setShowRegisterModal(false)}
+        onSwitchToLogin={() => {
+          setShowRegisterModal(false);
+          setShowLoginModal(true);
+        }}
+      />
     </div>
   );
 }
