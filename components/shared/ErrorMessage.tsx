@@ -37,7 +37,7 @@ export interface ErrorMessageProps {
 
   /**
    * Error type
-   * @default "error"
+   * @default "validation"
    */
   type?:
     | "validation"
@@ -99,7 +99,7 @@ export interface ErrorMessageProps {
 
 export function ErrorMessage({
   message,
-  type = "error",
+  type = "validation",
   severity = "error",
   retryable = false,
   onRetry,

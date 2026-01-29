@@ -9,6 +9,12 @@ import { generateMockFlights } from "@/lib/data/mock-flights";
 import { validateSearchCriteria } from "@/lib/validation/search";
 import type { SearchCriteria, FlightSearchResponse } from "@/lib/types";
 import { ZodError } from "zod";
+import {
+  withErrorHandler,
+  validationErrorResponse,
+  serverErrorResponse,
+} from "@/lib/utils/api-error-handler";
+import { createValidationError } from "@/lib/utils/error-handler";
 
 /**
  * POST /api/flights/search
@@ -22,91 +28,45 @@ import { ZodError } from "zod";
  *
  * Returns matching flights within 5 seconds (Requirement 1.8)
  */
-export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json();
+async function searchFlightsHandler(request: NextRequest) {
+  const body = await request.json();
 
-    // Validate search criteria using Zod schema
-    // Validates: Requirements 1.1, 1.3, 1.4, 1.5, 1.6, 1.7
-    const validationResult = validateSearchCriteria(body);
+  // Validate search criteria using Zod schema
+  // Validates: Requirements 1.1, 1.3, 1.4, 1.5, 1.6, 1.7
+  const validationResult = validateSearchCriteria(body);
 
-    if (!validationResult.success) {
-      // Return validation errors with specific field-level messages
-      // Validates: Requirement 1.7 (Form Validator prevents submission with specific errors)
-      const errors = validationResult.error.errors.map((err) => ({
-        field: err.path.join("."),
-        message: err.message,
-      }));
-
-      return NextResponse.json(
-        {
-          error: "Validation failed",
-          details: errors,
-        },
-        { status: 400 },
-      );
-    }
-
-    // Extract validated search criteria
-    const searchCriteria: SearchCriteria = validationResult.data;
-
-    // Generate mock flights based on validated criteria
-    // Validates: Requirement 1.8 (Return matching flights)
-    const flights = generateMockFlights(searchCriteria);
-
-    // Generate a unique search ID for this search
-    const searchId = `search-${Date.now()}-${Math.random().toString(36).substring(7)}`;
-
-    // Prepare response
-    const response: FlightSearchResponse = {
-      flights,
-      searchId,
-      totalResults: flights.length,
-    };
-
-    // Simulate network delay to mimic real API (remove in production)
-    // Ensures response time is within acceptable limits
-    await new Promise((resolve) => setTimeout(resolve, 500));
-
-    return NextResponse.json(response, { status: 200 });
-  } catch (error) {
-    console.error("Flight search error:", error);
-
-    // Handle Zod validation errors
-    if (error instanceof ZodError) {
-      const errors = error.errors.map((err) => ({
-        field: err.path.join("."),
-        message: err.message,
-      }));
-
-      return NextResponse.json(
-        {
-          error: "Validation failed",
-          details: errors,
-        },
-        { status: 400 },
-      );
-    }
-
-    // Handle other errors
-    if (error instanceof Error) {
-      return NextResponse.json(
-        {
-          error: error.message,
-        },
-        { status: 400 },
-      );
-    }
-
-    // Generic server error
-    return NextResponse.json(
-      {
-        error: "An error occurred while searching for flights",
-      },
-      { status: 500 },
-    );
+  if (!validationResult.success) {
+    // Return validation errors with specific field-level messages
+    // Validates: Requirement 1.7 (Form Validator prevents submission with specific errors)
+    const firstError = validationResult.error.issues[0];
+    throw createValidationError(firstError.message, firstError.path.join("."));
   }
+
+  // Extract validated search criteria
+  const searchCriteria: SearchCriteria = validationResult.data;
+
+  // Generate mock flights based on validated criteria
+  // Validates: Requirement 1.8 (Return matching flights)
+  const flights = generateMockFlights(searchCriteria);
+
+  // Generate a unique search ID for this search
+  const searchId = `search-${Date.now()}-${Math.random().toString(36).substring(7)}`;
+
+  // Prepare response
+  const response: FlightSearchResponse = {
+    flights,
+    searchId,
+    totalResults: flights.length,
+  };
+
+  // Simulate network delay to mimic real API (remove in production)
+  // Ensures response time is within acceptable limits
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  return NextResponse.json(response, { status: 200 });
 }
+
+export const POST = withErrorHandler(searchFlightsHandler);
 
 /**
  * GET /api/flights/search

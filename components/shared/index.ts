@@ -18,3 +18,6 @@ export type { ErrorMessageProps, InlineFieldErrorProps } from "./ErrorMessage";
 
 export { Modal } from "./Modal";
 export type { ModalProps } from "./Modal";
+
+export { ErrorBoundary, useErrorHandler } from "./ErrorBoundary";
+export type {} from "./ErrorBoundary";
