@@ -1,55 +1,47 @@
 "use client";
 
 /**
- * Payment Page
+ * Flight Details Page
  *
- * Handles payment processing with Razorpay checkout integration
- * Displays booking summary and price breakdown
+ * Displays detailed information about the selected flight
  *
- * Requirements: 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8
+ * Requirements: 5.1, 5.2, 5.3, 5.4, 5.5
  */
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Payment } from "@/components/payment";
+import { FlightDetails } from "@/components/booking";
 import { LoadingSpinner } from "@/components/shared";
 import { useBookingStore } from "@/lib/store/booking-store";
 
-export default function PaymentPage() {
+export default function DetailsPage() {
   const router = useRouter();
-  const { selectedFlight, passengers } = useBookingStore();
+  const { selectedFlight, goToStep } = useBookingStore();
 
-  // Redirect if no flight or passengers
+  // Redirect if no flight selected
   useEffect(() => {
     if (!selectedFlight) {
       router.push("/");
-      return;
     }
-    if (passengers.length === 0) {
-      router.push("/passengers");
-    }
-  }, [selectedFlight, passengers, router]);
+  }, [selectedFlight, router]);
 
   /**
-   * Handle successful payment
+   * Handle continue to seat selection
    */
-  const handlePaymentSuccess = (
-    bookingReference: string,
-    paymentId: string,
-  ) => {
-    console.log("Payment successful:", { bookingReference, paymentId });
-    // Navigation to confirmation is handled by Payment component
+  const handleContinue = () => {
+    goToStep("seats");
+    router.push("/seats");
   };
 
   /**
-   * Handle payment error
+   * Handle back to results
    */
-  const handlePaymentError = (error: Error) => {
-    console.error("Payment error:", error);
-    // Error display is handled by Payment component
+  const handleBack = () => {
+    goToStep("results");
+    router.push("/results");
   };
 
-  if (!selectedFlight || passengers.length === 0) {
+  if (!selectedFlight) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="large" />
@@ -79,10 +71,11 @@ export default function PaymentPage() {
       </header>
 
       {/* Main Content */}
-      <div className="py-8">
-        <Payment
-          onPaymentSuccess={handlePaymentSuccess}
-          onPaymentError={handlePaymentError}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <FlightDetails
+          flight={selectedFlight}
+          onContinue={handleContinue}
+          onBack={handleBack}
         />
       </div>
     </div>

@@ -1,23 +1,23 @@
 "use client";
 
 /**
- * Payment Page
+ * Extras Selection Page
  *
- * Handles payment processing with Razorpay checkout integration
- * Displays booking summary and price breakdown
+ * Allows users to add optional services to their booking
  *
- * Requirements: 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8
+ * Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.6
  */
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Payment } from "@/components/payment";
+import { Extras } from "@/components/booking";
 import { LoadingSpinner } from "@/components/shared";
 import { useBookingStore } from "@/lib/store/booking-store";
 
-export default function PaymentPage() {
+export default function ExtrasPage() {
   const router = useRouter();
-  const { selectedFlight, passengers } = useBookingStore();
+  const { selectedFlight, passengers, selectedExtras, setExtras, goToStep } =
+    useBookingStore();
 
   // Redirect if no flight or passengers
   useEffect(() => {
@@ -31,22 +31,19 @@ export default function PaymentPage() {
   }, [selectedFlight, passengers, router]);
 
   /**
-   * Handle successful payment
+   * Handle continue to payment
    */
-  const handlePaymentSuccess = (
-    bookingReference: string,
-    paymentId: string,
-  ) => {
-    console.log("Payment successful:", { bookingReference, paymentId });
-    // Navigation to confirmation is handled by Payment component
+  const handleContinue = () => {
+    goToStep("payment");
+    router.push("/payment");
   };
 
   /**
-   * Handle payment error
+   * Handle back to seats
    */
-  const handlePaymentError = (error: Error) => {
-    console.error("Payment error:", error);
-    // Error display is handled by Payment component
+  const handleBack = () => {
+    goToStep("seats");
+    router.push("/seats");
   };
 
   if (!selectedFlight || passengers.length === 0) {
@@ -79,10 +76,14 @@ export default function PaymentPage() {
       </header>
 
       {/* Main Content */}
-      <div className="py-8">
-        <Payment
-          onPaymentSuccess={handlePaymentSuccess}
-          onPaymentError={handlePaymentError}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Extras
+          flight={selectedFlight}
+          passengers={passengers}
+          selectedExtras={selectedExtras}
+          onExtrasChange={setExtras}
+          onContinue={handleContinue}
+          onBack={handleBack}
         />
       </div>
     </div>

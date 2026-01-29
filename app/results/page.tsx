@@ -1,49 +1,38 @@
 "use client";
 
 /**
- * Flight Results Demo Page
- * Demonstrates the FlightResults component with pagination
+ * Flight Results Page
+ *
+ * Displays search results with filtering and sorting options
+ *
+ * Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6
  */
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { FlightResults } from "@/components/results";
-import type { Flight, SearchCriteria } from "@/lib/types";
+import { LoadingSpinner, ErrorMessage } from "@/components/shared";
+import { useBookingStore } from "@/lib/store/booking-store";
+import type { Flight } from "@/lib/types";
 
 export default function ResultsPage() {
+  const router = useRouter();
+  const { searchCriteria, setSelectedFlight, goToStep } = useBookingStore();
   const [flights, setFlights] = useState<Flight[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Mock search criteria
-  const searchCriteria: SearchCriteria = {
-    tripType: "one-way",
-    segments: [
-      {
-        origin: {
-          code: "JFK",
-          name: "John F. Kennedy International Airport",
-          city: "New York",
-          country: "United States",
-        },
-        destination: {
-          code: "LHR",
-          name: "London Heathrow Airport",
-          city: "London",
-          country: "United Kingdom",
-        },
-        departureDate: new Date("2024-06-01"),
-      },
-    ],
-    passengers: {
-      adults: 1,
-      children: 0,
-      infants: 0,
-    },
-    cabinClass: "economy",
-  };
+  // Redirect if no search criteria
+  useEffect(() => {
+    if (!searchCriteria) {
+      router.push("/");
+    }
+  }, [searchCriteria, router]);
 
   // Fetch flights on mount
   useEffect(() => {
+    if (!searchCriteria) return;
+
     const fetchFlights = async () => {
       try {
         setIsLoading(true);
@@ -62,47 +51,120 @@ export default function ResultsPage() {
         }
 
         const data = await response.json();
-        setFlights(data.flights);
+        setFlights(data.flights || []);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
+        console.error("Error fetching flights:", err);
+        setError(err instanceof Error ? err.message : "Failed to load flights");
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchFlights();
-  }, []);
+  }, [searchCriteria]);
 
+  /**
+   * Handle flight selection
+   */
   const handleSelectFlight = (flight: Flight) => {
-    console.log("Selected flight:", flight);
-    alert(`Selected flight ${flight.flightNumber} - ${flight.airline.name}`);
+    setSelectedFlight(flight);
+    goToStep("details");
+    router.push("/details");
   };
 
+  /**
+   * Handle modify search
+   */
   const handleModifySearch = () => {
-    console.log("Modify search clicked");
-    alert("Navigate back to search page");
+    goToStep("search");
+    router.push("/");
   };
 
+  /**
+   * Handle retry
+   */
   const handleRetry = () => {
-    console.log("Retry clicked");
     window.location.reload();
   };
 
+  if (!searchCriteria) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <button
+                onClick={() => router.push("/")}
+                className="w-10 h-10 bg-gradient-to-br from-amber-600 to-amber-800 rounded-lg flex items-center justify-center hover:opacity-90 transition-opacity"
+              >
+                <span className="text-white font-bold text-xl">E</span>
+              </button>
+              <h1 className="text-2xl font-bold text-gray-900">
+                Etihad Airways
+              </h1>
+            </div>
+            <nav className="hidden md:flex items-center space-x-6">
+              <a
+                href="/manage"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Manage Booking
+              </a>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Search Summary */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">
             Flight Search Results
-          </h1>
-          <p className="text-gray-600 mt-2">
-            {searchCriteria.segments[0].origin.code} →{" "}
-            {searchCriteria.segments[0].destination.code} •{" "}
-            {searchCriteria.passengers.adults} Adult •{" "}
-            {searchCriteria.cabinClass}
-          </p>
+          </h2>
+          <div className="flex items-center text-gray-600">
+            <span className="font-medium">
+              {searchCriteria.segments[0].origin.code} →{" "}
+              {searchCriteria.segments[0].destination.code}
+            </span>
+            <span className="mx-2">•</span>
+            <span>
+              {searchCriteria.passengers.adults}{" "}
+              {searchCriteria.passengers.adults === 1 ? "Adult" : "Adults"}
+            </span>
+            {searchCriteria.passengers.children > 0 && (
+              <>
+                <span className="mx-2">•</span>
+                <span>
+                  {searchCriteria.passengers.children}{" "}
+                  {searchCriteria.passengers.children === 1
+                    ? "Child"
+                    : "Children"}
+                </span>
+              </>
+            )}
+            {searchCriteria.passengers.infants > 0 && (
+              <>
+                <span className="mx-2">•</span>
+                <span>
+                  {searchCriteria.passengers.infants}{" "}
+                  {searchCriteria.passengers.infants === 1
+                    ? "Infant"
+                    : "Infants"}
+                </span>
+              </>
+            )}
+            <span className="mx-2">•</span>
+            <span className="capitalize">{searchCriteria.cabinClass}</span>
+          </div>
         </div>
 
+        {/* Flight Results */}
         <FlightResults
           flights={flights}
           searchCriteria={searchCriteria}

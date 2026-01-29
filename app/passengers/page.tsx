@@ -1,61 +1,61 @@
 "use client";
 
 /**
- * Payment Page
+ * Passenger Information Page
  *
- * Handles payment processing with Razorpay checkout integration
- * Displays booking summary and price breakdown
+ * Collects passenger details for all travelers
  *
- * Requirements: 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8
+ * Requirements: 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7
  */
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Payment } from "@/components/payment";
+import { PassengerForm } from "@/components/booking";
 import { LoadingSpinner } from "@/components/shared";
 import { useBookingStore } from "@/lib/store/booking-store";
+import type { PassengerInfo } from "@/lib/types";
 
-export default function PaymentPage() {
+export default function PassengersPage() {
   const router = useRouter();
-  const { selectedFlight, passengers } = useBookingStore();
+  const {
+    selectedFlight,
+    searchCriteria,
+    passengers,
+    setPassengers,
+    goToStep,
+  } = useBookingStore();
 
-  // Redirect if no flight or passengers
+  // Redirect if no flight selected
   useEffect(() => {
-    if (!selectedFlight) {
+    if (!selectedFlight || !searchCriteria) {
       router.push("/");
-      return;
     }
-    if (passengers.length === 0) {
-      router.push("/passengers");
-    }
-  }, [selectedFlight, passengers, router]);
+  }, [selectedFlight, searchCriteria, router]);
 
   /**
-   * Handle successful payment
+   * Handle passenger form submission
    */
-  const handlePaymentSuccess = (
-    bookingReference: string,
-    paymentId: string,
-  ) => {
-    console.log("Payment successful:", { bookingReference, paymentId });
-    // Navigation to confirmation is handled by Payment component
+  const handleSubmit = (passengerData: PassengerInfo[]) => {
+    setPassengers(passengerData);
+    goToStep("seats");
+    router.push("/seats");
   };
 
-  /**
-   * Handle payment error
-   */
-  const handlePaymentError = (error: Error) => {
-    console.error("Payment error:", error);
-    // Error display is handled by Payment component
-  };
-
-  if (!selectedFlight || passengers.length === 0) {
+  if (!selectedFlight || !searchCriteria) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="large" />
       </div>
     );
   }
+
+  // Determine if flight is international
+  const isInternational =
+    searchCriteria.segments[0].origin.country !==
+    searchCriteria.segments[0].destination.country;
+
+  // Get travel date (first segment departure)
+  const travelDate = searchCriteria.segments[0].departureDate;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -79,10 +79,13 @@ export default function PaymentPage() {
       </header>
 
       {/* Main Content */}
-      <div className="py-8">
-        <Payment
-          onPaymentSuccess={handlePaymentSuccess}
-          onPaymentError={handlePaymentError}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <PassengerForm
+          passengerCount={searchCriteria.passengers}
+          isInternational={isInternational}
+          travelDate={travelDate}
+          initialPassengers={passengers.length > 0 ? passengers : undefined}
+          onSubmit={handleSubmit}
         />
       </div>
     </div>
