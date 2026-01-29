@@ -5,7 +5,7 @@
 import { describe, it, expect } from "vitest";
 
 // Base URL for API calls
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
 describe("Flight Search API Integration", () => {
   describe("POST /api/flights/search", () => {

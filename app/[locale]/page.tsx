@@ -8,7 +8,7 @@
  * Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 20.1, 20.2, 20.3, 20.4, 20.5
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Search } from "@/components/search";
@@ -23,6 +23,16 @@ export default function HomePage() {
   const t = useTranslations();
   const { setSearchCriteria, goToStep } = useBookingStore();
   const [isSearching, setIsSearching] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   /**
    * Handle flight search submission

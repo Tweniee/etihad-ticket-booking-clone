@@ -7,7 +7,7 @@
  * Requirements: 1.8 (Performance optimization)
  */
 
-import { redis } from "@/lib/redis";
+import redis from "@/lib/redis";
 
 // In-memory cache fallback
 const memoryCache = new Map<string, { data: any; expiry: number }>();

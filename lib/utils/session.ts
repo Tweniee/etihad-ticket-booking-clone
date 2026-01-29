@@ -5,7 +5,6 @@
  * Requirements: 16.1, 16.5
  */
 
-import { getRedisClient } from "./redis";
 import type {
   SearchCriteria,
   Flight,
@@ -13,6 +12,12 @@ import type {
   PassengerInfo,
   SelectedExtras,
 } from "../types";
+
+// Only import Redis on server side
+let getRedisClient: any;
+if (typeof window === "undefined") {
+  getRedisClient = require("./redis").getRedisClient;
+}
 
 /**
  * Session data structure stored in Redis
@@ -55,6 +60,12 @@ export async function saveSession(
   sessionId: string,
   data: SessionData,
 ): Promise<void> {
+  // Skip on client side
+  if (typeof window !== "undefined") {
+    console.warn("Session save skipped on client side");
+    return;
+  }
+
   try {
     const redis = getRedisClient();
     const key = `booking:session:${sessionId}`;
@@ -81,6 +92,12 @@ export async function saveSession(
 export async function loadSession(
   sessionId: string,
 ): Promise<SessionData | null> {
+  // Skip on client side
+  if (typeof window !== "undefined") {
+    console.warn("Session load skipped on client side");
+    return null;
+  }
+
   try {
     const redis = getRedisClient();
     const key = `booking:session:${sessionId}`;
@@ -109,6 +126,11 @@ export async function loadSession(
  * @param sessionId - Unique session identifier
  */
 export async function clearSession(sessionId: string): Promise<void> {
+  // Skip on client side
+  if (typeof window !== "undefined") {
+    return;
+  }
+
   try {
     const redis = getRedisClient();
     const key = `booking:session:${sessionId}`;
@@ -128,6 +150,11 @@ export async function clearSession(sessionId: string): Promise<void> {
  * @param sessionId - Unique session identifier
  */
 export async function extendSession(sessionId: string): Promise<void> {
+  // Skip on client side
+  if (typeof window !== "undefined") {
+    return;
+  }
+
   try {
     const redis = getRedisClient();
     const key = `booking:session:${sessionId}`;
@@ -149,6 +176,11 @@ export async function extendSession(sessionId: string): Promise<void> {
  * @returns true if session exists and is valid
  */
 export async function isSessionValid(sessionId: string): Promise<boolean> {
+  // Skip on client side
+  if (typeof window !== "undefined") {
+    return false;
+  }
+
   try {
     const redis = getRedisClient();
     const key = `booking:session:${sessionId}`;

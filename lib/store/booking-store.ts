@@ -24,15 +24,33 @@ import type {
   DetailedPriceBreakdown,
   BookingStep,
 } from "../types";
-import {
-  saveSession,
-  loadSession,
-  clearSession as clearSessionData,
-  generateSessionId,
-  extendSession,
-  type SessionData,
-} from "../utils/session";
+
+// Conditionally import session utilities only on server side
+let saveSession: any;
+let loadSession: any;
+let clearSessionData: any;
+let extendSession: any;
+let generateSessionId: any;
+
+if (typeof window === "undefined") {
+  const sessionModule = require("../utils/session");
+  saveSession = sessionModule.saveSession;
+  loadSession = sessionModule.loadSession;
+  clearSessionData = sessionModule.clearSession;
+  extendSession = sessionModule.extendSession;
+  generateSessionId = sessionModule.generateSessionId;
+} else {
+  // Client-side stubs
+  saveSession = async () => {};
+  loadSession = async () => null;
+  clearSessionData = () => {};
+  extendSession = async () => {};
+  generateSessionId = () =>
+    `session_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+}
+
 import { calculateTotalPrice as calculatePrice } from "../utils/price";
+import type { SessionData } from "../utils/session";
 
 /**
  * Booking Store State Interface

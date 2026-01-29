@@ -32,15 +32,22 @@ export const metadata: Metadata = {
   ],
 };
 
+// Generate static params for all locales
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
 export default async function LocaleLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  const { locale } = params;
+
   // Validate locale
-  if (!locales.includes(locale as any)) {
+  if (!locales.includes(locale as "en" | "ar")) {
     notFound();
   }
 
@@ -62,7 +69,7 @@ export default async function LocaleLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-50`}
       >
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider messages={messages} locale={locale}>
           <ErrorBoundary>
             <div className="min-h-screen flex flex-col">
               <main className="flex-1">{children}</main>
