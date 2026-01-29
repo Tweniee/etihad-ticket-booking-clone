@@ -15,6 +15,7 @@
     "create-test-user": "tsx scripts/create-test-user.ts",
     "create-demo-users": "tsx scripts/create-demo-users.ts",
     "generate-mock-data": "tsx scripts/generate-mock-airline-data.ts",
+    "seed-bookings": "tsx scripts/seed-mock-bookings.ts",
     "verify-auth": "tsx scripts/verify-auth-system.ts"
   },
   "dependencies": {
