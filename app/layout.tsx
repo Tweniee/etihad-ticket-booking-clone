@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ErrorBoundary } from "@/components/shared";
+import ChatbotButton from "@/components/shared/ChatbotButton";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -50,6 +51,7 @@ export default function RootLayout({
           <div className="min-h-screen flex flex-col">
             <main className="flex-1">{children}</main>
           </div>
+          <ChatbotButton chatUrl="https://chat.example.com" />
         </ErrorBoundary>
       </body>
     </html>
