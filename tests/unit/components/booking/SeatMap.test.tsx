@@ -300,7 +300,9 @@ describe("SeatMap Component", () => {
     // Check for column headers
     expect(screen.getByText("Row")).toBeInTheDocument();
     mockSeatMap.columns.forEach((col) => {
-      expect(screen.getByText(col)).toBeInTheDocument();
+      // Use getAllByText since column letters appear multiple times (header + seats)
+      const elements = screen.getAllByText(col);
+      expect(elements.length).toBeGreaterThan(0);
     });
   });
 
