@@ -398,5 +398,38 @@
     "openMenu": "فتح القائمة",
     "loading": "جاري تحميل المحتوى",
     "error": "حدث خطأ"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "confirmPasswordPlaceholder": "أعد إدخال كلمة المرور",
+    "firstName": "الاسم الأول",
+    "firstNamePlaceholder": "أدخل اسمك الأول",
+    "lastName": "اسم العائلة",
+    "lastNamePlaceholder": "أدخل اسم العائلة",
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "+1234567890",
+    "optional": "(اختياري)",
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور",
+    "noAccount": "ليس لديك حساب؟",
+    "haveAccount": "لديك حساب بالفعل؟",
+    "passwordMismatch": "كلمات المرور غير متطابقة",
+    "userMenu": "قائمة المستخدم",
+    "errors": {
+      "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+      "emailExists": "البريد الإلكتروني مسجل بالفعل",
+      "serverError": "حدث خطأ ما. يرجى المحاولة مرة أخرى."
+    }
+  },
+  "profile": {
+    "title": "ملفي الشخصي",
+    "role": "الدور"
   }
 }

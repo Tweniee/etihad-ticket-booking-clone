@@ -28,3 +28,6 @@ export type { SkipLinksProps, SkipLink } from "./SkipLinks";
 export { LiveRegion, useLiveRegion } from "./LiveRegion";
 export type { LiveRegionProps } from "./LiveRegion";
 export { LanguageSwitcher } from "./LanguageSwitcher";
+
+export { Header } from "./Header";
+export type { HeaderProps } from "./Header";

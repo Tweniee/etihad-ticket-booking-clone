@@ -398,5 +398,38 @@
     "openMenu": "Open menu",
     "loading": "Loading content",
     "error": "Error occurred"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Re-enter your password",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Enter your last name",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+1234567890",
+    "optional": "(Optional)",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "passwordMismatch": "Passwords do not match",
+    "userMenu": "User menu",
+    "errors": {
+      "invalidCredentials": "Invalid email or password",
+      "emailExists": "Email already registered",
+      "serverError": "Something went wrong. Please try again."
+    }
+  },
+  "profile": {
+    "title": "My Profile",
+    "role": "Role"
   }
 }

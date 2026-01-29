@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { locales } from "@/i18n/request";
 import "../globals.css";
 import { ErrorBoundary } from "@/components/shared";
+import { ClientProviders } from "@/components/providers/ClientProviders";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -71,9 +72,7 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider messages={messages} locale={locale}>
           <ErrorBoundary>
-            <div className="min-h-screen flex flex-col">
-              <main className="flex-1">{children}</main>
-            </div>
+            <ClientProviders locale={locale}>{children}</ClientProviders>
           </ErrorBoundary>
         </NextIntlClientProvider>
       </body>
