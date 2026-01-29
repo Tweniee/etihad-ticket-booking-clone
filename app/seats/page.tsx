@@ -10,10 +10,23 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { SeatMap } from "@/components/booking";
+import dynamic from "next/dynamic";
 import { LoadingSpinner, ErrorMessage } from "@/components/shared";
 import { useBookingStore } from "@/lib/store/booking-store";
 import type { SeatMap as SeatMapType } from "@/lib/types";
+
+// Lazy load SeatMap component
+const SeatMap = dynamic(
+  () =>
+    import("@/components/booking").then((mod) => ({ default: mod.SeatMap })),
+  {
+    loading: () => (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner size="large" />
+      </div>
+    ),
+  },
+);
 
 export default function SeatsPage() {
   const router = useRouter();

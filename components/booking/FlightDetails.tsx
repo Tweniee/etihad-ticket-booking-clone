@@ -14,6 +14,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { format } from "date-fns";
 import {
   Plane,
@@ -71,11 +72,16 @@ export function FlightDetails({
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
-            <img
-              src={flight.airline.logo}
-              alt={flight.airline.name}
-              className="h-12 w-12 object-contain"
-            />
+            <div className="relative w-12 h-12">
+              <Image
+                src={flight.airline.logo}
+                alt={flight.airline.name}
+                width={48}
+                height={48}
+                className="object-contain"
+                unoptimized={flight.airline.logo.startsWith("data:")}
+              />
+            </div>
             <div>
               <h1 className="text-2xl font-bold text-gray-900">
                 {flight.airline.name}

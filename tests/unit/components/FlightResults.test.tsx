@@ -422,7 +422,7 @@ describe("FlightResults", () => {
       const nextButton = screen.getByTestId("flight-results-next-button");
       fireEvent.click(nextButton);
 
-      expect(screen.getByText("Page 2 of 2")).toBeInTheDocument();
+      expect(screen.getAllByText("Page 2 of 2")).toHaveLength(2); // One in LiveRegion, one visible
       expect(
         screen.getByText("Showing 21-25 of 25 flights"),
       ).toBeInTheDocument();
@@ -516,7 +516,7 @@ describe("FlightResults", () => {
       const page2Button = screen.getByTestId("flight-results-page-2");
       fireEvent.click(page2Button);
 
-      expect(screen.getByText("Page 2 of 3")).toBeInTheDocument();
+      expect(screen.getAllByText("Page 2 of 3")).toHaveLength(2); // One in LiveRegion, one visible
       expect(
         screen.getByText("Showing 21-40 of 45 flights"),
       ).toBeInTheDocument();
@@ -539,7 +539,7 @@ describe("FlightResults", () => {
       // Go to page 2
       const nextButton = screen.getByTestId("flight-results-next-button");
       fireEvent.click(nextButton);
-      expect(screen.getByText("Page 2 of 2")).toBeInTheDocument();
+      expect(screen.getAllByText("Page 2 of 2")).toHaveLength(2); // One in LiveRegion, one visible
 
       // Change flights
       const newFlights = Array.from({ length: 30 }, (_, i) =>
@@ -556,7 +556,9 @@ describe("FlightResults", () => {
       );
 
       // Should be back on page 1
-      expect(screen.getByText("Page 1 of 2")).toBeInTheDocument();
+      expect(
+        screen.getByText("Showing 1-20 of 30 flights"),
+      ).toBeInTheDocument();
     });
 
     it("should respect custom flightsPerPage prop", () => {

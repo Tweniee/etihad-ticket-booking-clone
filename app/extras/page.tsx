@@ -10,9 +10,21 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Extras } from "@/components/booking";
+import dynamic from "next/dynamic";
 import { LoadingSpinner } from "@/components/shared";
 import { useBookingStore } from "@/lib/store/booking-store";
+
+// Lazy load Extras component
+const Extras = dynamic(
+  () => import("@/components/booking").then((mod) => ({ default: mod.Extras })),
+  {
+    loading: () => (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner size="large" />
+      </div>
+    ),
+  },
+);
 
 export default function ExtrasPage() {
   const router = useRouter();

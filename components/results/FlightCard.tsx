@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Clock, Plane } from "lucide-react";
 import { PriceDisplay } from "@/components/shared/PriceDisplay";
 import type { Flight } from "@/lib/types";
@@ -159,13 +160,16 @@ export function FlightCard({
         <div className="flex items-start gap-3 sm:gap-4">
           {/* Airline logo */}
           <div
-            className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center"
+            className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center relative"
             data-testid={`${testId}-airline-logo`}
           >
-            <img
+            <Image
               src={flight.airline.logo}
               alt={`${flight.airline.name} logo`}
-              className="max-w-full max-h-full object-contain"
+              width={48}
+              height={48}
+              className="object-contain"
+              unoptimized={flight.airline.logo.startsWith("data:")}
               onError={(e) => {
                 // Fallback to airline code if image fails to load
                 const target = e.target as HTMLImageElement;

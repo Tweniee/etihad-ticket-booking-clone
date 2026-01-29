@@ -10,9 +10,24 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { FlightDetails } from "@/components/booking";
+import dynamic from "next/dynamic";
 import { LoadingSpinner } from "@/components/shared";
 import { useBookingStore } from "@/lib/store/booking-store";
+
+// Lazy load FlightDetails component
+const FlightDetails = dynamic(
+  () =>
+    import("@/components/booking").then((mod) => ({
+      default: mod.FlightDetails,
+    })),
+  {
+    loading: () => (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner size="large" />
+      </div>
+    ),
+  },
+);
 
 export default function DetailsPage() {
   const router = useRouter();

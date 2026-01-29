@@ -11,9 +11,22 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Payment } from "@/components/payment";
+import dynamic from "next/dynamic";
 import { LoadingSpinner } from "@/components/shared";
 import { useBookingStore } from "@/lib/store/booking-store";
+
+// Lazy load Payment component
+const Payment = dynamic(
+  () =>
+    import("@/components/payment").then((mod) => ({ default: mod.Payment })),
+  {
+    loading: () => (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner size="large" />
+      </div>
+    ),
+  },
+);
 
 export default function PaymentPage() {
   const router = useRouter();

@@ -15,6 +15,7 @@ import {
   serverErrorResponse,
 } from "@/lib/utils/api-error-handler";
 import { createValidationError } from "@/lib/utils/error-handler";
+import { generateCacheKey, withCache, CACHE_TTL } from "@/lib/utils/cache";
 
 /**
  * POST /api/flights/search
@@ -27,6 +28,7 @@ import { createValidationError } from "@/lib/utils/error-handler";
  * - Cabin class (economy, business, first)
  *
  * Returns matching flights within 5 seconds (Requirement 1.8)
+ * Implements caching for improved performance
  */
 async function searchFlightsHandler(request: NextRequest) {
   const body = await request.json();
@@ -45,9 +47,14 @@ async function searchFlightsHandler(request: NextRequest) {
   // Extract validated search criteria
   const searchCriteria: SearchCriteria = validationResult.data;
 
-  // Generate mock flights based on validated criteria
-  // Validates: Requirement 1.8 (Return matching flights)
-  const flights = generateMockFlights(searchCriteria);
+  // Generate cache key based on search criteria
+  const cacheKey = generateCacheKey("flight-search", searchCriteria);
+
+  // Use cache wrapper to get or generate flights
+  // Validates: Requirement 1.8 (Return matching flights with caching)
+  const flights = await withCache(cacheKey, CACHE_TTL.FLIGHT_SEARCH, async () =>
+    generateMockFlights(searchCriteria),
+  );
 
   // Generate a unique search ID for this search
   const searchId = `search-${Date.now()}-${Math.random().toString(36).substring(7)}`;

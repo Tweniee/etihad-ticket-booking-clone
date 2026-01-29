@@ -10,10 +10,25 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { PassengerForm } from "@/components/booking";
+import dynamic from "next/dynamic";
 import { LoadingSpinner } from "@/components/shared";
 import { useBookingStore } from "@/lib/store/booking-store";
 import type { PassengerInfo } from "@/lib/types";
+
+// Lazy load PassengerForm component
+const PassengerForm = dynamic(
+  () =>
+    import("@/components/booking").then((mod) => ({
+      default: mod.PassengerForm,
+    })),
+  {
+    loading: () => (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingSpinner size="large" />
+      </div>
+    ),
+  },
+);
 
 export default function PassengersPage() {
   const router = useRouter();

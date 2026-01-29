@@ -10,10 +10,25 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { FlightResults } from "@/components/results";
+import dynamic from "next/dynamic";
 import { LoadingSpinner, ErrorMessage } from "@/components/shared";
 import { useBookingStore } from "@/lib/store/booking-store";
 import type { Flight } from "@/lib/types";
+
+// Lazy load FlightResults component
+const FlightResults = dynamic(
+  () =>
+    import("@/components/results").then((mod) => ({
+      default: mod.FlightResults,
+    })),
+  {
+    loading: () => (
+      <div className="flex items-center justify-center py-12">
+        <LoadingSpinner size="large" />
+      </div>
+    ),
+  },
+);
 
 export default function ResultsPage() {
   const router = useRouter();
