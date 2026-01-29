@@ -145,7 +145,7 @@ export function FlightCard({
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       className={cn(
-        "bg-white border rounded-lg p-6 cursor-pointer transition-all",
+        "bg-white border rounded-lg p-4 sm:p-6 cursor-pointer transition-all touch-manipulation",
         "hover:shadow-lg hover:border-blue-500",
         "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
         isSelected && "border-blue-600 shadow-md bg-blue-50",
@@ -154,12 +154,12 @@ export function FlightCard({
       data-testid={testId}
       aria-label={`Flight ${flight.flightNumber} from ${firstSegment.departure.airport.code} to ${lastSegment.arrival.airport.code}, ${getStopsText(stops)}, ${flight.price.currency} ${flight.price.amount}`}
     >
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        {/* Left section: Airline and flight info */}
-        <div className="flex items-start gap-4 flex-1">
+      <div className="flex flex-col gap-4">
+        {/* Mobile/Tablet Layout */}
+        <div className="flex items-start gap-3 sm:gap-4">
           {/* Airline logo */}
           <div
-            className="flex-shrink-0 w-12 h-12 flex items-center justify-center"
+            className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center"
             data-testid={`${testId}-airline-logo`}
           >
             <img
@@ -172,7 +172,7 @@ export function FlightCard({
                 target.style.display = "none";
                 const parent = target.parentElement;
                 if (parent) {
-                  parent.innerHTML = `<div class="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-gray-600 font-semibold text-sm">${flight.airline.code}</div>`;
+                  parent.innerHTML = `<div class="w-10 h-10 sm:w-12 sm:h-12 bg-gray-200 rounded flex items-center justify-center text-gray-600 font-semibold text-xs sm:text-sm">${flight.airline.code}</div>`;
                 }
               }}
             />
@@ -181,9 +181,9 @@ export function FlightCard({
           {/* Flight details */}
           <div className="flex-1 min-w-0">
             {/* Airline name and flight number */}
-            <div className="mb-3">
+            <div className="mb-2 sm:mb-3">
               <h3
-                className="text-sm font-semibold text-gray-900"
+                className="text-xs sm:text-sm font-semibold text-gray-900"
                 data-testid={`${testId}-airline-name`}
               >
                 {flight.airline.name}
@@ -197,37 +197,37 @@ export function FlightCard({
             </div>
 
             {/* Flight route and times */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               {/* Departure */}
               <div className="flex-shrink-0">
                 <div
-                  className="text-2xl font-bold text-gray-900"
+                  className="text-lg sm:text-2xl font-bold text-gray-900"
                   data-testid={`${testId}-departure-time`}
                 >
                   {formatTime(firstSegment.departure.dateTime)}
                 </div>
                 <div
-                  className="text-sm text-gray-600"
+                  className="text-xs sm:text-sm text-gray-600"
                   data-testid={`${testId}-departure-airport`}
                 >
                   {firstSegment.departure.airport.code}
                 </div>
-                <div className="text-xs text-gray-500">
+                <div className="text-xs text-gray-500 hidden sm:block">
                   {formatDate(firstSegment.departure.dateTime)}
                 </div>
               </div>
 
               {/* Flight path visualization */}
               <div className="flex-1 min-w-0 flex flex-col items-center">
-                <div className="w-full flex items-center justify-center gap-2 mb-1">
+                <div className="w-full flex items-center justify-center gap-1 sm:gap-2 mb-1">
                   <div className="flex-1 h-px bg-gray-300"></div>
                   <Plane
-                    className="w-4 h-4 text-gray-400 transform rotate-90"
+                    className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400 transform rotate-90"
                     aria-hidden="true"
                   />
                   <div className="flex-1 h-px bg-gray-300"></div>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-gray-500">
+                <div className="flex items-center gap-1 sm:gap-2 text-xs text-gray-500">
                   <Clock className="w-3 h-3" aria-hidden="true" />
                   <span data-testid={`${testId}-duration`}>
                     {formatDuration(totalDuration)}
@@ -244,18 +244,18 @@ export function FlightCard({
               {/* Arrival */}
               <div className="flex-shrink-0 text-right">
                 <div
-                  className="text-2xl font-bold text-gray-900"
+                  className="text-lg sm:text-2xl font-bold text-gray-900"
                   data-testid={`${testId}-arrival-time`}
                 >
                   {formatTime(lastSegment.arrival.dateTime)}
                 </div>
                 <div
-                  className="text-sm text-gray-600"
+                  className="text-xs sm:text-sm text-gray-600"
                   data-testid={`${testId}-arrival-airport`}
                 >
                   {lastSegment.arrival.airport.code}
                 </div>
-                <div className="text-xs text-gray-500">
+                <div className="text-xs text-gray-500 hidden sm:block">
                   {formatDate(lastSegment.arrival.dateTime)}
                 </div>
               </div>
@@ -263,20 +263,21 @@ export function FlightCard({
           </div>
         </div>
 
-        {/* Right section: Price and cabin class */}
-        <div className="flex flex-col items-end justify-center gap-2 md:border-l md:border-gray-200 md:pl-6">
-          <PriceDisplay
-            amount={flight.price.amount}
-            currency={flight.price.currency}
-            breakdown={flight.price.breakdown}
-            size="large"
-            testId={`${testId}-price`}
-          />
-          <div className="text-xs text-gray-500 capitalize">
-            {flight.cabinClass}
-          </div>
-          <div className="text-xs text-gray-500">
-            {flight.availableSeats} seats left
+        {/* Price section - Below on mobile, right on desktop */}
+        <div className="flex items-center justify-between sm:justify-end gap-4 pt-3 sm:pt-0 border-t sm:border-t-0 sm:border-l sm:border-gray-200 sm:pl-6">
+          <div className="flex flex-col sm:items-end gap-1 sm:gap-2">
+            <PriceDisplay
+              amount={flight.price.amount}
+              currency={flight.price.currency}
+              breakdown={flight.price.breakdown}
+              size="large"
+              testId={`${testId}-price`}
+            />
+            <div className="flex items-center gap-2 text-xs text-gray-500">
+              <span className="capitalize">{flight.cabinClass}</span>
+              <span>•</span>
+              <span>{flight.availableSeats} seats left</span>
+            </div>
           </div>
         </div>
       </div>

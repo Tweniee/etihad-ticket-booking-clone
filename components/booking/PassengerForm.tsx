@@ -208,14 +208,14 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+    <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-4 sm:p-6">
       {/* Progress indicator */}
-      <div className="mb-6">
+      <div className="mb-4 sm:mb-6">
         <div className="flex items-center justify-between mb-2">
-          <h2 className="text-xl font-semibold text-gray-900">
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
             Passenger Information
           </h2>
-          <span className="text-sm text-gray-600">
+          <span className="text-xs sm:text-sm text-gray-600">
             {currentPassengerIndex + 1} of {passengers.length}
           </span>
         </div>
@@ -230,10 +230,10 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
       </div>
 
       {/* Current passenger label */}
-      <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+      <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-blue-50 rounded-lg border border-blue-200">
         <div className="flex items-center">
-          <User className="w-5 h-5 text-blue-600 mr-2" />
-          <h3 className="text-lg font-medium text-blue-900">
+          <User className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 mr-2" />
+          <h3 className="text-base sm:text-lg font-medium text-blue-900">
             {getPassengerTypeLabel(
               currentPassenger.type,
               currentPassengerIndex,
@@ -242,25 +242,28 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
           </h3>
         </div>
         {isPrimary && (
-          <p className="text-sm text-blue-700 mt-1">
+          <p className="text-xs sm:text-sm text-blue-700 mt-1">
             We'll send booking confirmation to this passenger's email
           </p>
         )}
       </div>
 
-      <form onSubmit={handleSubmit(onPassengerSubmit)} className="space-y-6">
+      <form
+        onSubmit={handleSubmit(onPassengerSubmit)}
+        className="space-y-4 sm:space-y-6"
+      >
         {/* Basic Information */}
-        <div className="space-y-4">
-          <h4 className="text-md font-medium text-gray-900">
+        <div className="space-y-3 sm:space-y-4">
+          <h4 className="text-sm sm:text-md font-medium text-gray-900">
             Personal Information
           </h4>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {/* First Name */}
             <div>
               <label
                 htmlFor="firstName"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
               >
                 First Name <span className="text-red-500">*</span>
               </label>
@@ -273,7 +276,7 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
                     type="text"
                     id="firstName"
                     className={cn(
-                      "w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500",
+                      "w-full px-3 sm:px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base",
                       errors.firstName ? "border-red-500" : "border-gray-300",
                     )}
                     placeholder="Enter first name"
@@ -289,7 +292,7 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
             <div>
               <label
                 htmlFor="lastName"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
               >
                 Last Name <span className="text-red-500">*</span>
               </label>
@@ -302,7 +305,7 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
                     type="text"
                     id="lastName"
                     className={cn(
-                      "w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500",
+                      "w-full px-3 sm:px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base",
                       errors.lastName ? "border-red-500" : "border-gray-300",
                     )}
                     placeholder="Enter last name"
@@ -318,7 +321,7 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
             <div>
               <label
                 htmlFor="dateOfBirth"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
               >
                 Date of Birth <span className="text-red-500">*</span>
               </label>
@@ -344,7 +347,7 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
             <div>
               <label
                 htmlFor="gender"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
               >
                 Gender <span className="text-red-500">*</span>
               </label>
@@ -356,7 +359,7 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
                     {...field}
                     id="gender"
                     className={cn(
-                      "w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500",
+                      "w-full px-3 sm:px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base",
                       errors.gender ? "border-red-500" : "border-gray-300",
                     )}
                   >
@@ -375,15 +378,15 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
 
         {/* Passport Information (International flights only) */}
         {isInternational && (
-          <div className="space-y-4 pt-6 border-t border-gray-200">
+          <div className="space-y-3 sm:space-y-4 pt-4 sm:pt-6 border-t border-gray-200">
             <div className="flex items-center">
-              <Globe className="w-5 h-5 text-gray-600 mr-2" />
-              <h4 className="text-md font-medium text-gray-900">
+              <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" />
+              <h4 className="text-sm sm:text-md font-medium text-gray-900">
                 Passport Information
               </h4>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {/* Passport Number */}
               <div>
                 <label
@@ -510,15 +513,15 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
 
         {/* Contact Information (Primary passenger only) */}
         {isPrimary && (
-          <div className="space-y-4 pt-6 border-t border-gray-200">
+          <div className="space-y-3 sm:space-y-4 pt-4 sm:pt-6 border-t border-gray-200">
             <div className="flex items-center">
-              <Mail className="w-5 h-5 text-gray-600 mr-2" />
-              <h4 className="text-md font-medium text-gray-900">
+              <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 mr-2" />
+              <h4 className="text-sm sm:text-md font-medium text-gray-900">
                 Contact Information
               </h4>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {/* Email */}
               <div className="md:col-span-2">
                 <label
@@ -621,16 +624,16 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
         )}
 
         {/* Action Buttons */}
-        <div className="flex justify-between pt-6 border-t border-gray-200">
+        <div className="flex flex-col sm:flex-row justify-between gap-3 pt-4 sm:pt-6 border-t border-gray-200">
           <button
             type="button"
             onClick={handleBack}
             disabled={currentPassengerIndex === 0 || isLoading}
             className={cn(
-              "px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg",
+              "w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 border border-gray-300 text-gray-700 font-medium rounded-lg text-sm sm:text-base",
               "hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
               "disabled:opacity-50 disabled:cursor-not-allowed",
-              "transition-colors",
+              "transition-colors touch-manipulation",
             )}
           >
             Back
@@ -640,10 +643,10 @@ export const PassengerForm: React.FC<PassengerFormProps> = ({
             type="submit"
             disabled={isLoading}
             className={cn(
-              "px-8 py-3 bg-blue-600 text-white font-medium rounded-lg",
+              "w-full sm:w-auto px-6 sm:px-8 py-2 sm:py-3 bg-blue-600 text-white font-medium rounded-lg text-sm sm:text-base",
               "hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
               "disabled:opacity-50 disabled:cursor-not-allowed",
-              "transition-colors flex items-center space-x-2",
+              "transition-colors flex items-center justify-center space-x-2 touch-manipulation",
             )}
           >
             {isLoading ? (

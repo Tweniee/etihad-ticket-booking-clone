@@ -166,15 +166,18 @@ export const Search: React.FC<SearchProps> = ({
     passengers.adults + passengers.children + passengers.infants;
 
   return (
-    <div className="w-full max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <div className="w-full max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-4 sm:p-6">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-4 sm:space-y-6"
+      >
         {/* Trip Type Selector */}
-        <div className="flex space-x-2 border-b border-gray-200">
+        <div className="flex space-x-1 sm:space-x-2 border-b border-gray-200 overflow-x-auto">
           <button
             type="button"
             onClick={() => handleTripTypeChange("round-trip")}
             className={cn(
-              "px-6 py-3 font-medium text-sm transition-colors",
+              "px-4 sm:px-6 py-2 sm:py-3 font-medium text-xs sm:text-sm transition-colors whitespace-nowrap",
               "border-b-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
               tripType === "round-trip"
                 ? "border-blue-600 text-blue-600"
@@ -188,7 +191,7 @@ export const Search: React.FC<SearchProps> = ({
             type="button"
             onClick={() => handleTripTypeChange("one-way")}
             className={cn(
-              "px-6 py-3 font-medium text-sm transition-colors",
+              "px-4 sm:px-6 py-2 sm:py-3 font-medium text-xs sm:text-sm transition-colors whitespace-nowrap",
               "border-b-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
               tripType === "one-way"
                 ? "border-blue-600 text-blue-600"
@@ -202,7 +205,7 @@ export const Search: React.FC<SearchProps> = ({
             type="button"
             onClick={() => handleTripTypeChange("multi-city")}
             className={cn(
-              "px-6 py-3 font-medium text-sm transition-colors",
+              "px-4 sm:px-6 py-2 sm:py-3 font-medium text-xs sm:text-sm transition-colors whitespace-nowrap",
               "border-b-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
               tripType === "multi-city"
                 ? "border-blue-600 text-blue-600"
@@ -215,17 +218,17 @@ export const Search: React.FC<SearchProps> = ({
         </div>
 
         {/* Flight Segments */}
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {fields.map((field, index) => (
             <div
               key={field.id}
-              className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border border-gray-200 rounded-lg relative"
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 p-3 sm:p-4 border border-gray-200 rounded-lg relative"
             >
               {/* Segment label for multi-city */}
               {tripType === "multi-city" && (
-                <div className="md:col-span-3 flex items-center justify-between">
-                  <h3 className="text-sm font-medium text-gray-700 flex items-center">
-                    <Plane className="w-4 h-4 mr-2" />
+                <div className="sm:col-span-2 md:col-span-3 flex items-center justify-between">
+                  <h3 className="text-xs sm:text-sm font-medium text-gray-700 flex items-center">
+                    <Plane className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                     Flight {index + 1}
                   </h3>
                   {fields.length > 2 && (
@@ -235,7 +238,7 @@ export const Search: React.FC<SearchProps> = ({
                       className="text-red-600 hover:text-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 rounded p-1"
                       aria-label={`Remove flight ${index + 1}`}
                     >
-                      <X className="w-4 h-4" />
+                      <X className="w-3 h-3 sm:w-4 sm:h-4" />
                     </button>
                   )}
                 </div>
@@ -319,51 +322,51 @@ export const Search: React.FC<SearchProps> = ({
               onClick={() =>
                 append({ origin: null, destination: null, departureDate: null })
               }
-              className="w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-blue-500 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-center"
+              className="w-full py-2 sm:py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-blue-500 hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center justify-center text-sm sm:text-base"
             >
-              <Plus className="w-5 h-5 mr-2" />
+              <Plus className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               Add Another Flight
             </button>
           )}
         </div>
 
         {/* Passengers and Cabin Class */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           {/* Passengers */}
-          <div className="space-y-3">
-            <label className="block text-sm font-medium text-gray-700">
+          <div className="space-y-2 sm:space-y-3">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700">
               Passengers
             </label>
-            <div className="border border-gray-300 rounded-lg p-4 space-y-3">
+            <div className="border border-gray-300 rounded-lg p-3 sm:p-4 space-y-2 sm:space-y-3">
               {/* Adults */}
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-sm font-medium text-gray-900">
+                  <div className="text-xs sm:text-sm font-medium text-gray-900">
                     Adults
                   </div>
                   <div className="text-xs text-gray-500">12+ years</div>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2 sm:space-x-3">
                   <button
                     type="button"
                     onClick={() => handlePassengerChange("adults", -1)}
                     disabled={passengers.adults <= 1}
-                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 touch-manipulation"
                     aria-label="Decrease adults"
                   >
-                    <Minus className="w-4 h-4" />
+                    <Minus className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
-                  <span className="w-8 text-center font-medium">
+                  <span className="w-6 sm:w-8 text-center font-medium text-sm sm:text-base">
                     {passengers.adults}
                   </span>
                   <button
                     type="button"
                     onClick={() => handlePassengerChange("adults", 1)}
                     disabled={totalPassengers >= 9}
-                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 touch-manipulation"
                     aria-label="Increase adults"
                   >
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
                 </div>
               </div>
@@ -371,32 +374,32 @@ export const Search: React.FC<SearchProps> = ({
               {/* Children */}
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-sm font-medium text-gray-900">
+                  <div className="text-xs sm:text-sm font-medium text-gray-900">
                     Children
                   </div>
                   <div className="text-xs text-gray-500">2-11 years</div>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2 sm:space-x-3">
                   <button
                     type="button"
                     onClick={() => handlePassengerChange("children", -1)}
                     disabled={passengers.children <= 0}
-                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 touch-manipulation"
                     aria-label="Decrease children"
                   >
-                    <Minus className="w-4 h-4" />
+                    <Minus className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
-                  <span className="w-8 text-center font-medium">
+                  <span className="w-6 sm:w-8 text-center font-medium text-sm sm:text-base">
                     {passengers.children}
                   </span>
                   <button
                     type="button"
                     onClick={() => handlePassengerChange("children", 1)}
                     disabled={totalPassengers >= 9}
-                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 touch-manipulation"
                     aria-label="Increase children"
                   >
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
                 </div>
               </div>
@@ -404,22 +407,22 @@ export const Search: React.FC<SearchProps> = ({
               {/* Infants */}
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-sm font-medium text-gray-900">
+                  <div className="text-xs sm:text-sm font-medium text-gray-900">
                     Infants
                   </div>
                   <div className="text-xs text-gray-500">Under 2 years</div>
                 </div>
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2 sm:space-x-3">
                   <button
                     type="button"
                     onClick={() => handlePassengerChange("infants", -1)}
                     disabled={passengers.infants <= 0}
-                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 touch-manipulation"
                     aria-label="Decrease infants"
                   >
-                    <Minus className="w-4 h-4" />
+                    <Minus className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
-                  <span className="w-8 text-center font-medium">
+                  <span className="w-6 sm:w-8 text-center font-medium text-sm sm:text-base">
                     {passengers.infants}
                   </span>
                   <button
@@ -429,10 +432,10 @@ export const Search: React.FC<SearchProps> = ({
                       totalPassengers >= 9 ||
                       passengers.infants >= passengers.adults
                     }
-                    className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 touch-manipulation"
                     aria-label="Increase infants"
                   >
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
                 </div>
               </div>
@@ -445,8 +448,8 @@ export const Search: React.FC<SearchProps> = ({
           </div>
 
           {/* Cabin Class */}
-          <div className="space-y-3">
-            <label className="block text-sm font-medium text-gray-700">
+          <div className="space-y-2 sm:space-y-3">
+            <label className="block text-xs sm:text-sm font-medium text-gray-700">
               Cabin Class
             </label>
             <Controller
@@ -474,7 +477,7 @@ export const Search: React.FC<SearchProps> = ({
                     <label
                       key={option.value}
                       className={cn(
-                        "flex items-center p-4 border rounded-lg cursor-pointer transition-colors",
+                        "flex items-center p-3 sm:p-4 border rounded-lg cursor-pointer transition-colors touch-manipulation",
                         value === option.value
                           ? "border-blue-600 bg-blue-50"
                           : "border-gray-300 hover:border-gray-400",
@@ -488,7 +491,7 @@ export const Search: React.FC<SearchProps> = ({
                         className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                       />
                       <div className="ml-3">
-                        <div className="text-sm font-medium text-gray-900">
+                        <div className="text-xs sm:text-sm font-medium text-gray-900">
                           {option.label}
                         </div>
                         <div className="text-xs text-gray-500">
@@ -512,10 +515,10 @@ export const Search: React.FC<SearchProps> = ({
             type="submit"
             disabled={isLoading}
             className={cn(
-              "px-8 py-3 bg-blue-600 text-white font-medium rounded-lg",
+              "w-full sm:w-auto px-6 sm:px-8 py-3 bg-blue-600 text-white font-medium rounded-lg text-sm sm:text-base",
               "hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
               "disabled:opacity-50 disabled:cursor-not-allowed",
-              "transition-colors flex items-center space-x-2",
+              "transition-colors flex items-center justify-center space-x-2 touch-manipulation",
             )}
           >
             {isLoading ? (

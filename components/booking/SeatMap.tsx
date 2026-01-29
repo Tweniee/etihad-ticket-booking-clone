@@ -128,29 +128,29 @@ export function SeatMap({
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-3 sm:p-4 md:p-6">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
           Select Your Seats
         </h1>
-        <p className="text-gray-600">
+        <p className="text-sm sm:text-base text-gray-600">
           Choose your preferred seats for {seatMap.aircraft}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
         {/* Seat Map */}
-        <div className="lg:col-span-2">
-          <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="lg:col-span-2 order-2 lg:order-1">
+          <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 md:p-6">
             {/* Aircraft info */}
-            <div className="mb-6 pb-4 border-b border-gray-200">
+            <div className="mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-gray-200">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl font-semibold text-gray-900">
+                  <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                     {seatMap.aircraft}
                   </h2>
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-xs sm:text-sm text-gray-600 mt-1">
                     {seatMap.rows} rows · {seatMap.columns.length} seats per row
                   </p>
                 </div>
@@ -158,46 +158,46 @@ export function SeatMap({
             </div>
 
             {/* Legend */}
-            <div className="mb-6 flex flex-wrap gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-gray-100 border-2 border-gray-300 rounded"></div>
+            <div className="mb-4 sm:mb-6 flex flex-wrap gap-2 sm:gap-4 text-xs sm:text-sm">
+              <div className="flex items-center gap-1 sm:gap-2">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-100 border-2 border-gray-300 rounded"></div>
                 <span>Available</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-green-100 border-2 border-green-300 rounded"></div>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 bg-green-100 border-2 border-green-300 rounded"></div>
                 <span>Extra Fee</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-blue-600 border-2 border-blue-700 rounded"></div>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 bg-blue-600 border-2 border-blue-700 rounded"></div>
                 <span>Selected</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-gray-400 border-2 border-gray-500 rounded"></div>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gray-400 border-2 border-gray-500 rounded"></div>
                 <span>Occupied</span>
               </div>
             </div>
 
             {/* Seat Grid */}
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto -mx-3 sm:-mx-4 md:-mx-6 px-3 sm:px-4 md:px-6">
               <div className="inline-block min-w-full">
                 {/* Column headers */}
                 <div className="flex items-center justify-center mb-2">
-                  <div className="w-12 text-center text-xs font-semibold text-gray-500">
+                  <div className="w-8 sm:w-12 text-center text-xs font-semibold text-gray-500">
                     Row
                   </div>
                   {seatMap.columns.map((col, idx) => (
                     <React.Fragment key={col}>
-                      <div className="w-10 text-center text-xs font-semibold text-gray-500">
+                      <div className="w-8 sm:w-10 text-center text-xs font-semibold text-gray-500">
                         {col}
                       </div>
                       {/* Add aisle space after column C */}
-                      {idx === 2 && <div className="w-8"></div>}
+                      {idx === 2 && <div className="w-4 sm:w-8"></div>}
                     </React.Fragment>
                   ))}
                 </div>
 
                 {/* Seat rows */}
-                <div className="space-y-2">
+                <div className="space-y-1 sm:space-y-2">
                   {Array.from({ length: seatMap.rows }, (_, i) => i + 1).map(
                     (row) => {
                       const isExitRow = seatMap.exitRows.includes(row);
@@ -208,7 +208,7 @@ export function SeatMap({
                           className="flex items-center justify-center"
                         >
                           {/* Row number */}
-                          <div className="w-12 text-center text-sm font-semibold text-gray-700">
+                          <div className="w-8 sm:w-12 text-center text-xs sm:text-sm font-semibold text-gray-700">
                             {row}
                           </div>
 
@@ -231,10 +231,12 @@ export function SeatMap({
                                     }
                                   />
                                 ) : (
-                                  <div className="w-10 h-10"></div>
+                                  <div className="w-8 h-8 sm:w-10 sm:h-10"></div>
                                 )}
                                 {/* Add aisle space after column C */}
-                                {idx === 2 && <div className="w-8"></div>}
+                                {idx === 2 && (
+                                  <div className="w-4 sm:w-8"></div>
+                                )}
                               </React.Fragment>
                             );
                           })}
@@ -256,14 +258,14 @@ export function SeatMap({
         </div>
 
         {/* Passenger Selection Sidebar */}
-        <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg shadow-md p-6 sticky top-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <div className="lg:col-span-1 order-1 lg:order-2">
+          <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:sticky lg:top-6">
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">
               Passengers
             </h3>
 
             {/* Passenger list */}
-            <div className="space-y-3 mb-6">
+            <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
               {passengers.map((passenger, index) => {
                 const seat = selectedSeats.get(passenger.id);
                 const isActive = index === currentPassengerIndex;
@@ -274,7 +276,7 @@ export function SeatMap({
                     type="button"
                     onClick={() => setCurrentPassengerIndex(index)}
                     className={`
-                      w-full text-left p-3 rounded-lg border-2 transition-all
+                      w-full text-left p-2 sm:p-3 rounded-lg border-2 transition-all touch-manipulation
                       ${
                         isActive
                           ? "border-blue-500 bg-blue-50"
@@ -284,16 +286,16 @@ export function SeatMap({
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <div className="font-semibold text-gray-900">
+                        <div className="text-sm sm:text-base font-semibold text-gray-900">
                           {passenger.firstName} {passenger.lastName}
                         </div>
-                        <div className="text-sm text-gray-600 capitalize">
+                        <div className="text-xs sm:text-sm text-gray-600 capitalize">
                           {passenger.type}
                         </div>
                       </div>
                       <div className="text-right">
                         {seat ? (
-                          <div className="text-sm">
+                          <div className="text-xs sm:text-sm">
                             <div className="font-semibold text-blue-600">
                               {seat.row}
                               {seat.column}
@@ -305,7 +307,9 @@ export function SeatMap({
                             )}
                           </div>
                         ) : (
-                          <div className="text-sm text-gray-400">No seat</div>
+                          <div className="text-xs sm:text-sm text-gray-400">
+                            No seat
+                          </div>
                         )}
                       </div>
                     </div>
@@ -316,10 +320,12 @@ export function SeatMap({
 
             {/* Total seat fees */}
             {Array.from(selectedSeats.values()).some((s) => s.price > 0) && (
-              <div className="mb-6 p-3 bg-gray-50 rounded-lg">
+              <div className="mb-4 sm:mb-6 p-3 bg-gray-50 rounded-lg">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Seat Fees:</span>
-                  <span className="font-semibold text-gray-900">
+                  <span className="text-xs sm:text-sm text-gray-600">
+                    Seat Fees:
+                  </span>
+                  <span className="text-sm sm:text-base font-semibold text-gray-900">
                     $
                     {Array.from(selectedSeats.values()).reduce(
                       (sum, s) => sum + s.price,
@@ -331,13 +337,13 @@ export function SeatMap({
             )}
 
             {/* Action buttons */}
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               <button
                 type="button"
                 onClick={onContinue}
                 disabled={!allSeatsAssigned}
                 className={`
-                  w-full py-3 px-4 rounded-lg font-semibold transition-colors
+                  w-full py-2 sm:py-3 px-4 rounded-lg font-semibold transition-colors text-sm sm:text-base touch-manipulation
                   ${
                     allSeatsAssigned
                       ? "bg-blue-600 text-white hover:bg-blue-700"
@@ -351,7 +357,7 @@ export function SeatMap({
               <button
                 type="button"
                 onClick={handleSkip}
-                className="w-full py-3 px-4 rounded-lg font-semibold border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors"
+                className="w-full py-2 sm:py-3 px-4 rounded-lg font-semibold border-2 border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors text-sm sm:text-base touch-manipulation"
               >
                 Skip Seat Selection
               </button>
@@ -360,7 +366,7 @@ export function SeatMap({
                 <button
                   type="button"
                   onClick={onBack}
-                  className="w-full py-3 px-4 rounded-lg font-semibold text-gray-600 hover:text-gray-900 transition-colors"
+                  className="w-full py-2 sm:py-3 px-4 rounded-lg font-semibold text-gray-600 hover:text-gray-900 transition-colors text-sm sm:text-base touch-manipulation"
                 >
                   ← Back
                 </button>

@@ -249,22 +249,26 @@ export function Payment({ onPaymentSuccess, onPaymentError }: PaymentProps) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Payment</h1>
+    <div className="max-w-4xl mx-auto p-3 sm:p-4 md:p-6">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Payment</h1>
 
       {/* Booking Summary */}
-      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4">Booking Summary</h2>
+      <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-4 sm:mb-6">
+        <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
+          Booking Summary
+        </h2>
 
         {/* Flight Details */}
-        <div className="mb-4">
-          <h3 className="font-medium text-gray-700 mb-2">Flight</h3>
-          <div className="flex items-center justify-between">
+        <div className="mb-3 sm:mb-4">
+          <h3 className="text-sm sm:text-base font-medium text-gray-700 mb-2">
+            Flight
+          </h3>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
-              <p className="font-medium">
+              <p className="text-sm sm:text-base font-medium">
                 {selectedFlight.airline.name} {selectedFlight.flightNumber}
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="text-xs sm:text-sm text-gray-600">
                 {selectedFlight.segments[0].departure.airport.code} →{" "}
                 {
                   selectedFlight.segments[selectedFlight.segments.length - 1]
@@ -272,16 +276,20 @@ export function Payment({ onPaymentSuccess, onPaymentError }: PaymentProps) {
                 }
               </p>
             </div>
-            <p className="text-sm text-gray-600">{selectedFlight.cabinClass}</p>
+            <p className="text-xs sm:text-sm text-gray-600 capitalize">
+              {selectedFlight.cabinClass}
+            </p>
           </div>
         </div>
 
         {/* Passengers */}
-        <div className="mb-4">
-          <h3 className="font-medium text-gray-700 mb-2">Passengers</h3>
+        <div className="mb-3 sm:mb-4">
+          <h3 className="text-sm sm:text-base font-medium text-gray-700 mb-2">
+            Passengers
+          </h3>
           <ul className="space-y-1">
             {passengers.map((passenger, index) => (
-              <li key={passenger.id} className="text-sm">
+              <li key={passenger.id} className="text-xs sm:text-sm">
                 {index + 1}. {passenger.firstName} {passenger.lastName} (
                 {passenger.type})
               </li>
@@ -291,8 +299,10 @@ export function Payment({ onPaymentSuccess, onPaymentError }: PaymentProps) {
 
         {/* Seats */}
         {selectedSeats.size > 0 && (
-          <div className="mb-4">
-            <h3 className="font-medium text-gray-700 mb-2">Seats</h3>
+          <div className="mb-3 sm:mb-4">
+            <h3 className="text-sm sm:text-base font-medium text-gray-700 mb-2">
+              Seats
+            </h3>
             <ul className="space-y-1">
               {Array.from(selectedSeats.entries()).map(
                 ([passengerId, seat]) => {
@@ -300,7 +310,7 @@ export function Payment({ onPaymentSuccess, onPaymentError }: PaymentProps) {
                     (p) => p.id === passengerId,
                   );
                   return (
-                    <li key={passengerId} className="text-sm">
+                    <li key={passengerId} className="text-xs sm:text-sm">
                       {passenger?.firstName} {passenger?.lastName}: Seat{" "}
                       {seat.row}
                       {seat.column}
@@ -318,9 +328,11 @@ export function Payment({ onPaymentSuccess, onPaymentError }: PaymentProps) {
           selectedExtras.meals.size > 0 ||
           selectedExtras.insurance ||
           selectedExtras.loungeAccess) && (
-          <div className="mb-4">
-            <h3 className="font-medium text-gray-700 mb-2">Extras</h3>
-            <ul className="space-y-1 text-sm">
+          <div className="mb-3 sm:mb-4">
+            <h3 className="text-sm sm:text-base font-medium text-gray-700 mb-2">
+              Extras
+            </h3>
+            <ul className="space-y-1 text-xs sm:text-sm">
               {selectedExtras.baggage.size > 0 && (
                 <li>
                   Extra Baggage: {selectedExtras.baggage.size} passenger(s)
@@ -347,8 +359,10 @@ export function Payment({ onPaymentSuccess, onPaymentError }: PaymentProps) {
       </div>
 
       {/* Price Breakdown */}
-      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4">Price Breakdown</h2>
+      <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-4 sm:mb-6">
+        <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
+          Price Breakdown
+        </h2>
         <PriceDisplay
           amount={totalPrice}
           currency={selectedFlight.price.currency}
@@ -359,13 +373,13 @@ export function Payment({ onPaymentSuccess, onPaymentError }: PaymentProps) {
 
       {/* Error Message */}
       {error && (
-        <div className="mb-6">
+        <div className="mb-4 sm:mb-6">
           <ErrorMessage
             message={getErrorMessage(error)}
             onRetry={handleRetry}
           />
           {retryCount > 0 && (
-            <p className="text-sm text-gray-600 mt-2 text-center">
+            <p className="text-xs sm:text-sm text-gray-600 mt-2 text-center">
               Attempt {retryCount + 1}
               {retryCount >= 2 && (
                 <span className="block mt-1">
@@ -380,18 +394,18 @@ export function Payment({ onPaymentSuccess, onPaymentError }: PaymentProps) {
 
       {/* Success Message for Payment Attempted */}
       {paymentAttempted && !error && !isLoading && (
-        <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <p className="text-blue-800 text-center">
+        <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <p className="text-xs sm:text-sm text-blue-800 text-center">
             Payment window opened. Complete your payment in the popup window.
           </p>
         </div>
       )}
 
       {/* Payment Button */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3">
         <button
           onClick={() => router.back()}
-          className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+          className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm sm:text-base touch-manipulation"
           disabled={isLoading}
         >
           Back
@@ -400,7 +414,7 @@ export function Payment({ onPaymentSuccess, onPaymentError }: PaymentProps) {
         <button
           onClick={handlePayment}
           disabled={isLoading || !scriptLoaded}
-          className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2"
+          className="w-full sm:w-auto px-6 sm:px-8 py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm sm:text-base touch-manipulation"
         >
           {isLoading ? (
             <>
@@ -414,7 +428,7 @@ export function Payment({ onPaymentSuccess, onPaymentError }: PaymentProps) {
       </div>
 
       {/* Security Notice */}
-      <div className="mt-6 text-center text-sm text-gray-600">
+      <div className="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-gray-600">
         <p>🔒 Your payment is secure and encrypted</p>
         <p className="mt-1">Powered by Razorpay</p>
       </div>

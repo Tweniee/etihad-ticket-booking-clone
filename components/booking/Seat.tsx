@@ -105,22 +105,23 @@ export function Seat({
         onKeyDown={handleKeyDown}
         disabled={!isClickable}
         className={`
-          w-10 h-10 rounded-md border-2 text-xs font-semibold
+          w-8 h-8 sm:w-10 sm:h-10 rounded-md border-2 text-xs font-semibold
           transition-all duration-200
           flex items-center justify-center
+          touch-manipulation
           ${getSeatColor(seat, isSelected)}
-          ${isClickable ? "cursor-pointer focus:ring-2 focus:ring-blue-500 focus:outline-none" : ""}
+          ${isClickable ? "cursor-pointer focus:ring-2 focus:ring-blue-500 focus:outline-none active:scale-95" : ""}
         `}
         aria-label={`Seat ${seat.row}${seat.column}, ${getSeatTypeLabel(seat.type)}, ${seat.status}${seat.price > 0 ? `, $${seat.price} extra` : ""}`}
         aria-pressed={isSelected}
         data-testid={`seat-${seat.row}${seat.column}`}
       >
-        <span className="text-[10px]">{seat.column}</span>
+        <span className="text-[9px] sm:text-[10px]">{seat.column}</span>
       </button>
 
-      {/* Tooltip on hover */}
+      {/* Tooltip on hover (desktop only) */}
       {isAvailable && (
-        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10 shadow-lg">
+        <div className="hidden sm:block absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10 shadow-lg">
           <div className="font-semibold mb-1">
             Seat {seat.row}
             {seat.column}
