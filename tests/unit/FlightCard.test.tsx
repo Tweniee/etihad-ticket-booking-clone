@@ -92,7 +92,11 @@ describe("FlightCard", () => {
 
       const logo = screen.getByAltText("Etihad Airways logo");
       expect(logo).toBeInTheDocument();
-      expect(logo).toHaveAttribute("src", "https://example.com/logo.png");
+      // Next.js Image component transforms the URL
+      expect(logo).toHaveAttribute("src");
+      expect(logo.getAttribute("src")).toContain(
+        "https%3A%2F%2Fexample.com%2Flogo.png",
+      );
     });
 
     it("displays correct duration format", () => {

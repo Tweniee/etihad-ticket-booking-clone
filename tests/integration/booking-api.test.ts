@@ -93,7 +93,7 @@ describe("Booking API Integration", () => {
       };
 
       const response = await fetch(
-        "http://localhost:3000/api/bookings/create",
+        "http://localhost:3001/api/bookings/create",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -121,7 +121,7 @@ describe("Booking API Integration", () => {
       };
 
       const response = await fetch(
-        "http://localhost:3000/api/bookings/create",
+        "http://localhost:3001/api/bookings/create",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -144,7 +144,7 @@ describe("Booking API Integration", () => {
       };
 
       const response = await fetch(
-        "http://localhost:3000/api/bookings/create",
+        "http://localhost:3001/api/bookings/create",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -226,7 +226,7 @@ describe("Booking API Integration", () => {
       const references = new Set<string>();
       for (let i = 0; i < 5; i++) {
         const response = await fetch(
-          "http://localhost:3000/api/bookings/create",
+          "http://localhost:3001/api/bookings/create",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -287,7 +287,7 @@ describe("Booking API Integration", () => {
 
     it("retrieves booking by reference", async () => {
       const response = await fetch(
-        `http://localhost:3000/api/bookings/${testBookingReference}`,
+        `http://localhost:3001/api/bookings/${testBookingReference}`,
       );
 
       expect(response.status).toBe(200);
@@ -299,7 +299,7 @@ describe("Booking API Integration", () => {
 
     it("retrieves booking with lastName authentication", async () => {
       const response = await fetch(
-        `http://localhost:3000/api/bookings/${testBookingReference}?lastName=Doe`,
+        `http://localhost:3001/api/bookings/${testBookingReference}?lastName=Doe`,
       );
 
       expect(response.status).toBe(200);
@@ -310,7 +310,7 @@ describe("Booking API Integration", () => {
 
     it("rejects retrieval with incorrect lastName", async () => {
       const response = await fetch(
-        `http://localhost:3000/api/bookings/${testBookingReference}?lastName=Smith`,
+        `http://localhost:3001/api/bookings/${testBookingReference}?lastName=Smith`,
       );
 
       expect(response.status).toBe(404);
@@ -319,7 +319,7 @@ describe("Booking API Integration", () => {
     });
 
     it("returns 404 for non-existent booking", async () => {
-      const response = await fetch("http://localhost:3000/api/bookings/ABC999");
+      const response = await fetch("http://localhost:3001/api/bookings/ABC999");
 
       expect(response.status).toBe(404);
       const data = await response.json();
@@ -328,7 +328,7 @@ describe("Booking API Integration", () => {
 
     it("rejects invalid booking reference format", async () => {
       const response = await fetch(
-        "http://localhost:3000/api/bookings/invalid",
+        "http://localhost:3001/api/bookings/invalid",
       );
 
       expect(response.status).toBe(400);

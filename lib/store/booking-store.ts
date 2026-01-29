@@ -386,13 +386,15 @@ export const useBookingStore = create<BookingStore>()((set, get) => ({
    * Requirements: 16.1
    */
   saveSession: async () => {
-    const state = get();
-    const { sessionId } = state;
+    let state = get();
+    let { sessionId } = state;
 
     if (!sessionId) {
       // Initialize session if not exists
-      get().initializeSession();
-      return get().saveSession();
+      sessionId = generateSessionId();
+      set({ sessionId });
+      // Get fresh state after setting sessionId
+      state = get();
     }
 
     try {
