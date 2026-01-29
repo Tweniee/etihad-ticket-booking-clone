@@ -1,0 +1,402 @@
+{
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "retry": "إعادة المحاولة",
+    "cancel": "إلغاء",
+    "continue": "متابعة",
+    "back": "رجوع",
+    "save": "حفظ",
+    "close": "إغلاق",
+    "search": "بحث",
+    "select": "اختيار",
+    "clear": "مسح",
+    "apply": "تطبيق",
+    "submit": "إرسال",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "confirm": "تأكيد",
+    "yes": "نعم",
+    "no": "لا"
+  },
+  "header": {
+    "title": "الاتحاد للطيران",
+    "subtitle": "احجز رحلتك"
+  },
+  "search": {
+    "title": "البحث عن رحلات",
+    "tripType": {
+      "label": "نوع الرحلة",
+      "oneWay": "ذهاب فقط",
+      "roundTrip": "ذهاب وعودة",
+      "multiCity": "متعددة المدن"
+    },
+    "origin": {
+      "label": "من",
+      "placeholder": "مطار المغادرة"
+    },
+    "destination": {
+      "label": "إلى",
+      "placeholder": "مطار الوصول"
+    },
+    "departureDate": {
+      "label": "تاريخ المغادرة",
+      "placeholder": "اختر التاريخ"
+    },
+    "returnDate": {
+      "label": "تاريخ العودة",
+      "placeholder": "اختر التاريخ"
+    },
+    "passengers": {
+      "label": "المسافرون",
+      "adults": "بالغون",
+      "children": "أطفال",
+      "infants": "رضع",
+      "total": "{count} مسافر"
+    },
+    "cabinClass": {
+      "label": "درجة السفر",
+      "economy": "الدرجة الاقتصادية",
+      "business": "درجة رجال الأعمال",
+      "first": "الدرجة الأولى"
+    },
+    "searchButton": "البحث عن رحلات",
+    "errors": {
+      "originRequired": "مطار المغادرة مطلوب",
+      "destinationRequired": "مطار الوصول مطلوب",
+      "departureDateRequired": "تاريخ المغادرة مطلوب",
+      "returnDateRequired": "تاريخ العودة مطلوب للرحلات ذهاب وعودة",
+      "returnDateInvalid": "يجب أن يكون تاريخ العودة بعد تاريخ المغادرة",
+      "sameAirports": "يجب أن يختلف مطار المغادرة عن مطار الوصول"
+    }
+  },
+  "results": {
+    "title": "نتائج البحث",
+    "modifySearch": "تعديل البحث",
+    "sortBy": {
+      "label": "ترتيب حسب",
+      "price": "السعر",
+      "duration": "المدة",
+      "departure": "وقت المغادرة"
+    },
+    "filters": {
+      "title": "التصفية",
+      "priceRange": "نطاق السعر",
+      "duration": "المدة",
+      "stops": "التوقفات",
+      "airlines": "شركات الطيران",
+      "departureTime": "وقت المغادرة",
+      "clearAll": "مسح الكل",
+      "activeFilters": "{count} فلتر نشط"
+    },
+    "flightCard": {
+      "stops": "{count} توقف",
+      "nonstop": "مباشر",
+      "duration": "{hours}س {minutes}د",
+      "selectFlight": "اختيار الرحلة",
+      "from": "من"
+    },
+    "noResults": "لم يتم العثور على رحلات تطابق معاييرك",
+    "pagination": {
+      "previous": "السابق",
+      "next": "التالي",
+      "page": "صفحة {current} من {total}"
+    }
+  },
+  "flightDetails": {
+    "title": "تفاصيل الرحلة",
+    "itinerary": "خط سير الرحلة",
+    "segment": "المرحلة {number}",
+    "departure": "المغادرة",
+    "arrival": "الوصول",
+    "duration": "المدة",
+    "aircraft": "الطائرة",
+    "operatedBy": "تشغيل بواسطة",
+    "baggage": {
+      "title": "الأمتعة المسموح بها",
+      "checkedBags": "الأمتعة المسجلة",
+      "carryOn": "الأمتعة اليدوية",
+      "quantity": "{count} حقيبة",
+      "weight": "{weight} كجم",
+      "dimensions": "الأبعاد: {dimensions}"
+    },
+    "fareRules": {
+      "title": "قواعد التعرفة",
+      "changeFee": "رسوم التغيير",
+      "cancellationFee": "رسوم الإلغاء",
+      "refundable": "قابل للاسترداد",
+      "nonRefundable": "غير قابل للاسترداد",
+      "notAllowed": "غير مسموح",
+      "changePolicy": "سياسة التغيير",
+      "cancellationPolicy": "سياسة الإلغاء"
+    },
+    "amenities": {
+      "title": "المرافق"
+    },
+    "priceBreakdown": {
+      "title": "تفاصيل السعر",
+      "baseFare": "السعر الأساسي",
+      "taxes": "الضرائب",
+      "fees": "الرسوم",
+      "total": "الإجمالي"
+    }
+  },
+  "seats": {
+    "title": "اختيار المقاعد",
+    "selectFor": "اختر مقعد لـ {name}",
+    "legend": {
+      "title": "الدليل",
+      "available": "متاح",
+      "occupied": "محجوز",
+      "selected": "محدد",
+      "extraFee": "رسوم إضافية"
+    },
+    "seatInfo": {
+      "row": "صف {row}",
+      "seat": "مقعد {seat}",
+      "type": {
+        "standard": "قياسي",
+        "extraLegroom": "مساحة إضافية للأرجل",
+        "exitRow": "صف الطوارئ",
+        "preferred": "مفضل"
+      },
+      "position": {
+        "window": "نافذة",
+        "middle": "وسط",
+        "aisle": "ممر"
+      },
+      "fee": "رسوم إضافية: {amount}"
+    },
+    "skipSeats": "تخطي اختيار المقاعد",
+    "errors": {
+      "seatUnavailable": "هذا المقعد غير متاح",
+      "selectAllSeats": "يرجى اختيار مقاعد لجميع المسافرين"
+    }
+  },
+  "passengers": {
+    "title": "معلومات المسافرين",
+    "passengerNumber": "المسافر {number}",
+    "type": {
+      "adult": "بالغ",
+      "child": "طفل",
+      "infant": "رضيع"
+    },
+    "firstName": {
+      "label": "الاسم الأول",
+      "placeholder": "أدخل الاسم الأول"
+    },
+    "lastName": {
+      "label": "اسم العائلة",
+      "placeholder": "أدخل اسم العائلة"
+    },
+    "dateOfBirth": {
+      "label": "تاريخ الميلاد",
+      "placeholder": "اختر التاريخ"
+    },
+    "gender": {
+      "label": "الجنس",
+      "male": "ذكر",
+      "female": "أنثى",
+      "other": "آخر"
+    },
+    "contact": {
+      "title": "معلومات الاتصال",
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "email@example.com"
+      },
+      "phone": {
+        "label": "رقم الهاتف",
+        "placeholder": "+1234567890"
+      },
+      "countryCode": {
+        "label": "رمز الدولة",
+        "placeholder": "+1"
+      }
+    },
+    "passport": {
+      "title": "معلومات جواز السفر",
+      "number": {
+        "label": "رقم جواز السفر",
+        "placeholder": "أدخل رقم جواز السفر"
+      },
+      "expiryDate": {
+        "label": "تاريخ الانتهاء",
+        "placeholder": "اختر التاريخ"
+      },
+      "nationality": {
+        "label": "الجنسية",
+        "placeholder": "اختر الجنسية"
+      },
+      "issuingCountry": {
+        "label": "بلد الإصدار",
+        "placeholder": "اختر البلد"
+      }
+    },
+    "errors": {
+      "firstNameRequired": "الاسم الأول مطلوب",
+      "lastNameRequired": "اسم العائلة مطلوب",
+      "dateOfBirthRequired": "تاريخ الميلاد مطلوب",
+      "genderRequired": "الجنس مطلوب",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "تنسيق البريد الإلكتروني غير صحيح",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "passportRequired": "معلومات جواز السفر مطلوبة للرحلات الدولية",
+      "passportExpiry": "يجب أن يكون جواز السفر صالحًا لمدة 6 أشهر على الأقل بعد تاريخ السفر"
+    }
+  },
+  "extras": {
+    "title": "إضافة خدمات إضافية",
+    "skipExtras": "تخطي الخدمات الإضافية",
+    "baggage": {
+      "title": "أمتعة إضافية",
+      "description": "أضف أمتعة مسجلة إضافية",
+      "weight": "{weight} كجم",
+      "price": "{price} لكل حقيبة"
+    },
+    "meals": {
+      "title": "تفضيلات الوجبات",
+      "description": "اختر تفضيلات الوجبة",
+      "types": {
+        "standard": "قياسي",
+        "vegetarian": "نباتي",
+        "vegan": "نباتي صرف",
+        "halal": "حلال",
+        "kosher": "كوشر",
+        "glutenFree": "خالي من الجلوتين"
+      }
+    },
+    "insurance": {
+      "title": "تأمين السفر",
+      "description": "احمِ رحلتك",
+      "types": {
+        "basic": "تغطية أساسية",
+        "comprehensive": "تغطية شاملة"
+      },
+      "coverage": "تغطية حتى {amount}"
+    },
+    "lounge": {
+      "title": "الدخول إلى الصالة",
+      "description": "استرخِ قبل رحلتك",
+      "airport": "في {airport}"
+    }
+  },
+  "payment": {
+    "title": "الدفع",
+    "bookingSummary": {
+      "title": "ملخص الحجز",
+      "flight": "الرحلة",
+      "passengers": "المسافرون",
+      "seats": "المقاعد",
+      "extras": "الخدمات الإضافية"
+    },
+    "priceBreakdown": {
+      "title": "تفاصيل السعر",
+      "baseFare": "السعر الأساسي",
+      "taxes": "الضرائب",
+      "fees": "الرسوم",
+      "seatFees": "رسوم المقاعد",
+      "extraBaggage": "أمتعة إضافية",
+      "meals": "الوجبات",
+      "insurance": "التأمين",
+      "loungeAccess": "الدخول إلى الصالة",
+      "total": "الإجمالي",
+      "perPassenger": "لكل مسافر",
+      "allPassengers": "جميع المسافرين"
+    },
+    "cardDetails": {
+      "title": "تفاصيل البطاقة",
+      "cardNumber": {
+        "label": "رقم البطاقة",
+        "placeholder": "1234 5678 9012 3456"
+      },
+      "expiryDate": {
+        "label": "تاريخ الانتهاء",
+        "placeholder": "MM/YY"
+      },
+      "cvv": {
+        "label": "CVV",
+        "placeholder": "123"
+      },
+      "cardholderName": {
+        "label": "اسم حامل البطاقة",
+        "placeholder": "الاسم على البطاقة"
+      }
+    },
+    "payButton": "ادفع {amount}",
+    "processing": "جاري معالجة الدفع...",
+    "errors": {
+      "cardNumberRequired": "رقم البطاقة مطلوب",
+      "cardNumberInvalid": "رقم البطاقة غير صحيح",
+      "expiryRequired": "تاريخ الانتهاء مطلوب",
+      "expiryInvalid": "يجب أن يكون تاريخ الانتهاء في المستقبل",
+      "cvvRequired": "CVV مطلوب",
+      "cvvInvalid": "يجب أن يكون CVV من 3 أو 4 أرقام",
+      "cardholderRequired": "اسم حامل البطاقة مطلوب",
+      "paymentFailed": "فشل الدفع. يرجى المحاولة مرة أخرى.",
+      "paymentDeclined": "تم رفض الدفع. يرجى التحقق من تفاصيل البطاقة."
+    }
+  },
+  "confirmation": {
+    "title": "تم تأكيد الحجز",
+    "thankYou": "شكرًا لحجزك مع الاتحاد للطيران",
+    "bookingReference": "رقم الحجز",
+    "emailSent": "تم إرسال رسالة تأكيد إلى {email}",
+    "downloadPdf": "تحميل PDF",
+    "manageBooking": "إدارة الحجز",
+    "bookingDetails": {
+      "title": "تفاصيل الحجز",
+      "status": "الحالة",
+      "confirmed": "مؤكد",
+      "pending": "قيد الانتظار",
+      "cancelled": "ملغى"
+    }
+  },
+  "manageBooking": {
+    "title": "إدارة الحجز",
+    "retrieve": {
+      "title": "استرجاع الحجز",
+      "bookingReference": {
+        "label": "رقم الحجز",
+        "placeholder": "أدخل رقم الحجز المكون من 6 أحرف"
+      },
+      "lastName": {
+        "label": "اسم العائلة",
+        "placeholder": "أدخل اسم العائلة"
+      },
+      "retrieveButton": "استرجاع الحجز"
+    },
+    "actions": {
+      "modify": "تعديل الحجز",
+      "cancel": "إلغاء الحجز"
+    },
+    "cancelConfirmation": {
+      "title": "إلغاء الحجز",
+      "message": "هل أنت متأكد من رغبتك في إلغاء هذا الحجز؟",
+      "fee": "رسوم الإلغاء: {amount}",
+      "refund": "مبلغ الاسترداد: {amount}",
+      "confirmButton": "تأكيد الإلغاء"
+    },
+    "errors": {
+      "bookingNotFound": "لم يتم العثور على الحجز. يرجى التحقق من رقم الحجز واسم العائلة.",
+      "cannotModify": "لا يمكن تعديل هذا الحجز بسبب قيود التعرفة.",
+      "cannotCancel": "لا يمكن إلغاء هذا الحجز."
+    }
+  },
+  "errors": {
+    "generic": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    "network": "تعذر الاتصال. يرجى التحقق من اتصالك بالإنترنت.",
+    "server": "نواجه صعوبات تقنية. يرجى المحاولة مرة أخرى لاحقًا.",
+    "sessionExpired": "انتهت صلاحية جلستك. يرجى بدء بحث جديد.",
+    "validation": "يرجى تصحيح الأخطاء والمحاولة مرة أخرى."
+  },
+  "accessibility": {
+    "skipToMain": "الانتقال إلى المحتوى الرئيسي",
+    "skipToNav": "الانتقال إلى التنقل",
+    "menu": "القائمة",
+    "closeMenu": "إغلاق القائمة",
+    "openMenu": "فتح القائمة",
+    "loading": "جاري تحميل المحتوى",
+    "error": "حدث خطأ"
+  }
+}

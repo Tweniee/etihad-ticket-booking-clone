@@ -1,0 +1,402 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "save": "Save",
+    "close": "Close",
+    "search": "Search",
+    "select": "Select",
+    "clear": "Clear",
+    "apply": "Apply",
+    "submit": "Submit",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "header": {
+    "title": "Etihad Airways",
+    "subtitle": "Book Your Flight"
+  },
+  "search": {
+    "title": "Search Flights",
+    "tripType": {
+      "label": "Trip Type",
+      "oneWay": "One-way",
+      "roundTrip": "Round-trip",
+      "multiCity": "Multi-city"
+    },
+    "origin": {
+      "label": "From",
+      "placeholder": "Origin airport"
+    },
+    "destination": {
+      "label": "To",
+      "placeholder": "Destination airport"
+    },
+    "departureDate": {
+      "label": "Departure Date",
+      "placeholder": "Select date"
+    },
+    "returnDate": {
+      "label": "Return Date",
+      "placeholder": "Select date"
+    },
+    "passengers": {
+      "label": "Passengers",
+      "adults": "Adults",
+      "children": "Children",
+      "infants": "Infants",
+      "total": "{count} passenger(s)"
+    },
+    "cabinClass": {
+      "label": "Cabin Class",
+      "economy": "Economy",
+      "business": "Business",
+      "first": "First Class"
+    },
+    "searchButton": "Search Flights",
+    "errors": {
+      "originRequired": "Origin airport is required",
+      "destinationRequired": "Destination airport is required",
+      "departureDateRequired": "Departure date is required",
+      "returnDateRequired": "Return date is required for round-trip",
+      "returnDateInvalid": "Return date must be after departure date",
+      "sameAirports": "Origin and destination must be different"
+    }
+  },
+  "results": {
+    "title": "Flight Results",
+    "modifySearch": "Modify Search",
+    "sortBy": {
+      "label": "Sort by",
+      "price": "Price",
+      "duration": "Duration",
+      "departure": "Departure Time"
+    },
+    "filters": {
+      "title": "Filters",
+      "priceRange": "Price Range",
+      "duration": "Duration",
+      "stops": "Stops",
+      "airlines": "Airlines",
+      "departureTime": "Departure Time",
+      "clearAll": "Clear All",
+      "activeFilters": "{count} active filter(s)"
+    },
+    "flightCard": {
+      "stops": "{count} stop(s)",
+      "nonstop": "Nonstop",
+      "duration": "{hours}h {minutes}m",
+      "selectFlight": "Select Flight",
+      "from": "from"
+    },
+    "noResults": "No flights found matching your criteria",
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {current} of {total}"
+    }
+  },
+  "flightDetails": {
+    "title": "Flight Details",
+    "itinerary": "Itinerary",
+    "segment": "Segment {number}",
+    "departure": "Departure",
+    "arrival": "Arrival",
+    "duration": "Duration",
+    "aircraft": "Aircraft",
+    "operatedBy": "Operated by",
+    "baggage": {
+      "title": "Baggage Allowance",
+      "checkedBags": "Checked Bags",
+      "carryOn": "Carry-on",
+      "quantity": "{count} bag(s)",
+      "weight": "{weight} kg",
+      "dimensions": "Dimensions: {dimensions}"
+    },
+    "fareRules": {
+      "title": "Fare Rules",
+      "changeFee": "Change Fee",
+      "cancellationFee": "Cancellation Fee",
+      "refundable": "Refundable",
+      "nonRefundable": "Non-refundable",
+      "notAllowed": "Not allowed",
+      "changePolicy": "Change Policy",
+      "cancellationPolicy": "Cancellation Policy"
+    },
+    "amenities": {
+      "title": "Amenities"
+    },
+    "priceBreakdown": {
+      "title": "Price Breakdown",
+      "baseFare": "Base Fare",
+      "taxes": "Taxes",
+      "fees": "Fees",
+      "total": "Total"
+    }
+  },
+  "seats": {
+    "title": "Select Seats",
+    "selectFor": "Select seat for {name}",
+    "legend": {
+      "title": "Legend",
+      "available": "Available",
+      "occupied": "Occupied",
+      "selected": "Selected",
+      "extraFee": "Extra Fee"
+    },
+    "seatInfo": {
+      "row": "Row {row}",
+      "seat": "Seat {seat}",
+      "type": {
+        "standard": "Standard",
+        "extraLegroom": "Extra Legroom",
+        "exitRow": "Exit Row",
+        "preferred": "Preferred"
+      },
+      "position": {
+        "window": "Window",
+        "middle": "Middle",
+        "aisle": "Aisle"
+      },
+      "fee": "Additional fee: {amount}"
+    },
+    "skipSeats": "Skip seat selection",
+    "errors": {
+      "seatUnavailable": "This seat is not available",
+      "selectAllSeats": "Please select seats for all passengers"
+    }
+  },
+  "passengers": {
+    "title": "Passenger Information",
+    "passengerNumber": "Passenger {number}",
+    "type": {
+      "adult": "Adult",
+      "child": "Child",
+      "infant": "Infant"
+    },
+    "firstName": {
+      "label": "First Name",
+      "placeholder": "Enter first name"
+    },
+    "lastName": {
+      "label": "Last Name",
+      "placeholder": "Enter last name"
+    },
+    "dateOfBirth": {
+      "label": "Date of Birth",
+      "placeholder": "Select date"
+    },
+    "gender": {
+      "label": "Gender",
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "contact": {
+      "title": "Contact Information",
+      "email": {
+        "label": "Email",
+        "placeholder": "email@example.com"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "+1234567890"
+      },
+      "countryCode": {
+        "label": "Country Code",
+        "placeholder": "+1"
+      }
+    },
+    "passport": {
+      "title": "Passport Information",
+      "number": {
+        "label": "Passport Number",
+        "placeholder": "Enter passport number"
+      },
+      "expiryDate": {
+        "label": "Expiry Date",
+        "placeholder": "Select date"
+      },
+      "nationality": {
+        "label": "Nationality",
+        "placeholder": "Select nationality"
+      },
+      "issuingCountry": {
+        "label": "Issuing Country",
+        "placeholder": "Select country"
+      }
+    },
+    "errors": {
+      "firstNameRequired": "First name is required",
+      "lastNameRequired": "Last name is required",
+      "dateOfBirthRequired": "Date of birth is required",
+      "genderRequired": "Gender is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Email format is invalid",
+      "phoneRequired": "Phone number is required",
+      "passportRequired": "Passport information is required for international flights",
+      "passportExpiry": "Passport must be valid for at least 6 months after travel date"
+    }
+  },
+  "extras": {
+    "title": "Add Extras",
+    "skipExtras": "Skip extras",
+    "baggage": {
+      "title": "Extra Baggage",
+      "description": "Add extra checked baggage",
+      "weight": "{weight} kg",
+      "price": "{price} per bag"
+    },
+    "meals": {
+      "title": "Meal Preferences",
+      "description": "Select your meal preference",
+      "types": {
+        "standard": "Standard",
+        "vegetarian": "Vegetarian",
+        "vegan": "Vegan",
+        "halal": "Halal",
+        "kosher": "Kosher",
+        "glutenFree": "Gluten-free"
+      }
+    },
+    "insurance": {
+      "title": "Travel Insurance",
+      "description": "Protect your trip",
+      "types": {
+        "basic": "Basic Coverage",
+        "comprehensive": "Comprehensive Coverage"
+      },
+      "coverage": "Coverage up to {amount}"
+    },
+    "lounge": {
+      "title": "Lounge Access",
+      "description": "Relax before your flight",
+      "airport": "At {airport}"
+    }
+  },
+  "payment": {
+    "title": "Payment",
+    "bookingSummary": {
+      "title": "Booking Summary",
+      "flight": "Flight",
+      "passengers": "Passengers",
+      "seats": "Seats",
+      "extras": "Extras"
+    },
+    "priceBreakdown": {
+      "title": "Price Breakdown",
+      "baseFare": "Base Fare",
+      "taxes": "Taxes",
+      "fees": "Fees",
+      "seatFees": "Seat Fees",
+      "extraBaggage": "Extra Baggage",
+      "meals": "Meals",
+      "insurance": "Insurance",
+      "loungeAccess": "Lounge Access",
+      "total": "Total",
+      "perPassenger": "Per passenger",
+      "allPassengers": "All passengers"
+    },
+    "cardDetails": {
+      "title": "Card Details",
+      "cardNumber": {
+        "label": "Card Number",
+        "placeholder": "1234 5678 9012 3456"
+      },
+      "expiryDate": {
+        "label": "Expiry Date",
+        "placeholder": "MM/YY"
+      },
+      "cvv": {
+        "label": "CVV",
+        "placeholder": "123"
+      },
+      "cardholderName": {
+        "label": "Cardholder Name",
+        "placeholder": "Name on card"
+      }
+    },
+    "payButton": "Pay {amount}",
+    "processing": "Processing payment...",
+    "errors": {
+      "cardNumberRequired": "Card number is required",
+      "cardNumberInvalid": "Card number is invalid",
+      "expiryRequired": "Expiry date is required",
+      "expiryInvalid": "Expiry date must be in the future",
+      "cvvRequired": "CVV is required",
+      "cvvInvalid": "CVV must be 3 or 4 digits",
+      "cardholderRequired": "Cardholder name is required",
+      "paymentFailed": "Payment failed. Please try again.",
+      "paymentDeclined": "Payment declined. Please check your card details."
+    }
+  },
+  "confirmation": {
+    "title": "Booking Confirmed",
+    "thankYou": "Thank you for booking with Etihad Airways",
+    "bookingReference": "Booking Reference",
+    "emailSent": "A confirmation email has been sent to {email}",
+    "downloadPdf": "Download PDF",
+    "manageBooking": "Manage Booking",
+    "bookingDetails": {
+      "title": "Booking Details",
+      "status": "Status",
+      "confirmed": "Confirmed",
+      "pending": "Pending",
+      "cancelled": "Cancelled"
+    }
+  },
+  "manageBooking": {
+    "title": "Manage Booking",
+    "retrieve": {
+      "title": "Retrieve Booking",
+      "bookingReference": {
+        "label": "Booking Reference",
+        "placeholder": "Enter 6-character reference"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Enter last name"
+      },
+      "retrieveButton": "Retrieve Booking"
+    },
+    "actions": {
+      "modify": "Modify Booking",
+      "cancel": "Cancel Booking"
+    },
+    "cancelConfirmation": {
+      "title": "Cancel Booking",
+      "message": "Are you sure you want to cancel this booking?",
+      "fee": "Cancellation fee: {amount}",
+      "refund": "Refund amount: {amount}",
+      "confirmButton": "Confirm Cancellation"
+    },
+    "errors": {
+      "bookingNotFound": "Booking not found. Please check your reference and last name.",
+      "cannotModify": "This booking cannot be modified due to fare restrictions.",
+      "cannotCancel": "This booking cannot be cancelled."
+    }
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Unable to connect. Please check your internet connection.",
+    "server": "We're experiencing technical difficulties. Please try again later.",
+    "sessionExpired": "Your session has expired. Please start a new search.",
+    "validation": "Please correct the errors and try again."
+  },
+  "accessibility": {
+    "skipToMain": "Skip to main content",
+    "skipToNav": "Skip to navigation",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "openMenu": "Open menu",
+    "loading": "Loading content",
+    "error": "Error occurred"
+  }
+}
