@@ -58,6 +58,7 @@ export default function ConfirmationPage() {
       }
 
       try {
+        // For confirmation page, we don't require lastName since user just completed payment
         const response = await fetch(`/api/bookings/${bookingReference}`);
 
         if (!response.ok) {

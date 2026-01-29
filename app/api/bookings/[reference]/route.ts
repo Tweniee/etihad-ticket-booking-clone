@@ -1,25 +1,27 @@
 /**
  * Booking Retrieval API Route
  *
- * Retrieves booking details by reference
+ * Retrieves booking details by reference with modification options
  *
- * Requirements: 12.1, 12.2
+ * Requirements: 12.1, 12.2, 12.3, 12.5
  */
 
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { isValidBookingReference } from "@/lib/utils/booking";
+import { ModificationOption } from "@/lib/types";
 
 /**
  * GET /api/bookings/[reference]
  *
- * Retrieves a booking by reference
+ * Retrieves a booking by reference with modification options
  *
  * Query parameters:
- * - lastName: string (optional, for authentication)
+ * - lastName: string (required for authentication)
  *
  * Response:
  * - booking: Booking object with all details
+ * - modificationOptions: Available modification options based on fare rules
  */
 export async function GET(
   request: NextRequest,
@@ -50,7 +52,8 @@ export async function GET(
       return NextResponse.json({ error: "Booking not found" }, { status: 404 });
     }
 
-    // If lastName is provided, verify it matches one of the passengers
+    // If lastName is provided, verify it matches one of the passengers (for manage booking)
+    // If not provided, allow access (for confirmation page after payment)
     if (lastName) {
       const hasMatchingPassenger = booking.passengers.some(
         (p) => p.lastName.toLowerCase() === lastName.toLowerCase(),
@@ -63,6 +66,9 @@ export async function GET(
         );
       }
     }
+
+    // Calculate modification options based on fare rules and booking status
+    const modificationOptions = calculateModificationOptions(booking);
 
     return NextResponse.json({
       success: true,
@@ -81,6 +87,7 @@ export async function GET(
         createdAt: booking.createdAt,
         updatedAt: booking.updatedAt,
       },
+      modificationOptions,
     });
   } catch (error) {
     console.error("Error retrieving booking:", error);
@@ -94,4 +101,49 @@ export async function GET(
       { status: 500 },
     );
   }
+}
+
+/**
+ * Calculate available modification options based on fare rules and booking status
+ * Requirements: 12.5
+ */
+function calculateModificationOptions(booking: any): ModificationOption[] {
+  const options: ModificationOption[] = [];
+
+  // Cannot modify cancelled bookings
+  if (booking.status === "CANCELLED") {
+    return [
+      { type: "change-flight", available: false, fee: 0 },
+      { type: "change-seats", available: false, fee: 0 },
+      { type: "add-extras", available: false, fee: 0 },
+    ];
+  }
+
+  // Extract fare rules from flight data
+  const flightData = booking.flightData as any;
+  const fareRules = flightData.fareRules || {};
+
+  // Change flight option
+  const changeFee = fareRules.changeFee;
+  options.push({
+    type: "change-flight",
+    available: changeFee !== null && changeFee !== undefined,
+    fee: changeFee || 0,
+  });
+
+  // Change seats option (usually allowed with minimal or no fee)
+  options.push({
+    type: "change-seats",
+    available: true,
+    fee: 25, // Standard seat change fee
+  });
+
+  // Add extras option (usually always allowed)
+  options.push({
+    type: "add-extras",
+    available: true,
+    fee: 0, // No fee for adding extras
+  });
+
+  return options;
 }
