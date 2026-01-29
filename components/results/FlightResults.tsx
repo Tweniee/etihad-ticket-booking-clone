@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -16,6 +16,7 @@ import {
 } from "./FilterSidebar";
 import { LoadingSpinner } from "@/components/shared/LoadingSpinner";
 import { ErrorMessage } from "@/components/shared/ErrorMessage";
+import { LiveRegion } from "@/components/shared/LiveRegion";
 import type { Flight, SearchCriteria } from "@/lib/types";
 import { cn } from "@/lib/utils/cn";
 
@@ -197,9 +198,10 @@ export function FlightResults({
     getInitialFilters(flights),
   );
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [liveRegionMessage, setLiveRegionMessage] = useState("");
 
   // Initialize filters when flights change
-  React.useEffect(() => {
+  useEffect(() => {
     setFilters(getInitialFilters(flights));
   }, [flights]);
 
@@ -220,13 +222,30 @@ export function FlightResults({
   );
   const pageNumbers = getPageNumbers(currentPage, totalPages);
 
+  // Announce filter changes to screen readers (Requirement 15.5)
+  useEffect(() => {
+    if (filteredFlights.length > 0) {
+      const message = `Showing ${filteredFlights.length} flight${filteredFlights.length === 1 ? "" : "s"}`;
+      setLiveRegionMessage(message);
+    } else if (sortedFlights.length > 0) {
+      setLiveRegionMessage("No flights match your filters");
+    }
+  }, [filteredFlights.length, sortedFlights.length]);
+
+  // Announce page changes to screen readers
+  useEffect(() => {
+    if (currentPage > 1) {
+      setLiveRegionMessage(`Page ${currentPage} of ${totalPages}`);
+    }
+  }, [currentPage, totalPages]);
+
   // Reset to page 1 when flights or filters change
-  React.useEffect(() => {
+  useEffect(() => {
     setCurrentPage(1);
   }, [flights, filters]);
 
   // Scroll to top when page changes
-  React.useEffect(() => {
+  useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
@@ -331,6 +350,9 @@ export function FlightResults({
 
   return (
     <div className={cn("space-y-6", className)} data-testid={testId}>
+      {/* ARIA Live Region for dynamic updates (Requirement 15.5) */}
+      <LiveRegion message={liveRegionMessage} priority="polite" />
+
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Filter Sidebar */}
         <FilterSidebar
