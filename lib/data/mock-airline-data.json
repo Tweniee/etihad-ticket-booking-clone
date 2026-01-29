@@ -1,0 +1,2590 @@
+{
+  "users": [
+    {
+      "userProfile": {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "phone": "+1234567890"
+      },
+      "stats": {
+        "totalTrips": 10,
+        "totalSpend": 19810,
+        "favoriteAirline": "Delta Airlines",
+        "mostVisitedCity": "Doha",
+        "preferredCabinClass": "Premium Economy",
+        "averageFlightDurationMinutes": 377,
+        "frequentFlyerPrograms": [
+          {
+            "airline": "Delta Airlines",
+            "memberId": "DE1430282",
+            "tier": "Silver"
+          }
+        ]
+      },
+      "trips": [
+        {
+          "bookingId": "BK001JD2026",
+          "pnr": "EVZXDC",
+          "airline": {
+            "name": "British Airways",
+            "code": "BA",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/BA.png"
+          },
+          "flightNumber": "BA8567",
+          "aircraft": "Airbus A380",
+          "cabinClass": "Business",
+          "seatNumber": "36D",
+          "departure": {
+            "city": "New York",
+            "airport": "John F. Kennedy International",
+            "iata": "JFK",
+            "currency": "USD",
+            "dateTime": "2025-03-02T06:24:43.348Z"
+          },
+          "arrival": {
+            "city": "Doha",
+            "airport": "Hamad International",
+            "iata": "DOH",
+            "currency": "QAR",
+            "dateTime": "2025-03-02T12:09:43.348Z"
+          },
+          "durationMinutes": 345,
+          "stops": 1,
+          "layovers": [],
+          "price": {
+            "amount": 2922,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Partial Refund"
+          },
+          "status": "Cancelled",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [],
+          "carbonEmissionKg": 862
+        },
+        {
+          "bookingId": "BK002JD2026",
+          "pnr": "TRBDYX",
+          "airline": {
+            "name": "Air India",
+            "code": "AI",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/AI.png"
+          },
+          "flightNumber": "AI6223",
+          "aircraft": "Boeing 767-400",
+          "cabinClass": "Economy",
+          "seatNumber": "12C",
+          "departure": {
+            "city": "Singapore",
+            "airport": "Singapore Changi",
+            "iata": "SIN",
+            "currency": "SGD",
+            "dateTime": "2025-10-30T00:51:02.452Z"
+          },
+          "arrival": {
+            "city": "Delhi",
+            "airport": "Indira Gandhi International",
+            "iata": "DEL",
+            "currency": "INR",
+            "dateTime": "2025-10-30T05:06:02.452Z"
+          },
+          "durationMinutes": 255,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 1315,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 637
+        },
+        {
+          "bookingId": "BK003JD2026",
+          "pnr": "H4E84K",
+          "airline": {
+            "name": "United Airlines",
+            "code": "UA",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/UA.png"
+          },
+          "flightNumber": "UA1235",
+          "aircraft": "Airbus A350-900",
+          "cabinClass": "Economy",
+          "seatNumber": "33A",
+          "departure": {
+            "city": "London",
+            "airport": "London Heathrow",
+            "iata": "LHR",
+            "currency": "GBP",
+            "dateTime": "2024-03-06T04:40:45.681Z"
+          },
+          "arrival": {
+            "city": "New York",
+            "airport": "John F. Kennedy International",
+            "iata": "JFK",
+            "currency": "USD",
+            "dateTime": "2024-03-06T15:49:45.681Z"
+          },
+          "durationMinutes": 669,
+          "stops": 0,
+          "layovers": [
+            {
+              "city": "Delhi",
+              "airport": "London Heathrow",
+              "iata": "SIN",
+              "durationMinutes": 212
+            }
+          ],
+          "price": {
+            "amount": 1022,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Refunded"
+          },
+          "status": "Cancelled",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1672
+        },
+        {
+          "bookingId": "BK004JD2026",
+          "pnr": "BAQZB5",
+          "airline": {
+            "name": "Delta Airlines",
+            "code": "DL",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/DL.png"
+          },
+          "flightNumber": "DL3248",
+          "aircraft": "Airbus A350-900",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "21D",
+          "departure": {
+            "city": "Barcelona",
+            "airport": "Barcelona-El Prat",
+            "iata": "BCN",
+            "currency": "EUR",
+            "dateTime": "2024-02-05T14:55:55.076Z"
+          },
+          "arrival": {
+            "city": "Doha",
+            "airport": "Hamad International",
+            "iata": "DOH",
+            "currency": "QAR",
+            "dateTime": "2024-02-05T21:20:55.076Z"
+          },
+          "durationMinutes": 385,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 1955,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 962
+        },
+        {
+          "bookingId": "BK005JD2026",
+          "pnr": "7JV2KC",
+          "airline": {
+            "name": "Air China",
+            "code": "CA",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/CA.png"
+          },
+          "flightNumber": "CA7302",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Economy",
+          "seatNumber": "1C",
+          "departure": {
+            "city": "Singapore",
+            "airport": "Singapore Changi",
+            "iata": "SIN",
+            "currency": "SGD",
+            "dateTime": "2025-11-01T12:20:12.630Z"
+          },
+          "arrival": {
+            "city": "Frankfurt",
+            "airport": "Frankfurt Airport",
+            "iata": "FRA",
+            "currency": "EUR",
+            "dateTime": "2025-11-01T20:49:12.630Z"
+          },
+          "durationMinutes": 509,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 1190,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Kosher",
+          "specialRequests": [],
+          "carbonEmissionKg": 1272
+        },
+        {
+          "bookingId": "BK006JD2026",
+          "pnr": "EDLH8T",
+          "airline": {
+            "name": "Delta Airlines",
+            "code": "DL",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/DL.png"
+          },
+          "flightNumber": "DL4828",
+          "aircraft": "Airbus A350-900",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "6E",
+          "departure": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2026-01-04T03:00:35.492Z"
+          },
+          "arrival": {
+            "city": "Shanghai",
+            "airport": "Shanghai Pudong International",
+            "iata": "PVG",
+            "currency": "CNY",
+            "dateTime": "2026-01-04T10:44:35.492Z"
+          },
+          "durationMinutes": 464,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 1784,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Veg",
+          "specialRequests": [],
+          "carbonEmissionKg": 1160
+        },
+        {
+          "bookingId": "BK007JD2026",
+          "pnr": "KZFNFG",
+          "airline": {
+            "name": "Vistara",
+            "code": "UK",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/UK.png"
+          },
+          "flightNumber": "UK9306",
+          "aircraft": "Boeing 777-300ER",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "27D",
+          "departure": {
+            "city": "Shanghai",
+            "airport": "Shanghai Pudong International",
+            "iata": "PVG",
+            "currency": "CNY",
+            "dateTime": "2025-11-21T00:52:53.392Z"
+          },
+          "arrival": {
+            "city": "Beijing",
+            "airport": "Beijing Capital International",
+            "iata": "PEK",
+            "currency": "CNY",
+            "dateTime": "2025-11-21T04:16:53.392Z"
+          },
+          "durationMinutes": 204,
+          "stops": 1,
+          "layovers": [
+            {
+              "city": "Frankfurt",
+              "airport": "Barcelona-El Prat",
+              "iata": "BOM",
+              "durationMinutes": 192
+            }
+          ],
+          "price": {
+            "amount": 1960,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Partial Refund"
+          },
+          "status": "Cancelled",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Kosher",
+          "specialRequests": [],
+          "carbonEmissionKg": 510
+        },
+        {
+          "bookingId": "BK008JD2026",
+          "pnr": "KRDWH6",
+          "airline": {
+            "name": "Air China",
+            "code": "CA",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/CA.png"
+          },
+          "flightNumber": "CA8538",
+          "aircraft": "Airbus A380",
+          "cabinClass": "Business",
+          "seatNumber": "26A",
+          "departure": {
+            "city": "Singapore",
+            "airport": "Singapore Changi",
+            "iata": "SIN",
+            "currency": "SGD",
+            "dateTime": "2025-06-25T21:22:40.140Z"
+          },
+          "arrival": {
+            "city": "Barcelona",
+            "airport": "Barcelona-El Prat",
+            "iata": "BCN",
+            "currency": "EUR",
+            "dateTime": "2025-06-26T00:28:40.140Z"
+          },
+          "durationMinutes": 186,
+          "stops": 1,
+          "layovers": [],
+          "price": {
+            "amount": 2928,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 465
+        },
+        {
+          "bookingId": "BK009JD2026",
+          "pnr": "DHJLGC",
+          "airline": {
+            "name": "Air China",
+            "code": "CA",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/CA.png"
+          },
+          "flightNumber": "CA1878",
+          "aircraft": "Boeing 767-400",
+          "cabinClass": "Business",
+          "seatNumber": "14D",
+          "departure": {
+            "city": "Barcelona",
+            "airport": "Barcelona-El Prat",
+            "iata": "BCN",
+            "currency": "EUR",
+            "dateTime": "2024-09-26T23:19:44.308Z"
+          },
+          "arrival": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2024-09-27T05:37:44.308Z"
+          },
+          "durationMinutes": 378,
+          "stops": 0,
+          "layovers": [
+            {
+              "city": "Barcelona",
+              "airport": "Singapore Changi",
+              "iata": "FRA",
+              "durationMinutes": 227
+            }
+          ],
+          "price": {
+            "amount": 2795,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Partial Refund"
+          },
+          "status": "Cancelled",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Kosher",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 945
+        },
+        {
+          "bookingId": "BK010JD2026",
+          "pnr": "LR4HP7",
+          "airline": {
+            "name": "Delta Airlines",
+            "code": "DL",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/DL.png"
+          },
+          "flightNumber": "DL7769",
+          "aircraft": "Boeing 777-300ER",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "20E",
+          "departure": {
+            "city": "New York",
+            "airport": "John F. Kennedy International",
+            "iata": "JFK",
+            "currency": "USD",
+            "dateTime": "2025-02-26T23:32:07.266Z"
+          },
+          "arrival": {
+            "city": "Frankfurt",
+            "airport": "Frankfurt Airport",
+            "iata": "FRA",
+            "currency": "EUR",
+            "dateTime": "2025-02-27T05:49:07.266Z"
+          },
+          "durationMinutes": 377,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 1939,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Debit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [],
+          "carbonEmissionKg": 942
+        }
+      ]
+    },
+    {
+      "userProfile": {
+        "name": "Sarah Smith",
+        "email": "sarah.smith@example.com",
+        "phone": "+1234567891"
+      },
+      "stats": {
+        "totalTrips": 10,
+        "totalSpend": 16355,
+        "favoriteAirline": "Vistara",
+        "mostVisitedCity": "Mumbai",
+        "preferredCabinClass": "Economy",
+        "averageFlightDurationMinutes": 394,
+        "frequentFlyerPrograms": [
+          {
+            "airline": "Vistara",
+            "memberId": "VI8902400",
+            "tier": "Platinum"
+          }
+        ]
+      },
+      "trips": [
+        {
+          "bookingId": "BK001SS2026",
+          "pnr": "Z88B6A",
+          "airline": {
+            "name": "Singapore Airlines",
+            "code": "SQ",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png"
+          },
+          "flightNumber": "SQ4782",
+          "aircraft": "Airbus A350-900",
+          "cabinClass": "Business",
+          "seatNumber": "3B",
+          "departure": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2025-07-16T13:08:24.594Z"
+          },
+          "arrival": {
+            "city": "Beijing",
+            "airport": "Beijing Capital International",
+            "iata": "PEK",
+            "currency": "CNY",
+            "dateTime": "2025-07-16T17:34:24.594Z"
+          },
+          "durationMinutes": 266,
+          "stops": 1,
+          "layovers": [],
+          "price": {
+            "amount": 2872,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Non-Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 665
+        },
+        {
+          "bookingId": "BK002SS2026",
+          "pnr": "4CFCGJ",
+          "airline": {
+            "name": "Qatar Airways",
+            "code": "QR",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/QR.png"
+          },
+          "flightNumber": "QR6263",
+          "aircraft": "Boeing 777-300ER",
+          "cabinClass": "Economy",
+          "seatNumber": "34F",
+          "departure": {
+            "city": "Singapore",
+            "airport": "Singapore Changi",
+            "iata": "SIN",
+            "currency": "SGD",
+            "dateTime": "2025-12-15T12:51:33.210Z"
+          },
+          "arrival": {
+            "city": "Doha",
+            "airport": "Hamad International",
+            "iata": "DOH",
+            "currency": "QAR",
+            "dateTime": "2025-12-15T16:51:33.210Z"
+          },
+          "durationMinutes": 240,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 1224,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Debit Card",
+            "status": "Partial Refund"
+          },
+          "status": "Cancelled",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Non-Veg",
+          "specialRequests": [],
+          "carbonEmissionKg": 600
+        },
+        {
+          "bookingId": "BK003SS2026",
+          "pnr": "R3C4Z4",
+          "airline": {
+            "name": "Vistara",
+            "code": "UK",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/UK.png"
+          },
+          "flightNumber": "UK6810",
+          "aircraft": "Airbus A350-900",
+          "cabinClass": "Economy",
+          "seatNumber": "34F",
+          "departure": {
+            "city": "Beijing",
+            "airport": "Beijing Capital International",
+            "iata": "PEK",
+            "currency": "CNY",
+            "dateTime": "2026-01-13T13:56:57.192Z"
+          },
+          "arrival": {
+            "city": "Frankfurt",
+            "airport": "Frankfurt Airport",
+            "iata": "FRA",
+            "currency": "EUR",
+            "dateTime": "2026-01-13T18:32:57.192Z"
+          },
+          "durationMinutes": 276,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 572,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Debit Card",
+            "status": "Partial Refund"
+          },
+          "status": "Cancelled",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Kosher",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 690
+        },
+        {
+          "bookingId": "BK004SS2026",
+          "pnr": "UJVP4U",
+          "airline": {
+            "name": "Vistara",
+            "code": "UK",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/UK.png"
+          },
+          "flightNumber": "UK1608",
+          "aircraft": "Boeing 777-300ER",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "6B",
+          "departure": {
+            "city": "London",
+            "airport": "London Heathrow",
+            "iata": "LHR",
+            "currency": "GBP",
+            "dateTime": "2025-02-13T22:39:31.007Z"
+          },
+          "arrival": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2025-02-14T05:08:31.007Z"
+          },
+          "durationMinutes": 389,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 1486,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 972
+        },
+        {
+          "bookingId": "BK005SS2026",
+          "pnr": "TBJ26V",
+          "airline": {
+            "name": "Air India",
+            "code": "AI",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/AI.png"
+          },
+          "flightNumber": "AI1464",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Economy",
+          "seatNumber": "10A",
+          "departure": {
+            "city": "Singapore",
+            "airport": "Singapore Changi",
+            "iata": "SIN",
+            "currency": "SGD",
+            "dateTime": "2024-09-23T08:39:04.697Z"
+          },
+          "arrival": {
+            "city": "London",
+            "airport": "London Heathrow",
+            "iata": "LHR",
+            "currency": "GBP",
+            "dateTime": "2024-09-23T13:44:04.697Z"
+          },
+          "durationMinutes": 305,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 1092,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 762
+        },
+        {
+          "bookingId": "BK006SS2026",
+          "pnr": "7BHYPY",
+          "airline": {
+            "name": "Qatar Airways",
+            "code": "QR",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/QR.png"
+          },
+          "flightNumber": "QR2576",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "34A",
+          "departure": {
+            "city": "Delhi",
+            "airport": "Indira Gandhi International",
+            "iata": "DEL",
+            "currency": "INR",
+            "dateTime": "2025-04-16T10:35:15.428Z"
+          },
+          "arrival": {
+            "city": "Los Angeles",
+            "airport": "Los Angeles International",
+            "iata": "LAX",
+            "currency": "USD",
+            "dateTime": "2025-04-16T15:09:15.428Z"
+          },
+          "durationMinutes": 274,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 1540,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 685
+        },
+        {
+          "bookingId": "BK007SS2026",
+          "pnr": "F3GNGT",
+          "airline": {
+            "name": "Vistara",
+            "code": "UK",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/UK.png"
+          },
+          "flightNumber": "UK5141",
+          "aircraft": "Boeing 767-400",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "7E",
+          "departure": {
+            "city": "Los Angeles",
+            "airport": "Los Angeles International",
+            "iata": "LAX",
+            "currency": "USD",
+            "dateTime": "2024-08-02T17:44:35.722Z"
+          },
+          "arrival": {
+            "city": "Barcelona",
+            "airport": "Barcelona-El Prat",
+            "iata": "BCN",
+            "currency": "EUR",
+            "dateTime": "2024-08-03T02:02:35.722Z"
+          },
+          "durationMinutes": 498,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 2018,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Debit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Kosher",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1245
+        },
+        {
+          "bookingId": "BK008SS2026",
+          "pnr": "MZT8KV",
+          "airline": {
+            "name": "British Airways",
+            "code": "BA",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/BA.png"
+          },
+          "flightNumber": "BA5769",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Economy",
+          "seatNumber": "6D",
+          "departure": {
+            "city": "London",
+            "airport": "London Heathrow",
+            "iata": "LHR",
+            "currency": "GBP",
+            "dateTime": "2025-06-18T08:40:41.679Z"
+          },
+          "arrival": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2025-06-18T18:43:41.679Z"
+          },
+          "durationMinutes": 603,
+          "stops": 1,
+          "layovers": [
+            {
+              "city": "Delhi",
+              "airport": "London Heathrow",
+              "iata": "FRA",
+              "durationMinutes": 145
+            }
+          ],
+          "price": {
+            "amount": 583,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Non-Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1507
+        },
+        {
+          "bookingId": "BK009SS2026",
+          "pnr": "MKEZNN",
+          "airline": {
+            "name": "Air China",
+            "code": "CA",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/CA.png"
+          },
+          "flightNumber": "CA1423",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Business",
+          "seatNumber": "10B",
+          "departure": {
+            "city": "Dubai",
+            "airport": "Dubai International",
+            "iata": "DXB",
+            "currency": "AED",
+            "dateTime": "2024-08-07T18:53:07.397Z"
+          },
+          "arrival": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2024-08-08T04:42:07.397Z"
+          },
+          "durationMinutes": 589,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 2841,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Debit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Veg",
+          "specialRequests": [],
+          "carbonEmissionKg": 1472
+        },
+        {
+          "bookingId": "BK010SS2026",
+          "pnr": "LB5PTG",
+          "airline": {
+            "name": "Iberia",
+            "code": "IB",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/IB.png"
+          },
+          "flightNumber": "IB3928",
+          "aircraft": "Boeing 777-300ER",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "29D",
+          "departure": {
+            "city": "Madrid",
+            "airport": "Adolfo Suárez Madrid-Barajas",
+            "iata": "MAD",
+            "currency": "EUR",
+            "dateTime": "2024-11-06T15:39:27.540Z"
+          },
+          "arrival": {
+            "city": "Los Angeles",
+            "airport": "Los Angeles International",
+            "iata": "LAX",
+            "currency": "USD",
+            "dateTime": "2024-11-07T00:08:27.540Z"
+          },
+          "durationMinutes": 509,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 2127,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Debit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Non-Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1272
+        }
+      ]
+    },
+    {
+      "userProfile": {
+        "name": "Ahmed Ali",
+        "email": "ahmed.ali@example.com",
+        "phone": "+971501234567"
+      },
+      "stats": {
+        "totalTrips": 10,
+        "totalSpend": 16667,
+        "favoriteAirline": "Qatar Airways",
+        "mostVisitedCity": "New York",
+        "preferredCabinClass": "Economy",
+        "averageFlightDurationMinutes": 556,
+        "frequentFlyerPrograms": [
+          {
+            "airline": "Qatar Airways",
+            "memberId": "QA3284839",
+            "tier": "Platinum"
+          }
+        ]
+      },
+      "trips": [
+        {
+          "bookingId": "BK001AA2026",
+          "pnr": "8P8UKS",
+          "airline": {
+            "name": "Singapore Airlines",
+            "code": "SQ",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png"
+          },
+          "flightNumber": "SQ8184",
+          "aircraft": "Airbus A350-900",
+          "cabinClass": "Economy",
+          "seatNumber": "28B",
+          "departure": {
+            "city": "Shanghai",
+            "airport": "Shanghai Pudong International",
+            "iata": "PVG",
+            "currency": "CNY",
+            "dateTime": "2025-01-13T14:06:33.459Z"
+          },
+          "arrival": {
+            "city": "Barcelona",
+            "airport": "Barcelona-El Prat",
+            "iata": "BCN",
+            "currency": "EUR",
+            "dateTime": "2025-01-13T21:17:33.459Z"
+          },
+          "durationMinutes": 431,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 684,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1077
+        },
+        {
+          "bookingId": "BK002AA2026",
+          "pnr": "94WNX4",
+          "airline": {
+            "name": "Emirates",
+            "code": "EK",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/EK.png"
+          },
+          "flightNumber": "EK2288",
+          "aircraft": "Airbus A380",
+          "cabinClass": "Economy",
+          "seatNumber": "18A",
+          "departure": {
+            "city": "Dubai",
+            "airport": "Dubai International",
+            "iata": "DXB",
+            "currency": "AED",
+            "dateTime": "2025-11-28T19:03:56.168Z"
+          },
+          "arrival": {
+            "city": "Singapore",
+            "airport": "Singapore Changi",
+            "iata": "SIN",
+            "currency": "SGD",
+            "dateTime": "2025-11-29T07:27:56.168Z"
+          },
+          "durationMinutes": 744,
+          "stops": 1,
+          "layovers": [
+            {
+              "city": "Madrid",
+              "airport": "London Heathrow",
+              "iata": "SIN",
+              "durationMinutes": 166
+            }
+          ],
+          "price": {
+            "amount": 553,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Veg",
+          "specialRequests": [],
+          "carbonEmissionKg": 1860
+        },
+        {
+          "bookingId": "BK003AA2026",
+          "pnr": "F94WTY",
+          "airline": {
+            "name": "Qatar Airways",
+            "code": "QR",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/QR.png"
+          },
+          "flightNumber": "QR1127",
+          "aircraft": "Airbus A380",
+          "cabinClass": "Economy",
+          "seatNumber": "24E",
+          "departure": {
+            "city": "Singapore",
+            "airport": "Singapore Changi",
+            "iata": "SIN",
+            "currency": "SGD",
+            "dateTime": "2024-07-09T17:34:51.151Z"
+          },
+          "arrival": {
+            "city": "Delhi",
+            "airport": "Indira Gandhi International",
+            "iata": "DEL",
+            "currency": "INR",
+            "dateTime": "2024-07-10T05:23:51.151Z"
+          },
+          "durationMinutes": 709,
+          "stops": 1,
+          "layovers": [
+            {
+              "city": "Delhi",
+              "airport": "John F. Kennedy International",
+              "iata": "DEL",
+              "durationMinutes": 231
+            }
+          ],
+          "price": {
+            "amount": 1420,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Partial Refund"
+          },
+          "status": "Cancelled",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [],
+          "carbonEmissionKg": 1772
+        },
+        {
+          "bookingId": "BK004AA2026",
+          "pnr": "PEZSLF",
+          "airline": {
+            "name": "Qatar Airways",
+            "code": "QR",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/QR.png"
+          },
+          "flightNumber": "QR7658",
+          "aircraft": "Boeing 777-300ER",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "16D",
+          "departure": {
+            "city": "Barcelona",
+            "airport": "Barcelona-El Prat",
+            "iata": "BCN",
+            "currency": "EUR",
+            "dateTime": "2024-05-06T11:40:20.342Z"
+          },
+          "arrival": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2024-05-06T17:36:20.342Z"
+          },
+          "durationMinutes": 356,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 1515,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 890
+        },
+        {
+          "bookingId": "BK005AA2026",
+          "pnr": "X42JJ6",
+          "airline": {
+            "name": "British Airways",
+            "code": "BA",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/BA.png"
+          },
+          "flightNumber": "BA9256",
+          "aircraft": "Airbus A380",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "34B",
+          "departure": {
+            "city": "Los Angeles",
+            "airport": "Los Angeles International",
+            "iata": "LAX",
+            "currency": "USD",
+            "dateTime": "2025-02-26T02:06:34.183Z"
+          },
+          "arrival": {
+            "city": "New York",
+            "airport": "John F. Kennedy International",
+            "iata": "JFK",
+            "currency": "USD",
+            "dateTime": "2025-02-26T14:18:34.183Z"
+          },
+          "durationMinutes": 732,
+          "stops": 0,
+          "layovers": [
+            {
+              "city": "London",
+              "airport": "Los Angeles International",
+              "iata": "PEK",
+              "durationMinutes": 78
+            }
+          ],
+          "price": {
+            "amount": 1990,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1830
+        },
+        {
+          "bookingId": "BK006AA2026",
+          "pnr": "J9WJCH",
+          "airline": {
+            "name": "Qatar Airways",
+            "code": "QR",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/QR.png"
+          },
+          "flightNumber": "QR9723",
+          "aircraft": "Airbus A380",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "17C",
+          "departure": {
+            "city": "Los Angeles",
+            "airport": "Los Angeles International",
+            "iata": "LAX",
+            "currency": "USD",
+            "dateTime": "2024-03-11T22:43:56.963Z"
+          },
+          "arrival": {
+            "city": "Shanghai",
+            "airport": "Shanghai Pudong International",
+            "iata": "PVG",
+            "currency": "CNY",
+            "dateTime": "2024-03-12T01:51:56.963Z"
+          },
+          "durationMinutes": 188,
+          "stops": 0,
+          "layovers": [
+            {
+              "city": "Shanghai",
+              "airport": "Barcelona-El Prat",
+              "iata": "FRA",
+              "durationMinutes": 115
+            }
+          ],
+          "price": {
+            "amount": 1600,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [],
+          "carbonEmissionKg": 470
+        },
+        {
+          "bookingId": "BK007AA2026",
+          "pnr": "DEVJYC",
+          "airline": {
+            "name": "Singapore Airlines",
+            "code": "SQ",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png"
+          },
+          "flightNumber": "SQ5509",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Business",
+          "seatNumber": "14C",
+          "departure": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2025-09-02T02:43:46.329Z"
+          },
+          "arrival": {
+            "city": "London",
+            "airport": "London Heathrow",
+            "iata": "LHR",
+            "currency": "GBP",
+            "dateTime": "2025-09-02T12:47:46.329Z"
+          },
+          "durationMinutes": 604,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 3015,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1510
+        },
+        {
+          "bookingId": "BK008AA2026",
+          "pnr": "T696B6",
+          "airline": {
+            "name": "Qatar Airways",
+            "code": "QR",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/QR.png"
+          },
+          "flightNumber": "QR9163",
+          "aircraft": "Airbus A380",
+          "cabinClass": "Business",
+          "seatNumber": "10F",
+          "departure": {
+            "city": "Madrid",
+            "airport": "Adolfo Suárez Madrid-Barajas",
+            "iata": "MAD",
+            "currency": "EUR",
+            "dateTime": "2024-05-19T10:06:28.048Z"
+          },
+          "arrival": {
+            "city": "New York",
+            "airport": "John F. Kennedy International",
+            "iata": "JFK",
+            "currency": "USD",
+            "dateTime": "2024-05-19T22:02:28.048Z"
+          },
+          "durationMinutes": 716,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 3414,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1790
+        },
+        {
+          "bookingId": "BK009AA2026",
+          "pnr": "8LPEZD",
+          "airline": {
+            "name": "Air China",
+            "code": "CA",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/CA.png"
+          },
+          "flightNumber": "CA4453",
+          "aircraft": "Airbus A380",
+          "cabinClass": "Economy",
+          "seatNumber": "23E",
+          "departure": {
+            "city": "Madrid",
+            "airport": "Adolfo Suárez Madrid-Barajas",
+            "iata": "MAD",
+            "currency": "EUR",
+            "dateTime": "2025-02-13T08:50:58.642Z"
+          },
+          "arrival": {
+            "city": "Doha",
+            "airport": "Hamad International",
+            "iata": "DOH",
+            "currency": "QAR",
+            "dateTime": "2025-02-13T20:34:58.642Z"
+          },
+          "durationMinutes": 704,
+          "stops": 0,
+          "layovers": [
+            {
+              "city": "Mumbai",
+              "airport": "John F. Kennedy International",
+              "iata": "DEL",
+              "durationMinutes": 230
+            }
+          ],
+          "price": {
+            "amount": 1248,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Veg",
+          "specialRequests": [],
+          "carbonEmissionKg": 1760
+        },
+        {
+          "bookingId": "BK010AA2026",
+          "pnr": "YQLWTT",
+          "airline": {
+            "name": "Emirates",
+            "code": "EK",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/EK.png"
+          },
+          "flightNumber": "EK9162",
+          "aircraft": "Airbus A350-900",
+          "cabinClass": "Economy",
+          "seatNumber": "16B",
+          "departure": {
+            "city": "New York",
+            "airport": "John F. Kennedy International",
+            "iata": "JFK",
+            "currency": "USD",
+            "dateTime": "2025-04-23T02:39:01.517Z"
+          },
+          "arrival": {
+            "city": "Beijing",
+            "airport": "Beijing Capital International",
+            "iata": "PEK",
+            "currency": "CNY",
+            "dateTime": "2025-04-23T08:56:01.517Z"
+          },
+          "durationMinutes": 377,
+          "stops": 1,
+          "layovers": [],
+          "price": {
+            "amount": 1228,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "status": "Refunded"
+          },
+          "status": "Cancelled",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 942
+        }
+      ]
+    },
+    {
+      "userProfile": {
+        "name": "Maria Garcia",
+        "email": "maria.garcia@example.com",
+        "phone": "+34612345678"
+      },
+      "stats": {
+        "totalTrips": 10,
+        "totalSpend": 21087,
+        "favoriteAirline": "Iberia",
+        "mostVisitedCity": "Frankfurt",
+        "preferredCabinClass": "Business",
+        "averageFlightDurationMinutes": 494,
+        "frequentFlyerPrograms": [
+          {
+            "airline": "Iberia",
+            "memberId": "IB9021992",
+            "tier": "Platinum"
+          }
+        ]
+      },
+      "trips": [
+        {
+          "bookingId": "BK001MG2026",
+          "pnr": "LB93YG",
+          "airline": {
+            "name": "IndiGo",
+            "code": "6E",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/6E.png"
+          },
+          "flightNumber": "6E8346",
+          "aircraft": "Boeing 777-300ER",
+          "cabinClass": "Economy",
+          "seatNumber": "1A",
+          "departure": {
+            "city": "Barcelona",
+            "airport": "Barcelona-El Prat",
+            "iata": "BCN",
+            "currency": "EUR",
+            "dateTime": "2024-08-14T18:01:47.379Z"
+          },
+          "arrival": {
+            "city": "Frankfurt",
+            "airport": "Frankfurt Airport",
+            "iata": "FRA",
+            "currency": "EUR",
+            "dateTime": "2024-08-14T21:52:47.379Z"
+          },
+          "durationMinutes": 231,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 633,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Debit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 577
+        },
+        {
+          "bookingId": "BK002MG2026",
+          "pnr": "GXE9EL",
+          "airline": {
+            "name": "Qatar Airways",
+            "code": "QR",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/QR.png"
+          },
+          "flightNumber": "QR8365",
+          "aircraft": "Airbus A380",
+          "cabinClass": "Economy",
+          "seatNumber": "15F",
+          "departure": {
+            "city": "Barcelona",
+            "airport": "Barcelona-El Prat",
+            "iata": "BCN",
+            "currency": "EUR",
+            "dateTime": "2025-09-28T22:49:30.354Z"
+          },
+          "arrival": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2025-09-29T11:36:30.354Z"
+          },
+          "durationMinutes": 767,
+          "stops": 0,
+          "layovers": [
+            {
+              "city": "Mumbai",
+              "airport": "Hamad International",
+              "iata": "LHR",
+              "durationMinutes": 122
+            }
+          ],
+          "price": {
+            "amount": 602,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1917
+        },
+        {
+          "bookingId": "BK003MG2026",
+          "pnr": "RSW7CJ",
+          "airline": {
+            "name": "Singapore Airlines",
+            "code": "SQ",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png"
+          },
+          "flightNumber": "SQ2736",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Economy",
+          "seatNumber": "1B",
+          "departure": {
+            "city": "Barcelona",
+            "airport": "Barcelona-El Prat",
+            "iata": "BCN",
+            "currency": "EUR",
+            "dateTime": "2025-04-25T13:55:42.953Z"
+          },
+          "arrival": {
+            "city": "Los Angeles",
+            "airport": "Los Angeles International",
+            "iata": "LAX",
+            "currency": "USD",
+            "dateTime": "2025-04-25T20:36:42.953Z"
+          },
+          "durationMinutes": 401,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 1040,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Non-Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1002
+        },
+        {
+          "bookingId": "BK004MG2026",
+          "pnr": "XRSNYS",
+          "airline": {
+            "name": "Delta Airlines",
+            "code": "DL",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/DL.png"
+          },
+          "flightNumber": "DL9140",
+          "aircraft": "Boeing 767-400",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "26A",
+          "departure": {
+            "city": "Dubai",
+            "airport": "Dubai International",
+            "iata": "DXB",
+            "currency": "AED",
+            "dateTime": "2024-11-10T05:12:24.555Z"
+          },
+          "arrival": {
+            "city": "Frankfurt",
+            "airport": "Frankfurt Airport",
+            "iata": "FRA",
+            "currency": "EUR",
+            "dateTime": "2024-11-10T12:48:24.555Z"
+          },
+          "durationMinutes": 456,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 1420,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Non-Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1140
+        },
+        {
+          "bookingId": "BK005MG2026",
+          "pnr": "5EKSNT",
+          "airline": {
+            "name": "Iberia",
+            "code": "IB",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/IB.png"
+          },
+          "flightNumber": "IB1868",
+          "aircraft": "Boeing 777-300ER",
+          "cabinClass": "Business",
+          "seatNumber": "31B",
+          "departure": {
+            "city": "Beijing",
+            "airport": "Beijing Capital International",
+            "iata": "PEK",
+            "currency": "CNY",
+            "dateTime": "2024-11-03T11:19:35.298Z"
+          },
+          "arrival": {
+            "city": "Singapore",
+            "airport": "Singapore Changi",
+            "iata": "SIN",
+            "currency": "SGD",
+            "dateTime": "2024-11-03T23:07:35.298Z"
+          },
+          "durationMinutes": 708,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 2500,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1770
+        },
+        {
+          "bookingId": "BK006MG2026",
+          "pnr": "ETZDTZ",
+          "airline": {
+            "name": "Air India",
+            "code": "AI",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/AI.png"
+          },
+          "flightNumber": "AI7244",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Business",
+          "seatNumber": "25B",
+          "departure": {
+            "city": "Delhi",
+            "airport": "Indira Gandhi International",
+            "iata": "DEL",
+            "currency": "INR",
+            "dateTime": "2024-08-17T06:14:42.835Z"
+          },
+          "arrival": {
+            "city": "Shanghai",
+            "airport": "Shanghai Pudong International",
+            "iata": "PVG",
+            "currency": "CNY",
+            "dateTime": "2024-08-17T17:11:42.835Z"
+          },
+          "durationMinutes": 657,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 2869,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Refunded"
+          },
+          "status": "Cancelled",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Kosher",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1642
+        },
+        {
+          "bookingId": "BK007MG2026",
+          "pnr": "DYBNSE",
+          "airline": {
+            "name": "Vistara",
+            "code": "UK",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/UK.png"
+          },
+          "flightNumber": "UK7995",
+          "aircraft": "Airbus A350-900",
+          "cabinClass": "Business",
+          "seatNumber": "40D",
+          "departure": {
+            "city": "Madrid",
+            "airport": "Adolfo Suárez Madrid-Barajas",
+            "iata": "MAD",
+            "currency": "EUR",
+            "dateTime": "2025-05-20T00:00:16.300Z"
+          },
+          "arrival": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2025-05-20T05:16:16.300Z"
+          },
+          "durationMinutes": 316,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 2551,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Kosher",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 790
+        },
+        {
+          "bookingId": "BK008MG2026",
+          "pnr": "Q6PAP6",
+          "airline": {
+            "name": "Iberia",
+            "code": "IB",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/IB.png"
+          },
+          "flightNumber": "IB1982",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Business",
+          "seatNumber": "35C",
+          "departure": {
+            "city": "Frankfurt",
+            "airport": "Frankfurt Airport",
+            "iata": "FRA",
+            "currency": "EUR",
+            "dateTime": "2025-08-22T22:48:58.975Z"
+          },
+          "arrival": {
+            "city": "Doha",
+            "airport": "Hamad International",
+            "iata": "DOH",
+            "currency": "QAR",
+            "dateTime": "2025-08-23T10:17:58.975Z"
+          },
+          "durationMinutes": 689,
+          "stops": 1,
+          "layovers": [],
+          "price": {
+            "amount": 3426,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Kosher",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1722
+        },
+        {
+          "bookingId": "BK009MG2026",
+          "pnr": "WP22JS",
+          "airline": {
+            "name": "Air India",
+            "code": "AI",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/AI.png"
+          },
+          "flightNumber": "AI7866",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Business",
+          "seatNumber": "3F",
+          "departure": {
+            "city": "Barcelona",
+            "airport": "Barcelona-El Prat",
+            "iata": "BCN",
+            "currency": "EUR",
+            "dateTime": "2024-11-23T15:16:46.846Z"
+          },
+          "arrival": {
+            "city": "Beijing",
+            "airport": "Beijing Capital International",
+            "iata": "PEK",
+            "currency": "CNY",
+            "dateTime": "2024-11-23T19:16:46.846Z"
+          },
+          "durationMinutes": 240,
+          "stops": 1,
+          "layovers": [],
+          "price": {
+            "amount": 3285,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Debit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [],
+          "carbonEmissionKg": 600
+        },
+        {
+          "bookingId": "BK010MG2026",
+          "pnr": "444WFT",
+          "airline": {
+            "name": "British Airways",
+            "code": "BA",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/BA.png"
+          },
+          "flightNumber": "BA1431",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Business",
+          "seatNumber": "33B",
+          "departure": {
+            "city": "Barcelona",
+            "airport": "Barcelona-El Prat",
+            "iata": "BCN",
+            "currency": "EUR",
+            "dateTime": "2024-06-22T01:07:07.818Z"
+          },
+          "arrival": {
+            "city": "Shanghai",
+            "airport": "Shanghai Pudong International",
+            "iata": "PVG",
+            "currency": "CNY",
+            "dateTime": "2024-06-22T09:10:07.818Z"
+          },
+          "durationMinutes": 483,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 2761,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Non-Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1207
+        }
+      ]
+    },
+    {
+      "userProfile": {
+        "name": "David Chen",
+        "email": "david.chen@example.com",
+        "phone": "+8613812345678"
+      },
+      "stats": {
+        "totalTrips": 10,
+        "totalSpend": 19321,
+        "favoriteAirline": "Air China",
+        "mostVisitedCity": "Singapore",
+        "preferredCabinClass": "Economy",
+        "averageFlightDurationMinutes": 468,
+        "frequentFlyerPrograms": [
+          {
+            "airline": "Air China",
+            "memberId": "AI1406307",
+            "tier": "Gold"
+          }
+        ]
+      },
+      "trips": [
+        {
+          "bookingId": "BK001DC2026",
+          "pnr": "RL6M4V",
+          "airline": {
+            "name": "Emirates",
+            "code": "EK",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/EK.png"
+          },
+          "flightNumber": "EK2233",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Economy",
+          "seatNumber": "2D",
+          "departure": {
+            "city": "Dubai",
+            "airport": "Dubai International",
+            "iata": "DXB",
+            "currency": "AED",
+            "dateTime": "2025-05-23T12:20:31.204Z"
+          },
+          "arrival": {
+            "city": "Singapore",
+            "airport": "Singapore Changi",
+            "iata": "SIN",
+            "currency": "SGD",
+            "dateTime": "2025-05-23T21:45:31.204Z"
+          },
+          "durationMinutes": 565,
+          "stops": 0,
+          "layovers": [
+            {
+              "city": "Beijing",
+              "airport": "Barcelona-El Prat",
+              "iata": "DOH",
+              "durationMinutes": 121
+            }
+          ],
+          "price": {
+            "amount": 737,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Debit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1412
+        },
+        {
+          "bookingId": "BK002DC2026",
+          "pnr": "BA67YU",
+          "airline": {
+            "name": "Air China",
+            "code": "CA",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/CA.png"
+          },
+          "flightNumber": "CA5055",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Economy",
+          "seatNumber": "11C",
+          "departure": {
+            "city": "Dubai",
+            "airport": "Dubai International",
+            "iata": "DXB",
+            "currency": "AED",
+            "dateTime": "2024-08-30T19:32:38.460Z"
+          },
+          "arrival": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2024-08-31T02:05:38.460Z"
+          },
+          "durationMinutes": 393,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 756,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Debit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 982
+        },
+        {
+          "bookingId": "BK003DC2026",
+          "pnr": "G3PFU3",
+          "airline": {
+            "name": "Qatar Airways",
+            "code": "QR",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/QR.png"
+          },
+          "flightNumber": "QR3884",
+          "aircraft": "Boeing 767-400",
+          "cabinClass": "Economy",
+          "seatNumber": "5C",
+          "departure": {
+            "city": "Frankfurt",
+            "airport": "Frankfurt Airport",
+            "iata": "FRA",
+            "currency": "EUR",
+            "dateTime": "2024-10-18T12:31:13.081Z"
+          },
+          "arrival": {
+            "city": "Doha",
+            "airport": "Hamad International",
+            "iata": "DOH",
+            "currency": "QAR",
+            "dateTime": "2024-10-18T18:06:13.081Z"
+          },
+          "durationMinutes": 335,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 994,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Refunded"
+          },
+          "status": "Cancelled",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Halal",
+          "specialRequests": [],
+          "carbonEmissionKg": 837
+        },
+        {
+          "bookingId": "BK004DC2026",
+          "pnr": "8AL63G",
+          "airline": {
+            "name": "Singapore Airlines",
+            "code": "SQ",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/SQ.png"
+          },
+          "flightNumber": "SQ8627",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Business",
+          "seatNumber": "8C",
+          "departure": {
+            "city": "London",
+            "airport": "London Heathrow",
+            "iata": "LHR",
+            "currency": "GBP",
+            "dateTime": "2024-11-05T01:46:43.357Z"
+          },
+          "arrival": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2024-11-05T13:03:43.357Z"
+          },
+          "durationMinutes": 677,
+          "stops": 1,
+          "layovers": [],
+          "price": {
+            "amount": 3338,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Non-Veg",
+          "specialRequests": [],
+          "carbonEmissionKg": 1692
+        },
+        {
+          "bookingId": "BK005DC2026",
+          "pnr": "7FSESZ",
+          "airline": {
+            "name": "Delta Airlines",
+            "code": "DL",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/DL.png"
+          },
+          "flightNumber": "DL4460",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Economy",
+          "seatNumber": "30B",
+          "departure": {
+            "city": "Dubai",
+            "airport": "Dubai International",
+            "iata": "DXB",
+            "currency": "AED",
+            "dateTime": "2024-10-21T21:24:32.093Z"
+          },
+          "arrival": {
+            "city": "New York",
+            "airport": "John F. Kennedy International",
+            "iata": "JFK",
+            "currency": "USD",
+            "dateTime": "2024-10-22T08:14:32.093Z"
+          },
+          "durationMinutes": 650,
+          "stops": 0,
+          "layovers": [
+            {
+              "city": "Doha",
+              "airport": "Chhatrapati Shivaji Maharaj International",
+              "iata": "PEK",
+              "durationMinutes": 99
+            }
+          ],
+          "price": {
+            "amount": 1304,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Debit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Non-Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1625
+        },
+        {
+          "bookingId": "BK006DC2026",
+          "pnr": "TLU42M",
+          "airline": {
+            "name": "Vistara",
+            "code": "UK",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/UK.png"
+          },
+          "flightNumber": "UK1064",
+          "aircraft": "Airbus A350-900",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "30A",
+          "departure": {
+            "city": "Barcelona",
+            "airport": "Barcelona-El Prat",
+            "iata": "BCN",
+            "currency": "EUR",
+            "dateTime": "2025-05-02T05:54:22.976Z"
+          },
+          "arrival": {
+            "city": "Los Angeles",
+            "airport": "Los Angeles International",
+            "iata": "LAX",
+            "currency": "USD",
+            "dateTime": "2025-05-02T09:41:22.976Z"
+          },
+          "durationMinutes": 227,
+          "stops": 0,
+          "layovers": [
+            {
+              "city": "Barcelona",
+              "airport": "London Heathrow",
+              "iata": "DEL",
+              "durationMinutes": 115
+            }
+          ],
+          "price": {
+            "amount": 2065,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Non-Veg",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 567
+        },
+        {
+          "bookingId": "BK007DC2026",
+          "pnr": "UJUQV8",
+          "airline": {
+            "name": "Air China",
+            "code": "CA",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/CA.png"
+          },
+          "flightNumber": "CA2522",
+          "aircraft": "Airbus A350-900",
+          "cabinClass": "Business",
+          "seatNumber": "33D",
+          "departure": {
+            "city": "Mumbai",
+            "airport": "Chhatrapati Shivaji Maharaj International",
+            "iata": "BOM",
+            "currency": "INR",
+            "dateTime": "2024-09-13T00:56:13.705Z"
+          },
+          "arrival": {
+            "city": "Singapore",
+            "airport": "Singapore Changi",
+            "iata": "SIN",
+            "currency": "SGD",
+            "dateTime": "2024-09-13T07:00:13.705Z"
+          },
+          "durationMinutes": 364,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 3209,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Net Banking",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Kosher",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 910
+        },
+        {
+          "bookingId": "BK008DC2026",
+          "pnr": "YHQB38",
+          "airline": {
+            "name": "Air India",
+            "code": "AI",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/AI.png"
+          },
+          "flightNumber": "AI4831",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Business",
+          "seatNumber": "10B",
+          "departure": {
+            "city": "Singapore",
+            "airport": "Singapore Changi",
+            "iata": "SIN",
+            "currency": "SGD",
+            "dateTime": "2025-08-28T10:09:13.072Z"
+          },
+          "arrival": {
+            "city": "Madrid",
+            "airport": "Adolfo Suárez Madrid-Barajas",
+            "iata": "MAD",
+            "currency": "EUR",
+            "dateTime": "2025-08-28T17:05:13.072Z"
+          },
+          "durationMinutes": 416,
+          "stops": 0,
+          "layovers": [
+            {
+              "city": "Mumbai",
+              "airport": "Adolfo Suárez Madrid-Barajas",
+              "iata": "DXB",
+              "durationMinutes": 183
+            }
+          ],
+          "price": {
+            "amount": 2618,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Non-Veg",
+          "specialRequests": [],
+          "carbonEmissionKg": 1040
+        },
+        {
+          "bookingId": "BK009DC2026",
+          "pnr": "ZMCNN6",
+          "airline": {
+            "name": "Delta Airlines",
+            "code": "DL",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/DL.png"
+          },
+          "flightNumber": "DL4025",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Premium Economy",
+          "seatNumber": "22F",
+          "departure": {
+            "city": "Singapore",
+            "airport": "Singapore Changi",
+            "iata": "SIN",
+            "currency": "SGD",
+            "dateTime": "2024-11-15T14:50:40.624Z"
+          },
+          "arrival": {
+            "city": "Doha",
+            "airport": "Hamad International",
+            "iata": "DOH",
+            "currency": "QAR",
+            "dateTime": "2024-11-16T02:25:40.624Z"
+          },
+          "durationMinutes": 695,
+          "stops": 1,
+          "layovers": [],
+          "price": {
+            "amount": 1755,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "UPI",
+            "status": "Paid"
+          },
+          "status": "Completed",
+          "baggage": {
+            "checkInKg": 23,
+            "cabinKg": 7
+          },
+          "mealPreference": "Kosher",
+          "specialRequests": [
+            "Window seat"
+          ],
+          "carbonEmissionKg": 1737
+        },
+        {
+          "bookingId": "BK010DC2026",
+          "pnr": "MGVQYV",
+          "airline": {
+            "name": "Iberia",
+            "code": "IB",
+            "logoUrl": "https://www.gstatic.com/flights/airline_logos/70px/IB.png"
+          },
+          "flightNumber": "IB4291",
+          "aircraft": "Boeing 787-9",
+          "cabinClass": "Business",
+          "seatNumber": "7C",
+          "departure": {
+            "city": "Frankfurt",
+            "airport": "Frankfurt Airport",
+            "iata": "FRA",
+            "currency": "EUR",
+            "dateTime": "2025-04-20T14:03:10.247Z"
+          },
+          "arrival": {
+            "city": "Madrid",
+            "airport": "Adolfo Suárez Madrid-Barajas",
+            "iata": "MAD",
+            "currency": "EUR",
+            "dateTime": "2025-04-20T20:06:10.247Z"
+          },
+          "durationMinutes": 363,
+          "stops": 0,
+          "layovers": [],
+          "price": {
+            "amount": 2545,
+            "currency": "USD"
+          },
+          "payment": {
+            "method": "Credit Card",
+            "status": "Refunded"
+          },
+          "status": "Cancelled",
+          "baggage": {
+            "checkInKg": 32,
+            "cabinKg": 10
+          },
+          "mealPreference": "Non-Veg",
+          "specialRequests": [],
+          "carbonEmissionKg": 907
+        }
+      ]
+    }
+  ]
+}
