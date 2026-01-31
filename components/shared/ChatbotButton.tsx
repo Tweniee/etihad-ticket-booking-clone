@@ -70,9 +70,7 @@ function AnimatedDots() {
   }, []);
 
   return (
-    <span className="inline-block w-6 text-left">
-      {".".repeat(dotCount)}
-    </span>
+    <span className="inline-block w-6 text-left">{".".repeat(dotCount)}</span>
   );
 }
 
@@ -170,18 +168,15 @@ export default function ChatbotButton() {
 
       const token = getAuthToken();
 
-      const response = await fetch("/chat", {
+      const response = await fetch("http://74.162.57.122:8000/chat/stream", {
         method: "POST",
         headers: {
+          accept: "application/json",
           "Content-Type": "application/json",
           ...(token && { Authorization: `Bearer ${token}` }),
         },
         body: JSON.stringify({
           message: messageText,
-          conversationHistory: messages.map((m) => ({
-            role: m.sender === "user" ? "user" : "assistant",
-            content: m.text,
-          })),
         }),
         signal: abortControllerRef.current.signal,
       });
@@ -218,20 +213,16 @@ export default function ChatbotButton() {
         // Update the bot message with the streamed text
         setMessages((prev) =>
           prev.map((msg) =>
-            msg.id === botMessageId
-              ? { ...msg, text: streamedText }
-              : msg
-          )
+            msg.id === botMessageId ? { ...msg, text: streamedText } : msg,
+          ),
         );
       }
 
       // Mark streaming as complete
       setMessages((prev) =>
         prev.map((msg) =>
-          msg.id === botMessageId
-            ? { ...msg, isStreaming: false }
-            : msg
-        )
+          msg.id === botMessageId ? { ...msg, isStreaming: false } : msg,
+        ),
       );
     } catch (error) {
       if (error instanceof Error && error.name === "AbortError") {
@@ -250,8 +241,8 @@ export default function ChatbotButton() {
                 text: "Sorry, I encountered an error. Please try again.",
                 isStreaming: false,
               }
-            : msg
-        )
+            : msg,
+        ),
       );
     } finally {
       setIsLoading(false);
@@ -260,7 +251,7 @@ export default function ChatbotButton() {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -309,7 +300,9 @@ export default function ChatbotButton() {
                   }`}
                 >
                   <div className="text-sm whitespace-pre-wrap">
-                    {message.isStreaming && !hasStartedStreaming && !message.text ? (
+                    {message.isStreaming &&
+                    !hasStartedStreaming &&
+                    !message.text ? (
                       <LoadingIndicator word={loadingWord} />
                     ) : (
                       <>
@@ -347,7 +340,7 @@ export default function ChatbotButton() {
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyDown}
                 placeholder="Type your message..."
                 disabled={isLoading}
                 className="flex-1 rounded-full border border-gray-300 px-4 py-2 text-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 disabled:bg-gray-50 disabled:cursor-not-allowed"
