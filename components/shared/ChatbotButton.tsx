@@ -119,16 +119,19 @@ export default function ChatbotButton() {
     };
   }, []);
 
-  // Get JWT token from cookie
-  const getAuthToken = useCallback((): string | null => {
-    const cookies = document.cookie.split(";");
-    for (const cookie of cookies) {
-      const [name, value] = cookie.trim().split("=");
-      if (name === "auth-token") {
-        return value;
+  // Get JWT token from API endpoint
+  const getAuthToken = useCallback(async (): Promise<string | null> => {
+    try {
+      const response = await fetch("/api/auth/token");
+      if (response.ok) {
+        const data = await response.json();
+        return data.token || null;
       }
+      return null;
+    } catch (error) {
+      console.error("Error fetching auth token:", error);
+      return null;
     }
-    return null;
   }, []);
 
   const handleSendMessage = async () => {
@@ -166,7 +169,7 @@ export default function ChatbotButton() {
       }
       abortControllerRef.current = new AbortController();
 
-      const token = getAuthToken();
+      const token = await getAuthToken();
 
       const response = await fetch("http://74.162.57.122:8000/chat/stream", {
         method: "POST",
