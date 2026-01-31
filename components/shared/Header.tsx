@@ -48,17 +48,17 @@ export function Header({ locale }: HeaderProps) {
                     aria-label={t("auth.userMenu")}
                   >
                     <User size={20} />
-                    <span>{user.firstName || user.email.split("@")[0]}</span>
+                    <span>{user.name}</span>
                   </button>
 
                   {showUserMenu && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
                       <div className="px-4 py-2 text-sm text-gray-700 border-b">
                         <div className="font-medium">
-                          {user.firstName} {user.lastName}
+                          {user.name}
                         </div>
                         <div className="text-gray-500 truncate">
-                          {user.email}
+                          {user.category}
                         </div>
                       </div>
                       <Link

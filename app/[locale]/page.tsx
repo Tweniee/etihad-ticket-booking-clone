@@ -133,7 +133,7 @@ export default function HomePage() {
                   >
                     <User size={20} />
                     <span className="hidden sm:inline">
-                      {user.firstName || user.email.split("@")[0]}
+                      {user.name}
                     </span>
                   </button>
 
@@ -141,10 +141,10 @@ export default function HomePage() {
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
                       <div className="px-4 py-2 text-sm text-gray-700 border-b">
                         <div className="font-medium">
-                          {user.firstName} {user.lastName}
+                          {user.name}
                         </div>
                         <div className="text-gray-500 truncate">
-                          {user.email}
+                          {user.category}
                         </div>
                       </div>
                       <Link
