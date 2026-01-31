@@ -17,7 +17,8 @@ Starts the complete project with all dependencies.
 3. Installs Node.js dependencies
 4. Runs database migrations
 5. Generates Prisma Client
-6. Starts Next.js development server
+6. Seeds user and travel history data (4 users, 34 travel records)
+7. Starts Next.js development server
 
 **Services started:**
 
@@ -75,6 +76,7 @@ npm run create-test-user    # Create a test user
 npm run create-demo-users   # Create demo users
 npm run generate-mock-data  # Generate mock airline data JSON
 npm run seed-bookings       # Seed mock bookings to database
+npm run seed-user-travel    # Seed user and travel history data
 npm run verify-auth         # Verify authentication system
 ```
 

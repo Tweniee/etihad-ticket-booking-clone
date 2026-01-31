@@ -69,11 +69,15 @@ echo -e "${YELLOW}[4/6] Running database migrations...${NC}"
 npx prisma migrate deploy
 
 # Step 4: Generate Prisma Client
-echo -e "${YELLOW}[5/6] Generating Prisma Client...${NC}"
+echo -e "${YELLOW}[5/7] Generating Prisma Client...${NC}"
 npx prisma generate
 
-# Step 5: Start the development server
-echo -e "${YELLOW}[6/6] Starting Next.js development server...${NC}\n"
+# Step 5: Seed user and travel data
+echo -e "${YELLOW}[6/7] Seeding user and travel history data...${NC}"
+./scripts/seed-user-travel-data.sh
+
+# Step 6: Start the development server
+echo -e "${YELLOW}[7/7] Starting Next.js development server...${NC}\n"
 
 echo -e "${GREEN}========================================${NC}"
 echo -e "${GREEN}  ✓ All services started successfully!${NC}"
