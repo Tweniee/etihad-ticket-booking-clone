@@ -5,9 +5,16 @@ import bcrypt from "bcryptjs";
 const JWT_EXPIRY = "7d"; // 7 days
 
 function getJWTSecret(): Uint8Array {
-  const secret =
-    process.env.JWT_SECRET || "your-secret-key-change-in-production";
+  const secret = process.env.JWT_SECRET || "eyhackathonteam34";
   return new TextEncoder().encode(secret);
+}
+
+function getJWTAlgorithm(): "HS256" | "HS384" | "HS512" {
+  const algorithm = process.env.JWT_ALGORITHM || "HS256";
+  if (algorithm === "HS256" || algorithm === "HS384" || algorithm === "HS512") {
+    return algorithm;
+  }
+  return "HS256";
 }
 
 export interface JWTPayload {
@@ -38,7 +45,7 @@ export async function verifyPassword(
  */
 export async function createToken(payload: JWTPayload): Promise<string> {
   return new SignJWT(payload)
-    .setProtectedHeader({ alg: "HS256" })
+    .setProtectedHeader({ alg: getJWTAlgorithm() })
     .setIssuedAt()
     .setExpirationTime(JWT_EXPIRY)
     .sign(getJWTSecret());
@@ -51,7 +58,7 @@ export async function verifyToken(token: string): Promise<JWTPayload | null> {
   try {
     const { payload } = await jwtVerify(token, getJWTSecret());
     return payload as JWTPayload;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
