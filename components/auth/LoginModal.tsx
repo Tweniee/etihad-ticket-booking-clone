@@ -1,15 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { useAuth } from "@/lib/contexts/auth-context";
 import { Modal } from "@/components/shared";
-import { Eye, EyeOff } from "lucide-react";
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSwitchToRegister: () => void;
+}
+
+interface UserOption {
+  id: number;
+  name: string;
+  category: string;
 }
 
 export function LoginModal({
@@ -19,22 +24,50 @@ export function LoginModal({
 }: LoginModalProps) {
   const t = useTranslations();
   const { login } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState<number | "">("");
+  const [users, setUsers] = useState<UserOption[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [fetchingUsers, setFetchingUsers] = useState(false);
+
+  // Fetch available users when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setFetchingUsers(true);
+      fetch("/api/users")
+        .then((res) => res.json())
+        .then((data) => {
+          setUsers(
+            data.users?.map((u: UserOption) => ({
+              id: u.id,
+              name: u.name,
+              category: u.category,
+            })) || []
+          );
+        })
+        .catch((err) => {
+          console.error("Failed to fetch users:", err);
+          setUsers([]);
+        })
+        .finally(() => setFetchingUsers(false));
+    }
+  }, [isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    if (!selectedUserId) {
+      setError("Please select a user");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      await login(email, password);
+      await login(Number(selectedUserId));
       onClose();
-      setEmail("");
-      setPassword("");
+      setSelectedUserId("");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
     } finally {
@@ -43,8 +76,7 @@ export function LoginModal({
   };
 
   const handleClose = () => {
-    setEmail("");
-    setPassword("");
+    setSelectedUserId("");
     setError("");
     onClose();
   };
@@ -60,57 +92,34 @@ export function LoginModal({
 
         <div>
           <label
-            htmlFor="login-email"
+            htmlFor="login-user"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            {t("auth.email")}
+            Select User
           </label>
-          <input
-            id="login-email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7F5539]"
-            placeholder={t("auth.emailPlaceholder")}
-            required
-            autoComplete="email"
-          />
-        </div>
-
-        <div>
-          <label
-            htmlFor="login-password"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            {t("auth.password")}
-          </label>
-          <div className="relative">
-            <input
-              id="login-password"
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7F5539] pr-10"
-              placeholder={t("auth.passwordPlaceholder")}
+          {fetchingUsers ? (
+            <div className="text-gray-500 text-sm py-2">Loading users...</div>
+          ) : (
+            <select
+              id="login-user"
+              value={selectedUserId}
+              onChange={(e) => setSelectedUserId(e.target.value ? Number(e.target.value) : "")}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7F5539]"
               required
-              autoComplete="current-password"
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              aria-label={
-                showPassword ? t("auth.hidePassword") : t("auth.showPassword")
-              }
             >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-            </button>
-          </div>
+              <option value="">-- Select a user --</option>
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.name} ({user.category})
+                </option>
+              ))}
+            </select>
+          )}
         </div>
 
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || fetchingUsers}
           className="w-full bg-[#7F5539] text-white py-2 px-4 rounded-md hover:bg-[#6A4530] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? t("common.loading") : t("auth.login")}

@@ -1,23 +1,51 @@
 import { z } from "zod";
 
+// Login by user ID or name
 export const loginSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  userId: z.number().optional(),
+  name: z.string().optional(),
+}).refine((data) => data.userId !== undefined || data.name !== undefined, {
+  message: "Either userId or name must be provided",
 });
 
-export const registerSchema = z
-  .object({
-    email: z.string().email("Invalid email address"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
-    confirmPassword: z.string(),
-    firstName: z.string().min(1, "First name is required"),
-    lastName: z.string().min(1, "Last name is required"),
-    phone: z.string().optional(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  });
+// Register new user
+export const registerSchema = z.object({
+  category: z.string().min(1, "Category is required"),
+  name: z.string().min(1, "Name is required"),
+  citizenship: z.string().min(1, "Citizenship is required"),
+  uaeResident: z.boolean(),
+  details: z.string().optional(),
+});
+
+// Update user
+export const updateUserSchema = z.object({
+  category: z.string().min(1).optional(),
+  name: z.string().min(1).optional(),
+  citizenship: z.string().min(1).optional(),
+  uaeResident: z.boolean().optional(),
+  details: z.string().optional(),
+});
+
+// Travel history schemas
+export const createTravelHistorySchema = z.object({
+  userId: z.number(),
+  destination: z.string().min(1, "Destination is required"),
+  travelDate: z.string().refine((date) => !isNaN(Date.parse(date)), {
+    message: "Invalid date format",
+  }),
+  purpose: z.string().optional(),
+});
+
+export const updateTravelHistorySchema = z.object({
+  destination: z.string().min(1).optional(),
+  travelDate: z.string().refine((date) => !isNaN(Date.parse(date)), {
+    message: "Invalid date format",
+  }).optional(),
+  purpose: z.string().optional(),
+});
 
 export type LoginInput = z.infer<typeof loginSchema>;
 export type RegisterInput = z.infer<typeof registerSchema>;
+export type UpdateUserInput = z.infer<typeof updateUserSchema>;
+export type CreateTravelHistoryInput = z.infer<typeof createTravelHistorySchema>;
+export type UpdateTravelHistoryInput = z.infer<typeof updateTravelHistorySchema>;

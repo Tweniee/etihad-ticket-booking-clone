@@ -10,20 +10,32 @@ export async function GET() {
       return NextResponse.json({ user: null });
     }
 
-    // Fetch full user data
-    const user = await prisma.user.findUnique({
+    // Fetch full user data with travel history
+    const user = await prisma.userInfo.findUnique({
       where: { id: currentUser.userId },
-      select: {
-        id: true,
-        email: true,
-        firstName: true,
-        lastName: true,
-        phone: true,
-        role: true,
+      include: {
+        travelHistory: {
+          orderBy: { travelDate: "desc" },
+        },
       },
     });
 
-    return NextResponse.json({ user });
+    if (!user) {
+      return NextResponse.json({ user: null });
+    }
+
+    return NextResponse.json({
+      user: {
+        id: user.id,
+        category: user.category,
+        name: user.name,
+        citizenship: user.citizenship,
+        uaeResident: user.uaeResident,
+        details: user.details,
+        createdAt: user.createdAt,
+        travelHistory: user.travelHistory,
+      },
+    });
   } catch (error) {
     console.error("Get current user error:", error);
     return NextResponse.json(

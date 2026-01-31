@@ -4,13 +4,33 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useAuth } from "@/lib/contexts/auth-context";
 import { Modal } from "@/components/shared";
-import { Eye, EyeOff } from "lucide-react";
 
 interface RegisterModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSwitchToLogin: () => void;
 }
+
+const CATEGORIES = [
+  "New Traveller",
+  "Frequent Flyer",
+  "Family with kids",
+  "Business Traveller",
+  "Solo Traveller",
+];
+
+const COUNTRIES = [
+  "UAE",
+  "India",
+  "UK",
+  "USA",
+  "France",
+  "Germany",
+  "Australia",
+  "Canada",
+  "Singapore",
+  "Other",
+];
 
 export function RegisterModal({
   isOpen,
@@ -20,39 +40,35 @@ export function RegisterModal({
   const t = useTranslations();
   const { register } = useAuth();
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
+    name: "",
+    category: "",
+    citizenship: "",
+    uaeResident: false,
+    details: "",
   });
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    if (formData.password !== formData.confirmPassword) {
-      setError(t("auth.passwordMismatch"));
-      return;
-    }
-
     setLoading(true);
 
     try {
-      await register(formData);
+      await register({
+        name: formData.name,
+        category: formData.category,
+        citizenship: formData.citizenship,
+        uaeResident: formData.uaeResident,
+        details: formData.details || undefined,
+      });
       onClose();
       setFormData({
-        email: "",
-        password: "",
-        confirmPassword: "",
-        firstName: "",
-        lastName: "",
-        phone: "",
+        name: "",
+        category: "",
+        citizenship: "",
+        uaeResident: false,
+        details: "",
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Registration failed");
@@ -63,12 +79,11 @@ export function RegisterModal({
 
   const handleClose = () => {
     setFormData({
-      email: "",
-      password: "",
-      confirmPassword: "",
-      firstName: "",
-      lastName: "",
-      phone: "",
+      name: "",
+      category: "",
+      citizenship: "",
+      uaeResident: false,
+      details: "",
     });
     setError("");
     onClose();
@@ -83,159 +98,112 @@ export function RegisterModal({
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label
-              htmlFor="register-firstName"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              {t("auth.firstName")}
-            </label>
-            <input
-              id="register-firstName"
-              type="text"
-              value={formData.firstName}
-              onChange={(e) =>
-                setFormData({ ...formData, firstName: e.target.value })
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7F5539]"
-              placeholder={t("auth.firstNamePlaceholder")}
-              required
-              autoComplete="given-name"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="register-lastName"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              {t("auth.lastName")}
-            </label>
-            <input
-              id="register-lastName"
-              type="text"
-              value={formData.lastName}
-              onChange={(e) =>
-                setFormData({ ...formData, lastName: e.target.value })
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7F5539]"
-              placeholder={t("auth.lastNamePlaceholder")}
-              required
-              autoComplete="family-name"
-            />
-          </div>
-        </div>
-
         <div>
           <label
-            htmlFor="register-email"
+            htmlFor="register-name"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            {t("auth.email")}
+            Full Name
           </label>
           <input
-            id="register-email"
-            type="email"
-            value={formData.email}
+            id="register-name"
+            type="text"
+            value={formData.name}
             onChange={(e) =>
-              setFormData({ ...formData, email: e.target.value })
+              setFormData({ ...formData, name: e.target.value })
             }
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7F5539]"
-            placeholder={t("auth.emailPlaceholder")}
+            placeholder="Enter your full name"
             required
-            autoComplete="email"
+            autoComplete="name"
           />
         </div>
 
         <div>
           <label
-            htmlFor="register-phone"
+            htmlFor="register-category"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            {t("auth.phone")} {t("auth.optional")}
+            Traveller Category
           </label>
-          <input
-            id="register-phone"
-            type="tel"
-            value={formData.phone}
+          <select
+            id="register-category"
+            value={formData.category}
             onChange={(e) =>
-              setFormData({ ...formData, phone: e.target.value })
+              setFormData({ ...formData, category: e.target.value })
             }
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7F5539]"
-            placeholder={t("auth.phonePlaceholder")}
-            autoComplete="tel"
+            required
+          >
+            <option value="">-- Select category --</option>
+            {CATEGORIES.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label
+            htmlFor="register-citizenship"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Citizenship
+          </label>
+          <select
+            id="register-citizenship"
+            value={formData.citizenship}
+            onChange={(e) =>
+              setFormData({ ...formData, citizenship: e.target.value })
+            }
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7F5539]"
+            required
+          >
+            <option value="">-- Select country --</option>
+            {COUNTRIES.map((country) => (
+              <option key={country} value={country}>
+                {country}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex items-center">
+          <input
+            id="register-uaeResident"
+            type="checkbox"
+            checked={formData.uaeResident}
+            onChange={(e) =>
+              setFormData({ ...formData, uaeResident: e.target.checked })
+            }
+            className="h-4 w-4 text-[#7F5539] focus:ring-[#7F5539] border-gray-300 rounded"
           />
+          <label
+            htmlFor="register-uaeResident"
+            className="ml-2 block text-sm text-gray-700"
+          >
+            UAE Resident
+          </label>
         </div>
 
         <div>
           <label
-            htmlFor="register-password"
+            htmlFor="register-details"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            {t("auth.password")}
+            Additional Details (Optional)
           </label>
-          <div className="relative">
-            <input
-              id="register-password"
-              type={showPassword ? "text" : "password"}
-              value={formData.password}
-              onChange={(e) =>
-                setFormData({ ...formData, password: e.target.value })
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7F5539] pr-10"
-              placeholder={t("auth.passwordPlaceholder")}
-              required
-              autoComplete="new-password"
-              minLength={6}
-            />
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              aria-label={
-                showPassword ? t("auth.hidePassword") : t("auth.showPassword")
-              }
-            >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <label
-            htmlFor="register-confirmPassword"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            {t("auth.confirmPassword")}
-          </label>
-          <div className="relative">
-            <input
-              id="register-confirmPassword"
-              type={showConfirmPassword ? "text" : "password"}
-              value={formData.confirmPassword}
-              onChange={(e) =>
-                setFormData({ ...formData, confirmPassword: e.target.value })
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7F5539] pr-10"
-              placeholder={t("auth.confirmPasswordPlaceholder")}
-              required
-              autoComplete="new-password"
-              minLength={6}
-            />
-            <button
-              type="button"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-              aria-label={
-                showConfirmPassword
-                  ? t("auth.hidePassword")
-                  : t("auth.showPassword")
-              }
-            >
-              {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-            </button>
-          </div>
+          <textarea
+            id="register-details"
+            value={formData.details}
+            onChange={(e) =>
+              setFormData({ ...formData, details: e.target.value })
+            }
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7F5539]"
+            placeholder="E.g., Family of four, Business traveller, etc."
+            rows={3}
+          />
         </div>
 
         <button

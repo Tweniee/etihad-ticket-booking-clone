@@ -4,6 +4,31 @@
  */
 
 // ============================================================================
+// User and Travel History Types
+// ============================================================================
+
+export interface UserInfo {
+  id: number;
+  category: string;
+  name: string;
+  citizenship: string;
+  uaeResident: boolean;
+  details: string | null;
+  createdAt: Date;
+  travelHistory?: TravelHistory[];
+}
+
+export interface TravelHistory {
+  id: number;
+  userId: number;
+  destination: string;
+  travelDate: Date;
+  purpose: string | null;
+  createdAt: Date;
+  user?: UserInfo;
+}
+
+// ============================================================================
 // Airport and Airline Types
 // ============================================================================
 

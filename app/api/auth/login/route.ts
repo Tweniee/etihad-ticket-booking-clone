@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { loginSchema } from "@/lib/validation/auth";
-import { verifyPassword, createToken, setAuthCookie } from "@/lib/utils/auth";
+import { createToken, setAuthCookie } from "@/lib/utils/auth";
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,25 +16,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { email, password } = result.data;
+    const { userId, name } = result.data;
 
-    // Find user
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
+    // Find user by ID or name
+    let user;
+    if (userId) {
+      user = await prisma.userInfo.findUnique({
+        where: { id: userId },
+      });
+    } else if (name) {
+      user = await prisma.userInfo.findFirst({
+        where: { name: { equals: name, mode: "insensitive" } },
+      });
+    }
 
     if (!user) {
       return NextResponse.json(
-        { error: "Invalid email or password" },
-        { status: 401 },
-      );
-    }
-
-    // Verify password
-    const isValid = await verifyPassword(password, user.password);
-    if (!isValid) {
-      return NextResponse.json(
-        { error: "Invalid email or password" },
+        { error: "User not found" },
         { status: 401 },
       );
     }
@@ -42,22 +40,23 @@ export async function POST(request: NextRequest) {
     // Create token
     const token = await createToken({
       userId: user.id,
-      email: user.email,
-      role: user.role,
+      name: user.name,
+      category: user.category,
     });
 
     // Set cookie
     await setAuthCookie(token);
 
-    // Return user data (without password)
+    // Return user data
     return NextResponse.json({
       user: {
         id: user.id,
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        phone: user.phone,
-        role: user.role,
+        category: user.category,
+        name: user.name,
+        citizenship: user.citizenship,
+        uaeResident: user.uaeResident,
+        details: user.details,
+        createdAt: user.createdAt,
       },
     });
   } catch (error) {

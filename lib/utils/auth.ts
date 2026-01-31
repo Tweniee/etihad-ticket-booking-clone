@@ -1,6 +1,5 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import bcrypt from "bcryptjs";
 
 const JWT_EXPIRY = "7d"; // 7 days
 
@@ -18,26 +17,10 @@ function getJWTAlgorithm(): "HS256" | "HS384" | "HS512" {
 }
 
 export interface JWTPayload {
-  userId: string;
-  email: string;
-  role: string;
-}
-
-/**
- * Hash a password using bcrypt
- */
-export async function hashPassword(password: string): Promise<string> {
-  return bcrypt.hash(password, 10);
-}
-
-/**
- * Verify a password against a hash
- */
-export async function verifyPassword(
-  password: string,
-  hash: string,
-): Promise<boolean> {
-  return bcrypt.compare(password, hash);
+  userId: number;
+  name: string;
+  category: string;
+  [key: string]: unknown;
 }
 
 /**
@@ -57,7 +40,7 @@ export async function createToken(payload: JWTPayload): Promise<string> {
 export async function verifyToken(token: string): Promise<JWTPayload | null> {
   try {
     const { payload } = await jwtVerify(token, getJWTSecret());
-    return payload as JWTPayload;
+    return payload as unknown as JWTPayload;
   } catch {
     return null;
   }

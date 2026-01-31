@@ -10,127 +10,33 @@ datasource db {
 }
 
 // ============================================================================
-// Enums
-// ============================================================================
-
-enum BookingStatus {
-  CONFIRMED
-  PENDING
-  CANCELLED
-}
-
-enum PaymentStatus {
-  PENDING
-  COMPLETED
-  FAILED
-  REFUNDED
-}
-
-enum PassengerType {
-  ADULT
-  CHILD
-  INFANT
-}
-
-enum Gender {
-  MALE
-  FEMALE
-  OTHER
-}
-
-enum UserRole {
-  USER
-  ADMIN
-}
-
-// ============================================================================
 // Models
 // ============================================================================
 
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  firstName String?
-  lastName  String?
-  phone     String?
-  role      UserRole @default(USER)
+model UserInfo {
+  id          Int      @id @default(autoincrement()) @map("user_id")
+  category    String   @db.VarChar(50)
+  name        String   @db.VarChar(100)
+  citizenship String   @db.VarChar(50)
+  uaeResident Boolean  @map("uae_resident")
+  details     String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  travelHistory TravelHistory[]
 
-  @@index([email])
+  @@map("user_info")
 }
 
-model Booking {
-  id        String        @id @default(cuid())
-  reference String        @unique // 6-char alphanumeric
-  status    BookingStatus @default(PENDING)
+model TravelHistory {
+  id          Int      @id @default(autoincrement()) @map("travel_id")
+  userId      Int      @map("user_id")
+  destination String   @db.VarChar(50)
+  travelDate  DateTime @map("travel_date") @db.Date
+  purpose     String?  @db.VarChar(50)
+  createdAt   DateTime @default(now()) @map("created_at")
 
-  // Flight information (stored as JSON snapshot)
-  flightId   String
-  flightData Json // Snapshot of flight at booking time
+  user UserInfo @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  // Passengers
-  passengers Passenger[]
-
-  // Selections (stored as JSON)
-  seats  Json // Map of passengerId to seat
-  extras Json // Selected extras
-
-  // Payment
-  totalAmount   Decimal       @db.Decimal(10, 2)
-  currency      String        @default("USD")
-  paymentId     String?
-  paymentStatus PaymentStatus @default(PENDING)
-
-  // Metadata
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([reference])
-  @@index([createdAt])
-}
-
-model Passenger {
-  id        String  @id @default(cuid())
-  bookingId String
-  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
-
-  type        PassengerType
-  firstName   String
-  lastName    String
-  dateOfBirth DateTime
-  gender      Gender
-
-  // Passport (optional for international flights)
-  passportNumber String?
-  passportExpiry DateTime?
-  nationality    String?
-
-  // Contact (for primary passenger)
-  email       String?
-  phone       String?
-  countryCode String?
-
-  @@index([bookingId])
-}
-
-model Session {
-  id        String @id @default(cuid())
-  sessionId String @unique
-
-  // Booking flow state (stored as JSON)
-  searchCriteria Json?
-  selectedFlight Json?
-  selectedSeats  Json?
-  passengerInfo  Json?
-  selectedExtras Json?
-
-  expiresAt DateTime
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([sessionId])
-  @@index([expiresAt])
+  @@index([userId])
+  @@map("travel_history")
 }

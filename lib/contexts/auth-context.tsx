@@ -1,32 +1,27 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import type { UserInfo, TravelHistory } from "@/lib/types";
 
-export interface User {
-  id: string;
-  email: string;
-  firstName: string | null;
-  lastName: string | null;
-  phone: string | null;
-  role: string;
+export interface User extends UserInfo {
+  travelHistory?: TravelHistory[];
 }
 
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (email: string, password: string) => Promise<void>;
+  login: (userId?: number, name?: string) => Promise<void>;
   register: (data: RegisterData) => Promise<void>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
 }
 
 interface RegisterData {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  firstName: string;
-  lastName: string;
-  phone?: string;
+  category: string;
+  name: string;
+  citizenship: string;
+  uaeResident: boolean;
+  details?: string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -50,11 +45,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     refreshUser().finally(() => setLoading(false));
   }, []);
 
-  const login = async (email: string, password: string) => {
+  const login = async (userId?: number, name?: string) => {
     const response = await fetch("/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ userId, name }),
     });
 
     if (!response.ok) {
