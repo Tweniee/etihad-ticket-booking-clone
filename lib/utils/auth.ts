@@ -17,7 +17,7 @@ function getJWTAlgorithm(): "HS256" | "HS384" | "HS512" {
 }
 
 export interface JWTPayload {
-  userId: number;
+  user_id: number;
   name: string;
   category: string;
   [key: string]: unknown;
