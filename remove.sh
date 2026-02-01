@@ -19,6 +19,17 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 0
 fi
 
+# Step 0: Stop Next.js dev server if running
+if [ -f .nextjs.pid ]; then
+    NEXT_PID=$(cat .nextjs.pid)
+    if ps -p $NEXT_PID > /dev/null 2>&1; then
+        echo -e "${YELLOW}[0/5] Stopping Next.js server (PID: $NEXT_PID)...${NC}"
+        kill $NEXT_PID 2>/dev/null || true
+        sleep 1
+    fi
+    rm -f .nextjs.pid
+fi
+
 # Step 1: Stop and remove containers
 echo -e "${YELLOW}[1/5] Stopping Docker containers...${NC}"
 docker-compose down

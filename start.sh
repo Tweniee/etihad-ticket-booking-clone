@@ -91,12 +91,20 @@ echo -e "  • Prisma Studio: Run ${YELLOW}npx prisma studio --port 51212${NC}\n
 
 echo -e "${BLUE}Useful commands:${NC}"
 echo -e "  • Stop services:     ${YELLOW}./remove.sh${NC}"
-echo -e "  • View logs:         ${YELLOW}docker-compose logs -f${NC}"
+echo -e "  • View logs:         ${YELLOW}tail -f nextjs.log${NC}"
+echo -e "  • View docker logs:  ${YELLOW}docker-compose logs -f${NC}"
 echo -e "  • Seed mock data:    ${YELLOW}npm run seed-bookings${NC}\n"
 
-# Start the Next.js dev server
+# Start the Next.js dev server in detached mode
+LOG_FILE="nextjs.log"
 if command -v pnpm > /dev/null 2>&1; then
-    pnpm dev
+    nohup pnpm dev > "$LOG_FILE" 2>&1 &
 else
-    npm run dev
+    nohup npm run dev > "$LOG_FILE" 2>&1 &
 fi
+
+NEXT_PID=$!
+echo "$NEXT_PID" > .nextjs.pid
+
+echo -e "${GREEN}Next.js server started in background (PID: $NEXT_PID)${NC}"
+echo -e "${BLUE}Logs: ${YELLOW}tail -f $LOG_FILE${NC}\n"
