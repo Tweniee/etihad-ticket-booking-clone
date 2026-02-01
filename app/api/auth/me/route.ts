@@ -12,7 +12,7 @@ export async function GET() {
 
     // Fetch full user data with travel history
     const user = await prisma.userInfo.findUnique({
-      where: { id: currentUser.userId },
+      where: { id: currentUser.user_id },
       include: {
         travelHistory: {
           orderBy: { travelDate: "desc" },

@@ -174,13 +174,12 @@ export default function ChatbotButton() {
       const response = await fetch("http://74.162.57.122:8000/chat/stream", {
         method: "POST",
         headers: {
-          accept: "application/json",
           "Content-Type": "application/json",
+          // Use text/plain for raw streaming (not application/json)
+          Accept: "text/plain",
           ...(token && { Authorization: `Bearer ${token}` }),
         },
-        body: JSON.stringify({
-          message: messageText,
-        }),
+        body: JSON.stringify({ message: messageText }),
         signal: abortControllerRef.current.signal,
       });
 
@@ -188,37 +187,55 @@ export default function ChatbotButton() {
         throw new Error(`API error: ${response.status}`);
       }
 
-      // Handle streaming response
+      // CRITICAL: Check for readable stream support
       const reader = response.body?.getReader();
       if (!reader) {
-        throw new Error("No response body");
+        throw new Error("ReadableStream not supported or no response body");
       }
 
-      const decoder = new TextDecoder();
+      // TextDecoder handles UTF-8 multi-byte chars split across chunks
+      // stream: true ensures partial sequences are buffered until complete
+      const decoder = new TextDecoder("utf-8");
       let streamedText = "";
 
-      while (true) {
-        const { done, value } = await reader.read();
+      try {
+        while (true) {
+          // read() returns { done: boolean, value: Uint8Array }
+          const { done, value } = await reader.read();
 
-        if (done) {
-          break;
+          if (done) {
+            // Flush any remaining buffered bytes
+            const remaining = decoder.decode();
+            if (remaining) {
+              streamedText += remaining;
+              setMessages((prev) =>
+                prev.map((msg) =>
+                  msg.id === botMessageId ? { ...msg, text: streamedText } : msg,
+                ),
+              );
+            }
+            break;
+          }
+
+          // Mark streaming started on first chunk received
+          if (!streamedText) {
+            setHasStartedStreaming(true);
+          }
+
+          // Decode chunk with stream:true to handle partial UTF-8 sequences
+          const chunk = decoder.decode(value, { stream: true });
+          streamedText += chunk;
+
+          // Update UI immediately for real-time token display
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.id === botMessageId ? { ...msg, text: streamedText } : msg,
+            ),
+          );
         }
-
-        // Mark that streaming has started on first chunk
-        if (!streamedText) {
-          setHasStartedStreaming(true);
-        }
-
-        // Decode the chunk and append to the message
-        const chunk = decoder.decode(value, { stream: true });
-        streamedText += chunk;
-
-        // Update the bot message with the streamed text
-        setMessages((prev) =>
-          prev.map((msg) =>
-            msg.id === botMessageId ? { ...msg, text: streamedText } : msg,
-          ),
-        );
+      } finally {
+        // Always release the reader lock
+        reader.releaseLock();
       }
 
       // Mark streaming as complete
