@@ -7,8 +7,14 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
+# Get public IP (Azure/cloud server)
+PUBLIC_IP=$(curl -s ifconfig.me 2>/dev/null || curl -s ipinfo.io/ip 2>/dev/null || echo "localhost")
+HOST="0.0.0.0"
+PORT=3000
+
 echo -e "${BLUE}========================================${NC}"
 echo -e "${BLUE}  Starting Etihad Flight Booking App${NC}"
+echo -e "${BLUE}  Public IP: ${GREEN}${PUBLIC_IP}${NC}"
 echo -e "${BLUE}========================================${NC}\n"
 
 # Check if Docker is running
@@ -86,8 +92,8 @@ echo -e "${GREEN}========================================${NC}\n"
 echo -e "${BLUE}Services running:${NC}"
 echo -e "  • PostgreSQL:    ${GREEN}localhost:5432${NC}"
 echo -e "  • Redis:         ${GREEN}localhost:6379${NC}"
-echo -e "  • Next.js App:   ${GREEN}http://localhost:3000${NC}"
-echo -e "  • Prisma Studio: Run ${YELLOW}npx prisma studio --port 51212${NC}\n"
+echo -e "  • Next.js App:   ${GREEN}http://${PUBLIC_IP}:${PORT}${NC}"
+echo -e "  • Prisma Studio: Run ${YELLOW}npx prisma studio --port 51212 -b none${NC}\n"
 
 echo -e "${BLUE}Useful commands:${NC}"
 echo -e "  • Stop services:     ${YELLOW}./remove.sh${NC}"
@@ -95,16 +101,17 @@ echo -e "  • View logs:         ${YELLOW}tail -f nextjs.log${NC}"
 echo -e "  • View docker logs:  ${YELLOW}docker-compose logs -f${NC}"
 echo -e "  • Seed mock data:    ${YELLOW}npm run seed-bookings${NC}\n"
 
-# Start the Next.js dev server in detached mode
+# Start the Next.js dev server in detached mode (bind to 0.0.0.0 for public access)
 LOG_FILE="nextjs.log"
 if command -v pnpm > /dev/null 2>&1; then
-    nohup pnpm dev > "$LOG_FILE" 2>&1 &
+    nohup pnpm dev -H ${HOST} -p ${PORT} > "$LOG_FILE" 2>&1 &
 else
-    nohup npm run dev > "$LOG_FILE" 2>&1 &
+    nohup npm run dev -- -H ${HOST} -p ${PORT} > "$LOG_FILE" 2>&1 &
 fi
 
 NEXT_PID=$!
 echo "$NEXT_PID" > .nextjs.pid
 
 echo -e "${GREEN}Next.js server started in background (PID: $NEXT_PID)${NC}"
+echo -e "${GREEN}Access at: ${YELLOW}http://${PUBLIC_IP}:${PORT}${NC}"
 echo -e "${BLUE}Logs: ${YELLOW}tail -f $LOG_FILE${NC}\n"
