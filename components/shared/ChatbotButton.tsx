@@ -12,45 +12,58 @@ interface Message {
 }
 
 const LOADING_WORDS = [
-  "thinking",
-  "processing",
-  "analyzing",
-  "reasoning",
+  "pondering",
+  "considering",
+  "assessing",
+  "reviewing",
+  "scrutinizing",
+  "examining",
   "reflecting",
-  "contemplating",
-  "evaluating",
+  "analyzing",
   "deliberating",
-  "synthesizing",
-  "computing",
+  "contemplating",
+  "weighing",
+  "judging",
+  "calculating",
+  "speculating",
+  "mulling",
+  "envisioning",
+  "meditating",
+  "studying",
+  "processing",
+  "reasoning",
+  "appraising",
+  "estimating",
+  "exploring",
+  "interpreting",
+  "deciphering",
+  "evaluating",
   "inferring",
-  "deriving",
-  "resolving",
-  "cognitive",
-  "neuralScan",
-  "mindFlow",
-  "thoughtLoop",
-  "brainWave",
-  "logicPass",
-  "dataMull",
-  "cognix",
-  "thinkaLoop",
-  "neuramind",
-  "mindify",
-  "thoughtify",
-  "neuroMull",
-  "synaptrix",
-  "cerebrox",
-  "brainify",
-  "logicore",
-  "mentix",
-  "mindora",
-  "thinkron",
-  "cognify",
-  "neurix",
-  "thoughtix",
-  "mindplex",
-  "logiclyn",
-  "brainflux",
+  "deducing",
+  "projecting",
+  "forecasting",
+  "synthesizing",
+  "scanning",
+  "perceiving",
+  "comprehending",
+  "mapping",
+  "sorting",
+  "organizing",
+  "planning",
+  "strategizing",
+  "brainstorming",
+  "hypothesizing",
+  "visualizing",
+  "inspecting",
+  "questioning",
+  "inquiring",
+  "testing",
+  "probing",
+  "diagnosing",
+  "predicting",
+  "identifying",
+  "noticing",
+  "discerning"
 ];
 
 function getRandomLoadingWord(): string {
@@ -316,16 +329,16 @@ export default function ChatbotButton() {
     <>
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 flex h-[500px] w-[380px] flex-col rounded-2xl bg-white shadow-2xl">
-          {/* Header */}
-          <div className="flex items-center justify-between rounded-t-2xl bg-gradient-to-r from-amber-500 to-orange-600 p-4 text-white">
+        <div className="fixed bottom-24 right-6 z-50 flex h-[500px] w-[380px] flex-col rounded-2xl shadow-2xl" style={{ backgroundColor: '#FCFBF5' }}>
+          {/* Header - Etihad Black with Gold accent */}
+          <div className="flex items-center justify-between rounded-t-2xl p-4 text-white" style={{ backgroundColor: '#270015' }}>
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full" style={{ backgroundColor: '#C4921B' }}>
                 <MessageCircle className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="font-semibold">AI Chat Support</h3>
-                <p className="text-xs text-white/80">Powered by AI</p>
+                <h3 className="font-semibold">Etihad AI Assistant</h3>
+                <p className="text-xs opacity-80">Powered by AI</p>
               </div>
             </div>
             <button
@@ -349,9 +362,12 @@ export default function ChatbotButton() {
                 <div
                   className={`max-w-[75%] rounded-2xl px-4 py-2 ${
                     message.sender === "user"
-                      ? "bg-gradient-to-r from-amber-500 to-orange-600 text-white"
-                      : "bg-gray-100 text-gray-800"
+                      ? "text-white"
+                      : "text-gray-800"
                   }`}
+                  style={{
+                    backgroundColor: message.sender === "user" ? '#C4921B' : '#F5F5F0'
+                  }}
                 >
                   <div className="text-sm whitespace-pre-wrap">
                     {message.isStreaming &&
@@ -388,7 +404,7 @@ export default function ChatbotButton() {
           </div>
 
           {/* Input */}
-          <div className="border-t border-gray-200 p-4">
+          <div className="border-t p-4" style={{ borderColor: '#E5E5E0' }}>
             <div className="flex gap-2">
               <input
                 type="text"
@@ -397,12 +413,17 @@ export default function ChatbotButton() {
                 onKeyDown={handleKeyDown}
                 placeholder="Type your message..."
                 disabled={isLoading}
-                className="flex-1 rounded-full border border-gray-300 px-4 py-2 text-sm focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-200 disabled:bg-gray-50 disabled:cursor-not-allowed"
+                className="flex-1 rounded-full border px-4 py-2 text-sm focus:outline-none focus:ring-2 disabled:bg-gray-50 disabled:cursor-not-allowed"
+                style={{
+                  borderColor: '#C4921B',
+                  color: '#270015'
+                }}
               />
               <button
                 onClick={handleSendMessage}
                 disabled={!inputValue.trim() || isLoading}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="flex h-10 w-10 items-center justify-center rounded-full text-white transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                style={{ backgroundColor: '#C4921B' }}
                 aria-label="Send message"
               >
                 {isLoading ? (
@@ -416,12 +437,13 @@ export default function ChatbotButton() {
         </div>
       )}
 
-      {/* Chat Button */}
+      {/* Chat Button - Etihad Gold */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-amber-300"
+        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg transition-all duration-300 hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-4"
+        style={{ backgroundColor: '#C4921B', boxShadow: '0 4px 14px rgba(196, 146, 27, 0.4)' }}
         aria-label={isOpen ? "Close chat" : "Open chat support"}
         title="Chat with us"
       >

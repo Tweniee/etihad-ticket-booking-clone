@@ -3,14 +3,32 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Default colors */
+  --background: #FCFBF5;
+  --foreground: #270015;
+
+  /* Etihad Brand Colors */
+  --etihad-black: #270015;
+  --etihad-gold: #C4921B;
+  --etihad-white: #FCFBF5;
+  --etihad-gold-light: #D4A82B;
+  --etihad-gold-dark: #A47A15;
+  --etihad-black-light: #3D0022;
+
+  /* Semantic colors using Etihad palette */
+  --primary: var(--etihad-gold);
+  --primary-foreground: var(--etihad-white);
+  --secondary: var(--etihad-black);
+  --secondary-foreground: var(--etihad-white);
+  --accent: var(--etihad-gold-light);
+  --muted: #F5F5F0;
+  --border: #E5E5E0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--etihad-black);
+    --foreground: var(--etihad-white);
   }
 }
 
@@ -18,6 +36,34 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Etihad brand styling for primary elements */
+.btn-primary {
+  background-color: var(--etihad-gold);
+  color: var(--etihad-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--etihad-gold-dark);
+}
+
+.btn-secondary {
+  background-color: var(--etihad-black);
+  color: var(--etihad-white);
+}
+
+.btn-secondary:hover {
+  background-color: var(--etihad-black-light);
+}
+
+/* Link styling with Etihad gold */
+a {
+  color: var(--etihad-gold);
+}
+
+a:hover {
+  color: var(--etihad-gold-dark);
 }
 
 @layer base {
