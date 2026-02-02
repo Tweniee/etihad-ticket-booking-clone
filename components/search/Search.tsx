@@ -115,16 +115,17 @@ export const Search: React.FC<SearchProps> = ({
         },
       ]);
     } else if (newTripType === "round-trip") {
-      // Ensure exactly 2 segments
+      // Ensure exactly 2 segments with return leg auto-populated
       const firstSegment = watchedSegments[0] || {
         origin: null,
         destination: null,
         departureDate: null,
       };
-      const secondSegment = watchedSegments[1] || {
+      // Return leg: swap origin and destination from first segment
+      const secondSegment = {
         origin: firstSegment.destination,
         destination: firstSegment.origin,
-        departureDate: null,
+        departureDate: watchedSegments[1]?.departureDate || null,
       };
       setValue("segments", [firstSegment, secondSegment]);
     } else if (newTripType === "multi-city") {
@@ -219,101 +220,180 @@ export const Search: React.FC<SearchProps> = ({
 
         {/* Flight Segments */}
         <div className="space-y-3 sm:space-y-4">
-          {fields.map((field, index) => (
-            <div
-              key={field.id}
-              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 p-3 sm:p-4 border border-gray-200 rounded-lg relative"
-            >
-              {/* Segment label for multi-city */}
-              {tripType === "multi-city" && (
-                <div className="sm:col-span-2 md:col-span-3 flex items-center justify-between">
-                  <h3 className="text-xs sm:text-sm font-medium text-gray-700 flex items-center">
-                    <Plane className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-                    Flight {index + 1}
-                  </h3>
-                  {fields.length > 2 && (
-                    <button
-                      type="button"
-                      onClick={() => remove(index)}
-                      className="text-red-600 hover:text-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 rounded p-1"
-                      aria-label={`Remove flight ${index + 1}`}
-                    >
-                      <X className="w-3 h-3 sm:w-4 sm:h-4" />
-                    </button>
-                  )}
-                </div>
-              )}
-
+          {/* Round Trip - Single row with From, To, Departure, Return */}
+          {tripType === "round-trip" && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4 border border-gray-200 rounded-lg">
               {/* Origin Airport */}
               <Controller
-                name={`segments.${index}.origin`}
+                name="segments.0.origin"
                 control={control}
                 render={({ field: { value, onChange } }) => (
                   <AutocompleteInput
                     value={value}
-                    onChange={onChange}
+                    onChange={(newValue) => {
+                      onChange(newValue);
+                      // Auto-set return destination
+                      setValue("segments.1.destination", newValue);
+                    }}
                     onSearch={onAirportSearch}
-                    label={
-                      index === 0 || tripType === "multi-city" ? "From" : "To"
-                    }
+                    label="From"
                     placeholder="City or airport"
                     required
-                    error={errors.segments?.[index]?.origin?.message}
-                    id={`origin-${index}`}
-                    name={`segments.${index}.origin`}
+                    error={errors.segments?.[0]?.origin?.message}
+                    id="origin-0"
+                    name="segments.0.origin"
                   />
                 )}
               />
 
               {/* Destination Airport */}
               <Controller
-                name={`segments.${index}.destination`}
+                name="segments.0.destination"
                 control={control}
                 render={({ field: { value, onChange } }) => (
                   <AutocompleteInput
                     value={value}
-                    onChange={onChange}
+                    onChange={(newValue) => {
+                      onChange(newValue);
+                      // Auto-set return origin
+                      setValue("segments.1.origin", newValue);
+                    }}
                     onSearch={onAirportSearch}
-                    label={
-                      index === 0 || tripType === "multi-city" ? "To" : "From"
-                    }
+                    label="To"
                     placeholder="City or airport"
                     required
-                    error={errors.segments?.[index]?.destination?.message}
-                    id={`destination-${index}`}
-                    name={`segments.${index}.destination`}
+                    error={errors.segments?.[0]?.destination?.message}
+                    id="destination-0"
+                    name="segments.0.destination"
                   />
                 )}
               />
 
               {/* Departure Date */}
               <Controller
-                name={`segments.${index}.departureDate`}
+                name="segments.0.departureDate"
                 control={control}
                 render={({ field: { value, onChange } }) => (
                   <DatePicker
                     value={value}
                     onChange={onChange}
-                    label={
-                      tripType === "round-trip" && index === 1
-                        ? "Return Date"
-                        : "Departure Date"
-                    }
+                    label="Departure Date"
                     placeholder="Select date"
                     required
-                    minDate={
-                      index === 1 && watchedSegments[0]?.departureDate
-                        ? watchedSegments[0].departureDate
-                        : new Date()
-                    }
-                    error={errors.segments?.[index]?.departureDate?.message}
-                    id={`departure-${index}`}
-                    name={`segments.${index}.departureDate`}
+                    minDate={new Date()}
+                    error={errors.segments?.[0]?.departureDate?.message}
+                    id="departure-0"
+                    name="segments.0.departureDate"
+                  />
+                )}
+              />
+
+              {/* Return Date */}
+              <Controller
+                name="segments.1.departureDate"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <DatePicker
+                    value={value}
+                    onChange={onChange}
+                    label="Return Date"
+                    placeholder="Select date"
+                    required
+                    minDate={watchedSegments[0]?.departureDate || new Date()}
+                    error={errors.segments?.[1]?.departureDate?.message}
+                    id="departure-1"
+                    name="segments.1.departureDate"
                   />
                 )}
               />
             </div>
-          ))}
+          )}
+
+          {/* One-way and Multi-city - Show all segments */}
+          {tripType !== "round-trip" &&
+            fields.map((field, index) => (
+              <div
+                key={field.id}
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 p-3 sm:p-4 border border-gray-200 rounded-lg relative"
+              >
+                {/* Segment label for multi-city */}
+                {tripType === "multi-city" && (
+                  <div className="sm:col-span-2 md:col-span-3 flex items-center justify-between">
+                    <h3 className="text-xs sm:text-sm font-medium text-gray-700 flex items-center">
+                      <Plane className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+                      Flight {index + 1}
+                    </h3>
+                    {fields.length > 2 && (
+                      <button
+                        type="button"
+                        onClick={() => remove(index)}
+                        className="text-red-600 hover:text-red-800 focus:outline-none focus:ring-2 focus:ring-red-500 rounded p-1"
+                        aria-label={`Remove flight ${index + 1}`}
+                      >
+                        <X className="w-3 h-3 sm:w-4 sm:h-4" />
+                      </button>
+                    )}
+                  </div>
+                )}
+
+                {/* Origin Airport */}
+                <Controller
+                  name={`segments.${index}.origin`}
+                  control={control}
+                  render={({ field: { value, onChange } }) => (
+                    <AutocompleteInput
+                      value={value}
+                      onChange={onChange}
+                      onSearch={onAirportSearch}
+                      label="From"
+                      placeholder="City or airport"
+                      required
+                      error={errors.segments?.[index]?.origin?.message}
+                      id={`origin-${index}`}
+                      name={`segments.${index}.origin`}
+                    />
+                  )}
+                />
+
+                {/* Destination Airport */}
+                <Controller
+                  name={`segments.${index}.destination`}
+                  control={control}
+                  render={({ field: { value, onChange } }) => (
+                    <AutocompleteInput
+                      value={value}
+                      onChange={onChange}
+                      onSearch={onAirportSearch}
+                      label="To"
+                      placeholder="City or airport"
+                      required
+                      error={errors.segments?.[index]?.destination?.message}
+                      id={`destination-${index}`}
+                      name={`segments.${index}.destination`}
+                    />
+                  )}
+                />
+
+                {/* Departure Date */}
+                <Controller
+                  name={`segments.${index}.departureDate`}
+                  control={control}
+                  render={({ field: { value, onChange } }) => (
+                    <DatePicker
+                      value={value}
+                      onChange={onChange}
+                      label="Departure Date"
+                      placeholder="Select date"
+                      required
+                      minDate={new Date()}
+                      error={errors.segments?.[index]?.departureDate?.message}
+                      id={`departure-${index}`}
+                      name={`segments.${index}.departureDate`}
+                    />
+                  )}
+                />
+              </div>
+            ))}
 
           {/* Add Flight Button (Multi-city only) */}
           {tripType === "multi-city" && fields.length < 5 && (
