@@ -84,21 +84,23 @@ function LoadingIndicator({ word }: { word: string }) {
   );
 }
 
+// Default welcome message
+const getWelcomeMessage = (): Message => ({
+  id: "1",
+  text: "Hello! How can I help you today?",
+  sender: "bot",
+  timestamp: new Date(),
+});
+
 export default function ChatbotButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "1",
-      text: "Hello! How can I help you today?",
-      sender: "bot",
-      timestamp: new Date(),
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([getWelcomeMessage()]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [loadingWord, setLoadingWord] = useState("");
   const [hasStartedStreaming, setHasStartedStreaming] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
@@ -118,6 +120,38 @@ export default function ChatbotButton() {
       }
     };
   }, []);
+
+  // Monitor user login/logout and clear chat history on user change
+  useEffect(() => {
+    const checkUserChange = async () => {
+      try {
+        const response = await fetch("/api/auth/me");
+        if (response.ok) {
+          const data = await response.json();
+          const newUserId = data.user?.id ?? null;
+
+          // If user changed (login/logout/switch), clear chat history
+          if (newUserId !== currentUserId) {
+            setCurrentUserId(newUserId);
+            // Only clear if this isn't the initial load (currentUserId was set before)
+            if (currentUserId !== null || newUserId !== null) {
+              setMessages([getWelcomeMessage()]);
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Error checking user:", error);
+      }
+    };
+
+    // Check immediately
+    checkUserChange();
+
+    // Poll for user changes every 5 seconds (catches login from other tabs)
+    const interval = setInterval(checkUserChange, 5000);
+
+    return () => clearInterval(interval);
+  }, [currentUserId]);
 
   // Get JWT token from API endpoint
   const getAuthToken = useCallback(async (): Promise<string | null> => {
